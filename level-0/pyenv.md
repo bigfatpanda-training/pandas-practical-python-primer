@@ -20,5 +20,11 @@ did things and don't understand how to work with v2.1.
 
 Don't do it.
 
+### Training Steps
+1. Visit the [pyenv Github repo](https://github.com/yyuu/pyenv).
+2. Follow the link to the pyenv installer script and execute the command it gives you.
+3. See where this is installed: `/home/vagrant/.pyenv`
+4. Demonstrate how to create a virtual environment.
+
 
 

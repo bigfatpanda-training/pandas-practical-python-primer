@@ -6,6 +6,8 @@ We will be using it to create a uniform environment to learn Python in our
 class. This allows us to focus on Python rather than the various environment
 differences.
 
+Also, most of the time, Python applications are deployed onto Linux servers.  Practicing with a Linux system will better prepare you for your full-time Python employment. ;)
+
 ## Prereqs
 For our purposes, you must have 
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) installed on your
