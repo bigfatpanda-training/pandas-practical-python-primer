@@ -4,7 +4,7 @@
     <list default="true" id="3c9611bf-fe28-4c12-ba6c-733d8e88107b" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/level_0_example/myCoolProgram.py" afterPath="$PROJECT_DIR$/level_0_example/myCoolProgram.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
     </list>
     <ignored path="level-0-example.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,8 +32,18 @@
       <file leaf-file-name="myCoolProgram.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/level_0_example/myCoolProgram.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.043165468" vertical-offset="0" max-vertical-offset="695">
-              <caret line="2" column="80" selection-start-line="2" selection-start-column="80" selection-end-line="2" selection-end-column="80" />
+            <state vertical-scroll-proportion="0.28057554" vertical-offset="0" max-vertical-offset="695">
+              <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MEANPANDA.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/level_0_example/MEANPANDA.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+              <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -49,7 +59,10 @@
       <list>
         <option value="$PROJECT_DIR$/level_0_example/stuff.csv" />
         <option value="$PROJECT_DIR$/level_0_example/level_0_example.py" />
+        <option value="$PROJECT_DIR$/level_0_example/mean.py" />
+        <option value="$PROJECT_DIR$/level_0_example/MEANPANDA.py" />
         <option value="$PROJECT_DIR$/level_0_example/myCoolProgram.py" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
@@ -213,18 +226,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/level_0_example/stuff.csv">
+    <entry file="file://$PROJECT_DIR$/level_0_example/MEANPANDA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04477612" vertical-offset="0" max-vertical-offset="566925">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02255639" vertical-offset="0" max-vertical-offset="665">
+          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/level_0_example/myCoolProgram.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.043165468" vertical-offset="0" max-vertical-offset="695">
-          <caret line="2" column="80" selection-start-line="2" selection-start-column="80" selection-end-line="2" selection-end-column="80" />
+        <state vertical-scroll-proportion="0.28057554" vertical-offset="0" max-vertical-offset="695">
+          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
           <folding />
         </state>
       </provider>
