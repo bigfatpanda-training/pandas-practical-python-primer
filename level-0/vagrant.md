@@ -29,3 +29,9 @@ system to use Vagrant.
   * `vagrant halt`: Stores the hard-drive state of the VM and stops it.
 
   * `vagrant destroy`: Obliterates the VM and all contents.
+  
+## Training Steps
+
+  * In the root folder of this repository is a `Vagrantfile` for everyone to use during class.
+  * Use the `vagrant up` and `vagrant ssh` to get to the command line of your VM.
+  * It gives us a clean install of an Ubuntu 14.04 VM but does install some requisites that will be needed for our work - namely some development libraries and Git.  If you need to go back in the future and see what it installed (for your own work!) you can see in the [supplemental provision shell script](../misc/vagrant-pyenv-prereqs.sh)
