@@ -22,9 +22,11 @@ Don't do it.
 
 ### Training Steps
 1. Visit the [pyenv Github repo](https://github.com/yyuu/pyenv).
-2. Follow the link to the pyenv installer script and execute the command it gives you.
+2. Use the helper repo to install pyenv into the Vagrant VM that we've created.
 3. See where this is installed: `/home/vagrant/.pyenv`
-4. Demonstrate how to create a virtual environment.
+4. Install a base version of Python: `pyenv install 3.4.3`
+5. Install a virtualenv based on our base version: `pyenv virtualenv 3.4.3 [your-name]`
+6. We'll come back to this later when we're ready to start coding.
 
 
 
