@@ -5,7 +5,10 @@
 * Unanswered questions from level 0
 * Quick Hits
   * Snacks and break schedule. 
-  * Git: Pulling down changes from an upstream repository. 
+  * Git: Upstream Repositories
+   * Add the original bigfatpanda-training repo as an **upstream repo**: `git remote add upstream https://github.com/bigfatpanda-training/pandas-practical-python-primer.git`  
+   * Grab the latest changes from the upstream remote: `git fetch remote`
+   * Merge those changes into your **master** branch: `git merge upstream/master`
   * Vagrant: Destroy your VM accidently on purpose.  Oops!
 * Python
   * Command Line Interfaces: Training Introduction
