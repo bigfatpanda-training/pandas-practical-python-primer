@@ -1,7 +1,6 @@
 ![Welcome to Level 0](http://vignette3.wikia.nocookie.net/kungfupanda/images/4/46/Level-Zero.jpg/revision/20111215042422)
 # Welcome to Level Zero
 
-
 ## Today's Topics
 * The Way of the Dragon Warrior (Class Philosophy)
   * Intro to BigFatPanda
@@ -9,7 +8,6 @@
     * Create an environment where people feel safe being beginners.  This is a beginners class.
     * Tailor the class very specifically to what you are individually interested in.  How this is not a traditional class.  More like an apprenticship.
     * Talk about what we have to practice to succeed.  Patience, kindness, humility, determination.
-* Discussion on class times (1-5 or 1:30-5:30) and dates.
 
 * Discussion on what each member wants to learn in the class.
   * Why did you sign up for this class?
@@ -25,10 +23,7 @@
 
 * Using PYENV for [Python Environment Management](pyenv.md)
 
-* Installing a trial of PyCharm IDE
-	* Create folder for your level-0 training project.
-	* Create a virtual environment matching the folder.
-	* Wire them together in PyCharm. 		
+* Installing a trial of [PyCharm IDE](https://www.jetbrains.com/pycharm/download/) 		
 
 * The "Pythonic" Way and your first program.
   * [PEP 8](https://www.python.org/dev/peps/pep-0008), [Pep 257](https://www.python.org/dev/peps/pep-0257)
