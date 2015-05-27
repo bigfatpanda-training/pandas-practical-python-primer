@@ -46,6 +46,15 @@ for all objects of their types.
 * Break things into smaller chuncks with functions.
     * Create a function that parses command line input and returns the result.
     * Create a function stub that will be used to copy the files.
+    
+## Goal 5: Introduction to Subprocess
+The subprocess module allows us to make calls to other programs on your 
+system, Python or otherwise.  We can then capture the output of these 
+programs for evaluation.
+
+1. import the `subprocess` module
+2. Add content to the function stub that we created earlier to process
+the program arguments and copy the files.
 
     
 

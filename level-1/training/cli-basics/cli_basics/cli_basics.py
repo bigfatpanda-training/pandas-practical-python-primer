@@ -1,7 +1,5 @@
-# Excerpt From: David Beazley and Brian K. Jones. “Python Cookbook.” iBooks.
 """
-Hypothetical command-line tool for searching a collection of
-files for one or more text patterns.
+Insert docstring here.
 """
 import argparse
 import subprocess
@@ -31,9 +29,20 @@ def process_user_input() -> argparse.Namespace:
 def copy_files(files: list, destination: str):
     """
     Copy files to a given destination.
+
+    First attempt to copy the file while maintaining current permissions.
+    If this fails, it attempt to copy without maintaining permissions.
+
     """
+
+    for file in files:
+        operation_result = subprocess.check_output(
+            ['cp', '-vp', file, destination],
+            stderr=subprocess.STDOUT)
+
+        print(operation_result.decode('utf-8'))
 
 
 if __name__ == "__main__":
     cli_arguments = process_user_input()
-    print(cli_arguments)
+    copy_files(cli_arguments.filenames, cli_arguments.destination)
