@@ -11,7 +11,7 @@
     * Merge those changes into your **master** branch: `git merge upstream/master`
   * Vagrant: Destroy your VM accidently on purpose.  Oops!
 * Python
-  * Command Line Interfaces: Training Introduction
+  * An [introduction to CLIs](cli-basics.md) based on the standard library.
   * Understanding and improving a standard library based CLI
   * Replicating the CLI with a 3rd Party Package: Docopt or Click
   

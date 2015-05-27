@@ -1,6 +1,6 @@
 import argparse
 import subprocess
-from string import lower
+# from string import lower
 
 from AutoFileUtilities import *
 from string_manipulation import remove_List_From_String
@@ -135,7 +135,7 @@ class FileManager(Auto_File_Utility):
 
         """
         self.get_filelist(self.program_arguments.filename_location)
-        print '-- Start OS Output --'
+        print('-- Start OS Output --')
 
         try:
             if lower(self.program_arguments.operation) == 'copy':
@@ -165,15 +165,15 @@ class FileManager(Auto_File_Utility):
             self.last_operation_status = 0
 
         except subprocess.CalledProcessError as subprocess_error:
-            print subprocess_error
-            print subprocess_error.output
+            print(subprocess_error)
+            print(subprocess_error.output)
             self.last_operation_status = 1
 
         except EnvironmentError as environment_error:
-            print environment_error.message
+            print(environment_error.message)
             self.last_operation_status = 1
 
-        print '-- End OS Output --'
+        print('-- End OS Output --')
 
         self.display_Program_Summary()
 
@@ -197,7 +197,7 @@ class FileManager(Auto_File_Utility):
                  self.program_arguments.dest_filename],
                 stderr=subprocess.STDOUT)
 
-        print operation_result
+        print(operation_result)
 
     def delete_file(self):
         """
@@ -213,7 +213,7 @@ class FileManager(Auto_File_Utility):
         """
         Encrypt one or more files using GPG.
         """
-        print 'Encrypting: ' + self.current_file
+        print('Encrypting: ' + self.current_file)
         print(
             subprocess.check_output(
                 ['gpg',
@@ -232,7 +232,7 @@ class FileManager(Auto_File_Utility):
         Decrypt files encoded using PGP/GPG.
 
         """
-        print 'Decrypting: ' + self.current_file
+        print('Decrypting: ' + self.current_file)
         unencrypted_filename = remove_List_From_String(
             self.current_file,
             ['.gpg', '.pgp'])
