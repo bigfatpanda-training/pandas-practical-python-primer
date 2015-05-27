@@ -44,8 +44,8 @@ for all objects of their types.
 * Pythonic way of indicating that a script is callable as a program. 
 `if __name__ == "__main__"` construct.  What does this get you?
 * Break things into smaller chuncks with functions.
-
-## Goal 5: Introducing Subprocess
+    * Create a function that parses command line input and returns the result.
+    * Create a function stub that will be used to copy the files.
 
     
 

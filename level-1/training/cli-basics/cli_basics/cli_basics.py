@@ -6,43 +6,34 @@ files for one or more text patterns.
 import argparse
 import subprocess
 
-def copy_file(self):
-        """
-        Copy a file(s) from one location to another.
 
-        First attempt to copy the file while maintaining current permissions.
-        If this fails, it attempt to copy without maintaining permissions.
+def process_user_input() -> argparse.Namespace:
+    """
+    Process input from the command line and return the results.
 
-        """
-        try:
-            operation_result = subprocess.check_output(
-                ['cp', '-vp', self.current_file,
-                 self.program_arguments.dest_filename],
-                stderr=subprocess.STDOUT)
+    Returns:
+        argparse.Namespace: A dictionary-like object containing the
+        results of parsing the command line input.
+    """
+    parser = argparse.ArgumentParser(description="This programs copies files.",
+                                     epilog="This programs copies files in "
+                                            "case you forgot.")
 
-        except subprocess.CalledProcessError:
-            operation_result = subprocess.check_output(
-                ['cp', '-v', self.current_file,
-                 self.program_arguments.dest_filename],
-                stderr=subprocess.STDOUT)
+    parser.add_argument(dest='filenames', metavar='filename',
+                        nargs='+', help="All the files to copy.")
 
-        print(operation_result)
+    parser.add_argument('-d', '--destination', required=True,
+                        dest='destination', help='Location to copy files to.')
 
-parser = argparse.ArgumentParser(description="This programs copies files.",
-                                 epilog="This programs copies files in "
-                                        "case you forgot.")
+    return parser.parse_args()
 
-parser.add_argument(dest='filenames', metavar='filename',
-                    nargs='+', help="All the files to copy.")
 
-parser.add_argument('-d', '--destination', required=True,
-                    dest='destination', help='Location to copy files to.')
+def copy_files(files: list, destination: str):
+    """
+    Copy files to a given destination.
+    """
 
-args = parser.parse_args()
 
-# Output the collected arguments
-print(args.filenames)
-print(args.patterns)
-print(args.verbose)
-print(args.outfile)
-print(args.speed)
+if __name__ == "__main__":
+    cli_arguments = process_user_input()
+    print(cli_arguments)
