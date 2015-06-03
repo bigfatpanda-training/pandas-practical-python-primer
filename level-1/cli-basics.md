@@ -33,6 +33,8 @@ filesnames to copy.
 4. Add an additional argument to specify the destination of the copied files.
     * `parser.add_argument('-d', '--destination', required=True, dest='destination', help='Location to copy files to.')`
     
+5. **Students:**  Add an additional optional argument to the parser.
+    
 ## Goal 3: The result of `parser.parse_args()` => About `str` and `list` types
 1. In Python, both of these object types are considered 
 [sequences](https://docs.python.org/3.4/library/stdtypes.html#sequence-types-list-tuple-range) 
@@ -43,7 +45,7 @@ for all objects of their types.
 ## Goal 4: Organizational Pitstop
 * Pythonic way of indicating that a script is callable as a program. 
 `if __name__ == "__main__"` construct.  What does this get you?
-* Break things into smaller chuncks with functions.
+* Break things into smaller chunks with functions.
     * Create a function that parses command line input and returns the result.
     * Create a function stub that will be used to copy the files.
     
@@ -55,6 +57,9 @@ programs for evaluation.
 1. import the `subprocess` module
 2. Add content to the function stub that we created earlier to process
 the program arguments and copy the files.
+    * Use `help(subprocess.check_output)` or online documentation to see
+    what this function does.
+    * How to iterate over an object?  Or, what makes an object iterable?
 
     
 
