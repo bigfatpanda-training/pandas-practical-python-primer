@@ -1,3 +1,13 @@
-# Add PYENV and base 3.4.3 Python
+#!/usr/bin/env bash
+
+# Add PYENV and base Python versions
 su - vagrant -c "curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash"
 su - vagrant -c "pyenv install 3.4.3"
+su - vagrant -c "pyenv install 2.7.9"
+
+# Create VirtualEnvs for Training Levels
+su - vagrant -c "pyenv virtualenv 3.4.3 level-0"
+su - vagrant -c "pyenv virtualenv 3.4.3 level-1"
+su - vagrant -c "pyenv virtualenv 3.4.3 level-2"
+su - vagrant -c "pyenv virtualenv 3.4.3 level-3"
+su - vagrant -c "pyenv virtualenv 3.4.3 level-4"
