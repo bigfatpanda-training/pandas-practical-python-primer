@@ -3,28 +3,29 @@ This programs connects to an API and presents selected data to user.
 """
 import requests
 
-import level_0_example.meanpanda as meanpanda
+from .MEANPANDA import api_url, text_strings
+from level_0_example import MEANPANDA
 
-dv = '-' * 25
-dv.capitalize()
+divider = '-' * 25
 
-
-def prscores(i):
+def print_scores(scores):
     """
     {'sat_math_avg_score': '402', 'num_of_sat_test_takers': '70', 'dbn': '01M450', 'school_name': 'EAST SIDE COMMUNITY SCHOOL', 'sat_critical_reading_avg_score': '377', 'sat_writing_avg_score': '370'}
 
     """
-    print(dv)
+    print(divider)
     print("{}: {}\n{}: {}".format(
-        meanpanda.text_strings['one'], i['school_name'],
-        meanpanda.text_strings['two'], i['num_of_sat_test_takers']))
+        MEANPANDA.text_strings['one'], scores['school_name'],
+        text_strings['two'], scores['num_of_sat_test_takers']))
     print("Average Math Score: {}\n"
           "Average Reading Score: {}\n"
           "Average Writing Score: {}".format(
-              i['sat_math_avg_score'],
-              i['sat_writing_avg_score'],
-              i['sat_critical_reading_avg_score']))
+              scores['sat_math_avg_score'],
+              scores['sat_writing_avg_score'],
+              scores['sat_critical_reading_avg_score']))
 
-get_result = requests.get(meanpanda.api_url)
-dfd = get_result.json()[0:5]
-for i in dfd: prscores(i)
+get_result = requests.get(api_url)
+school_sat_scores = get_result.json()[0:5]
+
+for school_score in school_sat_scores:
+    print_scores(school_score)
