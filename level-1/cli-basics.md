@@ -59,7 +59,43 @@ programs for evaluation.
 the program arguments and copy the files.
     * Use `help(subprocess.check_output)` or online documentation to see
     what this function does.
-    * How to iterate over an object?  Or, what makes an object iterable?
+    * How to iterate over an object?
+        * For loops, `iter()`, and `hasattr()`
+3. How might we go about utilizing `subprocess.check_output` to actually 
+copy files to a different location?
+    * What are the necessary arguments?
+    * What type of arguments does the underlying program (`cp`) take
+    that might be useful to use?
+
+
+## Interlude: Python 2 -> Python 3
+1. Rebuilding the Vagrant machine to use the latest Vagrantfile.
+    * `Vagrant destroy`
+    * `Vagrant up`
+2. Reconnecting PyCharm with the VM.
+3. What does this get us right now? [Function Annotations](https://www.python.org/dev/peps/pep-3107/)
+    
+## Goal 6: Adding Conditional Logic and Exception Handling
+In this step we are going to add somethings into our program that *can* make
+it explode depending on the input we receive from the user.  We'll look at
+a couple of different ways of dealing with this added complexity.
+
+1. Add an if/else statement to check for the existence of non-empty new_names 
+function parameter value.
+    * Options for checking if for non-empty : `if new_names vs. if new_names is not None`
+    * What is going on with `new_filenames[files.index(file)])`?
+    * Review `str.format()`
+    * So what is going to happen if there aren't enough names in `new_names`
+    to match the number of files in `files`?
+    
+2. Add Exception handling to deal with the IndexError that we've discovered!AdAff
+
+
+## Goal 6: Becoming a multi-purpose CLI
+We've made great progress thus far.  Now let's take the next (and final) step
+in this training level and turn our CLI into something that can handle more
+than one type of task.  Specifically, let's add the ability for our 
+program to move files as well as copy them.
 
     
 
