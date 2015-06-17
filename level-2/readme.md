@@ -1,5 +1,5 @@
-![Welcome to Level 2](http://images2.fanpop.com/image/photos/12400000/Kung-Fu-Panda-kung-fu-panda-12434029-960-424.jpg)
-# Level One: Interacting with Web Services
+![Welcome to Level 2](http://i610.photobucket.com/albums/tt185/louper_anguano/KungFuPandaTh4nosAC35106010718-22-1.png)
+# Level Two: Interacting with Web Services
 
 ## PyCharm Project Setup
 * Open a new project folder: `[repo-location]/trainee-area/level-2/using-web-services`
