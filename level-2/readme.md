@@ -6,6 +6,7 @@
 * Set the project interpreter
 ![Project Interpreter Settings](project-interpreter.png)
 * Probably restart PyCharm due to software bug in latest version.
+* Install the missing 3rd party libraries.
 
 ## Training Topics
 
