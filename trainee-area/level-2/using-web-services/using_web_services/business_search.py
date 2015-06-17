@@ -11,7 +11,7 @@ COMPANY_SEARCH_URL = "http://api.searchcompany.us/1.0/search"
 COMPANY_RETRIEVAL_URL = "http://api.searchcompany.us/1.0/company"
 
 
-def company_search(name: str):
+def company_search(name: str) -> list:
     search_url = "{}/{}".format(COMPANY_SEARCH_URL, name)
     return requests.get(search_url).json()['company']   # Method Chaining
 
