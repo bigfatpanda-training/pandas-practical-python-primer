@@ -54,3 +54,4 @@ awesome package called [`requests`](http://docs.python-requests.org/en/latest/) 
 apis.  This is one of the reasons Python is awesome, because there are 
 so many people out there creating awesome stuff and sharing it for free.
 
+[Start Training](exercise-1.md)
