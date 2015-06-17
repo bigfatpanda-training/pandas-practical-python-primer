@@ -2,7 +2,7 @@
 ### Step 2: Use the `requests` library to search for companies based on name 
 * Use the `requests.get()` function to search for companies that have a given
 string in their name.
-```
+```python
 if __name__ == "__main__":
     search_url = "{}/{}".format("http://api.searchcompany.us/1.0/search", "Panda")
     results = requests.get(search_url)
