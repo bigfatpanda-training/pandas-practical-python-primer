@@ -4,7 +4,7 @@
 string in their name.
 ```
 if __name__ == "__main__":
-    search_url = "{}/{}".format("http://api.searchcompany.us/1.0/search/", "Panda")
+    search_url = "{}/{}".format("http://api.searchcompany.us/1.0/search", "Panda")
     results = requests.get(search_url)
 ```
 * Run the program interactively (`python -i [program_name]`) and use the 
