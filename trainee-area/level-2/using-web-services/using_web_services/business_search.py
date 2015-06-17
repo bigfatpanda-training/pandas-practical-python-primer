@@ -13,34 +13,35 @@ COMPANY_RETRIEVAL_URL = "http://api.searchcompany.us/1.0/company"
 
 def company_search(name: str):
     search_url = "{}/{}".format(COMPANY_SEARCH_URL, name)
-    return requests.get(search_url)
+    return requests.get(search_url).json()['company']   # Method Chaining
+
+    # Without Method Chaining
+    # results = requests.get(search_url)
+    # json_payload = results.json()
+    # company_records = json_payload['company']
+    # return company_records
 
 
-def company_lookup(id: int):
-    pass
+def companies_info(companies: list):
+    # Use list comprehension because its pretty simple.
+    company_ids = [company['id'] for company in companies]
+
+    # Alternatively w/o list comprehension
+    # company_ids = []   # Alternatively, company_ids = list()
+    # for company in companies:
+    #     company_ids.append(company['id'])
+
+    # Don't use list comprehension because it isn't so simple.
+    full_company_listings = []
+    for company_id in company_ids:
+        lookup_url = "{}/{}".format(COMPANY_RETRIEVAL_URL, company_id)
+        lookup_results = requests.get(lookup_url)
+        full_company_listings.append(lookup_results.json())
+
+    return full_company_listings
 
 
 if __name__ == "__main__":
-    search_url = "{}/{}".format("http://api.searchcompany.us/1.0/search", "Panda")
-    results = requests.get(search_url)
-
-    company_ids = []   # Alternatively, company_ids = list()
-    for company_record in results.json()['company']:
-        company_ids.append(company_record['id'])
-
-    # As List Comprehension
-    # company_ids = [company_record['id'] for company_record in results.json()['company']]
-
-    company_info = []
-    for company_id in company_ids:
-        lookup_url = "{}/{}".format("http://api.searchcompany.us/1.0/company", company_id)
-        lookup_results = requests.get(lookup_url)
-        company_info.append(lookup_results.json())
-
-    # As List Comprehension
-    # company_info = [
-    #     requests.get("{}/{}".format(
-    #         "http://api.searchcompany.us/1.0/company", company_id)).json()
-    #     for company_id in company_ids]
-
-    print(company_info)
+    companies = company_search(name="Panda")
+    information_on_companies = companies_info(companies=companies)
+    print(information_on_companies)
