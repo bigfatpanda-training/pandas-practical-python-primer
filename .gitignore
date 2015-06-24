@@ -60,3 +60,4 @@ target/
 *.conf
 *.iml
 .idea
+*.json
