@@ -2,8 +2,7 @@
 ## Program Structure & Setup
 #### Step 1: Package Creation / Dependency Installation
 * Inside the `/vagrant/trainee-area/level-3-using-web-services` directory, you
-will see a folder called `trainee-friends-api`.  This is where you will be 
-putting your work for this session.
+will see a folder called `trainee-friends-api`.  
 
 * Note that there are already two files inside of this directory: 
 `requirements.txt` and `run_server.py`.
@@ -15,10 +14,11 @@ putting your work for this session.
     production environment, we wouldn't use the testing server and this file
     wouldn't be necessary, but using it will help us get started quickly.
 
-* Create a new Python package inside `/trainee-area/level-3-using-web-services/friends-api`
+* Create a new Python package inside `/trainee-area/level-3-using-web-services/trainee-friends-api`
     * Call it `trainee_friends_api`.
     * If you did this correctly, you'll automatically get an `__init__.py` file
     inside of the folder.
+    * **All other work for this session will go inside this folder.**
 
 * Add a docstring to `__init__.py` which describes what the entire package 
 will provide. In our case, an API to interact with friendship data.
@@ -31,6 +31,22 @@ your interpreter is probably not set up correctly.
 * To start off, we'll need two modules (i.e. python files) inside the package:
     * `datastore.py`: This is where we will store information on our friends.
     * `api.py`: This will be the actual Flask API.
+    
+    
+#### Step 3: Create a Barebones Flask App
+* Add the following to `api.py`:
+    ```python
+    from flask import Flask, jsonify
+    
+    app = Flask(__name__)
+    ```   
+* The first line imports the `Flask` class and a helper function called `jsonify`.
+* The second line creates an Flask-typed object and assigns it to the name `app`. 
+* This is our Flask application.  **It just doesn't do anything yet.**
+
+    > ![Remember](../images/remember.png) A class is just a special object that creates other objects
+    > according to its blueprint.
+
 
 
    

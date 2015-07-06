@@ -3,6 +3,11 @@
 The first thing that we are going to do is add support for HTTP GET operations
 to our API.  We will add this for both the **resource collection** and 
 **individual resource** levels.
+
+> Question: What is the difference between those two terms?
+
+
+
 * Refer to the online [API documentation](http://api.searchcompany.us) to see 
 how to use the results of the search to get the information you need to get 
 more information on a specific business.

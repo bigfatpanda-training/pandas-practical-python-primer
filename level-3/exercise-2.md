@@ -12,17 +12,24 @@ keep it in a dictionary for the time being.  Add the following to `datastore.py`
             "telephone": "574-213-0726",
             "email": "mike@eikonomega.com",
             "notes": "My bestest friend in all the world."
+        },
+        {
+            "first_name": "Vin",
+            "last_name": "Diesel",
+            "telephone": "I-HIT-PEOPLE",
+            "email": "vdiesel4@supercool.edu",
+            "notes": "Really annoying guy.  Will never amount to anything."
         }
     ]
     ```
-* We'll edit this list via our API to create/modify/delete our friends!
+* We'll access and edit this list via our API to create/modify/delete our friends!
 * Don't forget to add a docstring to the file.  Hopefully PyCharm will remind
 you that this is currently missing.
 
 
 #### Step 2: Access `datastore.friends` from `api.py`
 * How do we access data from one module in another module?  We `import` it!
-* Add the following to `api.py`: `from [your_id]_friends_api import datastore`
+* Add the following to `api.py`: `from trainee_friends_api import datastore`
 * Drop to the command line and run `ipython -i [your_id]_friends_api.api` and 
 see if you can access `datastore.friends` 
 
