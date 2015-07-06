@@ -47,7 +47,7 @@ your interpreter is probably not set up correctly.
 * The second line creates an Flask-typed object and assigns it to the name `app`. 
 * This is our Flask application.  **It just doesn't do anything yet.**
 
-> ![](../images/reminder.png) Don't forget to add the module docstring.
+> ![Reminder](../images/reminder.png) Don't forget to add the module docstring.
 
     
 
