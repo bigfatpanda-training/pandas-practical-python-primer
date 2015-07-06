@@ -4,7 +4,7 @@ Provides a Flask API to interact with Friendship data.
 
 from flask import Flask
 
-from friends_api import datastore
+from bfp_friends_api.datastore import friends
 
 app = Flask(__name__)
 
