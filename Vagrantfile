@@ -65,6 +65,6 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", path: "misc/vagrant-pyenv-prereqs.sh"
-  config.vm.provision "file", source: "misc/.bash_profile", destination: "/home/vagrant/.bash_profile"
+  config.vm.provision "shell", path: "misc/bash_profile.sh"
   config.vm.provision "shell", path: "misc/pyenv-installation.sh"
 end
