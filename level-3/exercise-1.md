@@ -41,11 +41,15 @@ your interpreter is probably not set up correctly.
     app = Flask(__name__)
     ```   
 * The first line imports the `Flask` class and a helper function called `jsonify`.
-* The second line creates an Flask-typed object and assigns it to the name `app`. 
-* This is our Flask application.  **It just doesn't do anything yet.**
 
     > ![Information](../images/information.png) A class is just a special object that creates other objects
     > according to its blueprint.
+* The second line creates an Flask-typed object and assigns it to the name `app`. 
+* This is our Flask application.  **It just doesn't do anything yet.**
+
+> ![](../images/reminder.png) Don't forget to add the module docstring.
+
+    
 
 
 
