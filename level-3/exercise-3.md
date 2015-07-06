@@ -4,9 +4,13 @@ The first thing that we are going to do is add support for HTTP GET operations
 to our API.  We will add this for both the **resource collection** and 
 **individual resource** levels.
 
-> Question: What is the difference between those two terms?
+> ![Question](../images/reminder.png) What is the difference between those two terms?
 
+#### Step 1: Add a function that will return information on all our friends
 
+```python
+
+```
 
 * Refer to the online [API documentation](http://api.searchcompany.us) to see 
 how to use the results of the search to get the information you need to get 

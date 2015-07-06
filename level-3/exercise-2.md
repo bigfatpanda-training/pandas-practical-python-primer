@@ -29,9 +29,18 @@ you that this is currently missing.
 
 #### Step 2: Access `datastore.friends` from `api.py`
 * How do we access data from one module in another module?  We `import` it!
-* Add the following to `api.py`: `from trainee_friends_api import datastore`
-* Drop to the command line and run `ipython -i [your_id]_friends_api.api` and 
-see if you can access `datastore.friends` 
+* Add the following to `api.py`: 
+    ```python
+    from flask import Flask, jsonify
+    
+    from trainee_friends_api import datastore
+    ...
+    ```
+* Drop to the command line and run `ipython -i -m trainee_friends_api.api` and 
+see if you can access `datastore.friends`
+
+    ![alert](../images/alert.png) If you forget the `-m' option, your program 
+    won't handle the import statements correctly and will break.
 
     
 
