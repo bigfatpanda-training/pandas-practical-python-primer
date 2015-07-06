@@ -44,7 +44,7 @@ your interpreter is probably not set up correctly.
 * The second line creates an Flask-typed object and assigns it to the name `app`. 
 * This is our Flask application.  **It just doesn't do anything yet.**
 
-    > ![Remember](../images/remember.png) A class is just a special object that creates other objects
+    > ![Information](../images/information.png) A class is just a special object that creates other objects
     > according to its blueprint.
 
 
