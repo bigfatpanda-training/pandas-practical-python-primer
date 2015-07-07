@@ -62,6 +62,36 @@ worked correctly:
     * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
     * Restarting with stat
     ```
+* In your second terminal window, you can issue `curl` commands to access
+various methods of your API.  Test your first method with the following command:
+`curl 127.0.0.1:5000/api/v1/friends`.  
+* You should get the following response:
+    
+    ```
+    {
+      "friends": [
+        {
+          "email": "mike@eikonomega.com",
+          "first_name": "Big Fat",
+          "id": "BFP",
+          "last_name": "Panda",
+          "notes": "My bestest friend in all the world.",
+          "telephone": "574-213-0726"
+        },
+        {
+          "email": "vdiesel4@supercool.edu",
+          "first_name": "Vin",
+          "id": "VinDi",
+          "last_name": "Diesel",
+          "notes": "Really annoying guy.  Will never amount to anything.",
+          "telephone": "I-HIT-PEOPLE"
+        }
+      ]
+    }
+    ```
+    
+    > > ![Reminder](../images/reminder.png) Both terminal sessions need to have
+    active SSH connections to the Vagrant VM (`vagrant ssh`) for this to work correctly.
     
 #### Step 3: Enable API Support for Retrieving Information on a Specific Friend
 ```python
@@ -100,12 +130,27 @@ modify the HTTP status code that would be returned by using `jsonify` alone (200
 
 ##### Testing
 * Drop to the command-line and try to access your new method: 
-`curl 127.0.0.1:5000/api/v1/friends/BFP`.  
+`curl 127.0.0.1:5000/api/v1/friends/VinDi`.  
     * Did you get this? `NameError: name 'make_response' is not defined`
     * This is because we're referencing an name that is not currently defined. 
     It still needs to be imported from the `flask` package.
     * Update your `from flask import ...` statement to include `make_response`.
+    
+* Once you've fixed the code, notice that the Flask test HTTP server restarts
+automatically?  This is a handy feature for development, but would not be
+present in production environments.
 
+* Try the curl command again and you should get the following output:
+    ```
+    {
+      "email": "vdiesel4@supercool.edu",
+      "first_name": "Vin",
+      "id": "VinDi",
+      "last_name": "Diesel",
+      "notes": "Really annoying guy.  Will never amount to anything.",
+      "telephone": "I-HIT-PEOPLE"
+    }
+    ```
 
 > ![Alert](../images/alert.png) We've introduced a bug here that might not be
 > be immediately obvious.  What happens when we query for `BFP`?  What about
