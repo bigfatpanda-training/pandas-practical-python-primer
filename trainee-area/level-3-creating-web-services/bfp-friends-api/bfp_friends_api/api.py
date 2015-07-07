@@ -2,7 +2,7 @@
 Provides a Flask API to interact with Friendship data.
 """
 
-from flask import Flask, jsonify, abort
+from flask import Flask, jsonify, abort, make_response
 
 from bfp_friends_api.datastore import friends
 
@@ -19,6 +19,8 @@ def get_friend(id):
     for friend in friends:
         if friend["id"] == id:
             return jsonify(friend)
-    abort(404)
 
-    return jsonify({"friends": friends})
+    error_response = make_response(
+        jsonify({"error": "No such friend exists."}), 404)
+    return error_response
+
