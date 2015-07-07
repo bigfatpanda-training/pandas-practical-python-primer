@@ -25,8 +25,9 @@ keep it in a dictionary for the time being.  Add the following to `datastore.py`
     ]
     ```
 * We'll access and edit this list via our API to create/modify/delete our friends!
-* Don't forget to add a docstring to the file.  Hopefully PyCharm will remind
-you that this is currently missing.
+
+    > ![reminder](../images/reminder.png) Don't forget to add a docstring to the file.  Hopefully PyCharm will remind
+    > you that this is currently missing.
 
 
 #### Step 2: Access `datastore.friends` from `api.py`
@@ -41,7 +42,7 @@ you that this is currently missing.
 * Drop to the command line and run `ipython -i trainee_friends_api.api` and 
 see if you can access `datastore.friends`
 
-    ![alert](../images/alert.png) If you prefer the default `python` 
+    > ![alert](../images/alert.png) If you prefer the default `python` 
     interpreter, don't forget to add the `-m' option.  If you don't, your 
     program won't handle the import statements correctly and will break.
 

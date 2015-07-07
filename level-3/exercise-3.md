@@ -16,7 +16,7 @@ to our API.  We will add this for both the **resource collection** and
     @app.route('/api/v1/friends', methods=['GET'])
     def get_friends():
         """Return a representation of the collection of friend resources."""
-        return jsonify({"friends": friends})
+        return jsonify({"friends": datastore.friends})
     ```
 * There is a lot going on here. So let's take it line by line.
     * The `@app.route()` is a **decorator**.  Decorators are used in Python 
@@ -99,7 +99,7 @@ various methods of your API.  Test your first method with the following command:
 @app.route('/api/v1/friends/<id>', methods=['GET'])
 def get_friend(id):
     """Return a representation of a specific friend or an error."""
-    for friend in friends:
+    for friend in datastore.friends:
         if friend["id"] == id:
             return jsonify(friend)
 
