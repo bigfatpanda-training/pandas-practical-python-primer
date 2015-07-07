@@ -7,6 +7,7 @@ keep it in a dictionary for the time being.  Add the following to `datastore.py`
     ```python
     friends = [
         {
+            "id": "BFP",
             "first_name": "Big Fat",
             "last_name": "Panda",
             "telephone": "574-213-0726",
@@ -14,6 +15,7 @@ keep it in a dictionary for the time being.  Add the following to `datastore.py`
             "notes": "My bestest friend in all the world."
         },
         {
+            "id": "VinDi",
             "first_name": "Vin",
             "last_name": "Diesel",
             "telephone": "I-HIT-PEOPLE",
@@ -36,11 +38,12 @@ you that this is currently missing.
     from trainee_friends_api import datastore
     ...
     ```
-* Drop to the command line and run `ipython -i -m trainee_friends_api.api` and 
+* Drop to the command line and run `ipython -i trainee_friends_api.api` and 
 see if you can access `datastore.friends`
 
-    ![alert](../images/alert.png) If you forget the `-m' option, your program 
-    won't handle the import statements correctly and will break.
+    ![alert](../images/alert.png) If you prefer the default `python` 
+    interpreter, don't forget to add the `-m' option.  If you don't, your 
+    program won't handle the import statements correctly and will break.
 
     
 

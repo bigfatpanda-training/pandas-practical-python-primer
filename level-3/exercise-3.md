@@ -6,78 +6,45 @@ to our API.  We will add this for both the **resource collection** and
 
 > ![Question](../images/reminder.png) What is the difference between those two terms?
 
-#### Step 1: Add a function that will return information on all our friends
-
+#### Step 1: Enable API Support for Retrieving Information on all our Friends
+* Add the following code to `api.py`:
+    ```python
+    ...
+    app = Flask(__name__)
+    
+    
+    @app.route('/api/v1/friends', methods=['GET'])
+    def get_friends():
+        """Return a representation of the collection of friend resources."""
+        return jsonify({"friends": friends})
+    ```
+* There is a lot going on here. So let's take it line by line.
+    * The `@app.route()` is a **decorator**.  Decorators are used in Python 
+    programs to dynamically add addition statements that are executed before
+    and/or after a given function whenever the name of the function is invoked.
+        * They are pretty advanced so we won't really get into the guts of how they
+        work here (unless you ask me and then we can Geek out!).
+        * What you **do** need to understand is that Flask uses them to tie
+        your functions to incoming HTTP requests for a given URL and HTTP method.
+        * In this case, it is connecting incoming requests to 
+        `www.yourserver.com/api/v1/friends` using the `GET` to this function.
+        * So this function will be executed whenever such a request is received.
+    
+    * You're familiar with the function definition statement and the docstring 
+    by now and you also know what the `return` statement does generally speaking.
+    But what is `jsonify`?
+    
+    > ![Question](../images/question.png) You know the answer!  We've done it
+    before, what is at least one way you can find out what something does in 
+    Python/PyCharm?
+    
+#### Step 2: Enable API Support for Retrieving Information on a Specific Friend
 ```python
-
+...
+@app.route('/api/v1/friends', methods=['GET'])
+    def get_friends():
+        """Return a representation of the collection of friend resources."""
+        return jsonify({"friends": friends})
+...
 ```
-
-* Refer to the online [API documentation](http://api.searchcompany.us) to see 
-how to use the results of the search to get the information you need to get 
-more information on a specific business.
-
-* Pull out the necessary information from the JSON body/payload of the search
-request.  Talk about what is happening here with the class.
-
-    ```python
-    if __name__ == "__main__":
-        search_url = "{}/{}".format("http://api.searchcompany.us/1.0/search", "Panda")
-        results = requests.get(search_url)
         
-        company_ids = []   # Alternatively, company_ids = list()
-        for company_record in results.json()['company']:
-            company_ids.append(company_record['id'])
-    ```
-
-* **Advanced Tidbit**: Pythonistas use a feature call _list comprehensions_ to 
-dynamically generate lists like the one we've made without the need to
-define the list ahead of time and construct a loop.  Here's how that would look:
-
-    ```python
-    if __name__ == "__main__":
-        search_url = "{}/{}".format("http://api.searchcompany.us/1.0/search", "Panda")
-        results = requests.get(search_url)
-        
-        # List Comprehension (Cool points in Python bars)
-        company_ids = [company_record['id'] for company_record in results.json()['company']]
-    ```
-
-* Make additional calls to the API to retrieve detailed information on each 
-business ID that you've obtained.
-
-    ```python
-    if __name__ == "__main__":
-        search_url = "{}/{}".format("http://api.searchcompany.us/1.0/search", "Panda")
-        results = requests.get(search_url)
-        
-        company_ids = []   # Alternatively, company_ids = list()
-        for company_record in results.json()['company']:
-            company_ids.append(company_record['id'])
-            
-        company_info = [] 
-        for company_id in company_ids:
-            lookup_url = "{}/{}".format("http://api.searchcompany.us/1.0/company", company_id)
-            lookup_results = requests.get(lookup_url)
-            company_info.append(lookup_results.json())
-            
-        print(company_info)
-    ```
-    
-* What would this look like using a list comprehension? What about the Zen of Python?
-
-    ```python
-    if __name__ == "__main__":
-        search_url = "{}/{}".format("http://api.searchcompany.us/1.0/search", "Panda")
-        results = requests.get(search_url)
-    
-        company_ids = []   # Alternatively, company_ids = list()
-        for company_record in results.json()['company']:
-            company_ids.append(company_record['id'])
-    
-        company_info = [
-            requests.get("{}/{}".format(
-                "http://api.searchcompany.us/1.0/company", company_id)).json()
-            for company_id in company_ids]
-    
-        print(company_info)
-    ```
