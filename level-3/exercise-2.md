@@ -1,4 +1,4 @@
-[Previous](readme.md) |  [Next](exercise-2.md)
+[Previous](exercise-1.md) |  [Next](exercise-3.md)
 ## Storing & Importing Friendship Information
 #### Step 1: Add some information on your friends to `datastore.py`
 * Since we don't have a database to store our program data.  We're going to 
