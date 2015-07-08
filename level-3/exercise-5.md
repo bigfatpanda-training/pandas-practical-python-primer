@@ -66,7 +66,7 @@ def create_friend():
     > recommended.  I'm only doing it here because I know this is going to go
     > away after we finish debugging.
     
-    > ![info](../images/information) You've seen the `try/except` syntax before,
+    > ![info](../images/information.png) You've seen the `try/except` syntax before,
     > but if you need a refresher on how it works, consult the 
     [Python Documentation](https://docs.python.org/2/tutorial/errors.html#handling-exceptions) 
     
