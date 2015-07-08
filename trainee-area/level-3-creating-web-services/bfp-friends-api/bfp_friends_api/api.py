@@ -39,8 +39,6 @@ def create_friend():
 
     try:
         import sys
-        required_data_elements = {
-            "id", "firstName", "lastName", "telephone", "email", "notes"}
         try:
             request_payload = request.get_json()
         except BadRequest:
@@ -58,14 +56,17 @@ def create_friend():
                 400)
             return error_response
 
-        # if not required_data_elements.issubset(request_payload.keys()):
-        #     error_response = make_response(
-        #         jsonify(
-        #             {"error": "Missing required payload elements. "
-        #                       "The following elements are "
-        #                       "required: {}".format(required_data_elements)}),
-        #         404)
-        #     return error_response
+        required_data_elements = {
+            "id", "firstName", "lastName", "telephone", "email", "notes"}
+
+        if not required_data_elements.issubset(request_payload.keys()):
+            error_response = make_response(
+                jsonify(
+                    {"error": "Missing required payload elements. "
+                              "The following elements are "
+                              "required: {}".format(required_data_elements)}),
+                404)
+            return error_response
 
         datastore.friends.append(
             {"id": request_payload['id'],

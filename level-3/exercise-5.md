@@ -29,8 +29,6 @@ def create_friend():
 
     try:
         import sys
-        required_data_elements = {
-            "id", "firstName", "lastName", "telephone", "email", "notes"}
         request_payload = request.get_json()
 
         datastore.friends.append(
@@ -198,6 +196,77 @@ return a message to the user saying that the JSON payload had syntax errors.
     
     ```
 
+* Try the `curl` call with bad JSON syntax again and you should get this:
+    ```
+    {
+      "error": "JSON payload contains syntax errors. Please fix and try again."
+    }
+    ```
+    
+#### Step 4: Fix the Missing Required Data Element Bug
+* Incoming HTTP requests that don't provide all the necessary data points in
+the JSON payload result in a `KeyError` exception.  
+    * Example: `curl 127.0.0.1:5000/api/v1/friends -X POST -H "content-type:application/json" -d '{"firstName": "Donald", "lastName": "Duck", "telephone": "i-love-ducks", "email": "donald@disney.com", "notes": "A grumpy, easily agitated duck."}'`
+        
+        ```
+        # HTTP Response
+        {
+          "errorLocation": 71,
+          "errorMessage": "'id'",
+          "errorType": "<class 'KeyError'>"
+        }
+        ```
+        
+    * Let's look at the code that I have at line 71 that is generating a 
+    `KeyError` on an attempt to access a dictionary element named `id`:
+    
+        ```python
+        datastore.friends.append(
+            {"id": request_payload['id'],
+             "first_name": request_payload['firstName'],
+             "last_name": request_payload['lastName'],
+             "telephone": request_payload['telephone'],
+             "email": request_payload['email'],
+             "notes": request_payload['notes']})
+        ```
+    
+        * This was the same bit of code that caused us problems before when 
+        there the incoming HTTP request didn't have a `content-type` header.
+        
+        * However, the errors are not the same.  The first time, the exception
+        was caused by trying to access `None` as if it were a dictionary which 
+        resulted in a `TypeError`.  This time, we have a `KeyError` which is 
+        raised when you attempt to access a key that doesn't exist on a dictionary.
+        
+    * What this means is `request_payload` has the JSON content from the 
+    request, but that the `id` element isn't in it.  This makes sense 
+    because if you check the `curl` command you'll see that this element 
+    is indeed missing.
+    
+    * To address this bug we'll need to create a `set` that holds the add an `if` statement to our code
+    that verifies that all required data elements are present in the request's
+    JSON payload:
+    
+        ```python
+        ...
+        required_data_elements = {
+            "id", "firstName", "lastName", "telephone", "email", "notes"}
+        
+        if not required_data_elements.issubset(request_payload.keys()):
+            error_response = make_response(
+                jsonify(
+                    {"error": "Missing required payload elements. "
+                              "The following elements are "
+                              "required: {}".format(required_data_elements)}),
+                404)
+            return error_response
 
-* Leave out the `firstName` element from the JSON payload. -> `KeyError`
-* POST the same JSON representation twice. -> Two resources are created with the same info.
+        datastore.friends.append(
+            {"id": request_payload['id'],
+             "first_name": request_payload['firstName'],
+             "last_name": request_payload['lastName'],
+             "telephone": request_payload['telephone'],
+             "email": request_payload['email'],
+             "notes": request_payload['notes']})
+        ...
+        ```
