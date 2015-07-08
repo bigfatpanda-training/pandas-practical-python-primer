@@ -88,6 +88,7 @@ up to this point.  However, we actually been introducing bugs into our program
 along the way.  Try the following `curl` operations to see them crawl out of their 
 holes:
     
-    * Leave out the header that sets `content-type` to `application/json` 
-    * Have a syntax error in the JSON payload.
-    * Leave out the `firstName` element from the JSON payload.
+* Leave out the header that sets `content-type` to `application/json` -> `TypeError: 'NoneType' object is not subscriptable` 
+* Have a syntax error in the JSON payload. -> Stange HTML error message with a 400 status code.
+* Leave out the `firstName` element from the JSON payload. -> `KeyError`
+* POST the same JSON representation twice. -> Two resources are created with the same info.

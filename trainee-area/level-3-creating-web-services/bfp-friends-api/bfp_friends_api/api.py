@@ -3,6 +3,7 @@ Provides a Flask API to interact with Friendship data.
 """
 
 from flask import Flask, jsonify, make_response, request
+from werkzeug.exceptions import BadRequest
 
 from bfp_friends_api import datastore
 
@@ -36,27 +37,51 @@ def create_friend():
     a new friend resource.
     """
 
-    required_data_elements = {
-        "id", "firstName", "lastName", "telephone", "email", "notes"}
-    request_payload = request.get_json()
+    try:
+        import sys
+        required_data_elements = {
+            "id", "firstName", "lastName", "telephone", "email", "notes"}
+        try:
+            request_payload = request.get_json()
+        except BadRequest:
+            error_response = make_response(
+                jsonify({"error": "JSON payload contains syntax errors. Please "
+                                  "fix and try again."}),
+                400)
+            return error_response
 
-    # if not required_data_elements.issubset(request_payload.keys()):
-    #     error_response = make_response(
-    #         jsonify(
-    #             {"error": "Missing required payload elements. "
-    #                       "The following elements are "
-    #                       "required: {}".format(required_data_elements)}),
-    #         404)
-    #     return error_response
+        if request_payload is None:
+            error_response = make_response(
+                jsonify({"error": "No JSON payload present.  Make sure that "
+                                  "appropriate `content-type` header is "
+                                  "included in your request."}),
+                400)
+            return error_response
 
-    datastore.friends.append(
-        {"id": request_payload['id'],
-         "first_name": request_payload['firstName'],
-         "last_name": request_payload['lastName'],
-         "telephone": request_payload['telephone'],
-         "email": request_payload['email'],
-         "notes": request_payload['notes']})
+        # if not required_data_elements.issubset(request_payload.keys()):
+        #     error_response = make_response(
+        #         jsonify(
+        #             {"error": "Missing required payload elements. "
+        #                       "The following elements are "
+        #                       "required: {}".format(required_data_elements)}),
+        #         404)
+        #     return error_response
 
-    response = make_response(jsonify({"message": "Friend resource created."}),
-                             201)
+        datastore.friends.append(
+            {"id": request_payload['id'],
+             "first_name": request_payload['firstName'],
+             "last_name": request_payload['lastName'],
+             "telephone": request_payload['telephone'],
+             "email": request_payload['email'],
+             "notes": request_payload['notes']})
+
+        response = make_response(jsonify({"message": "Friend resource created."}),
+                                 201)
+    except Exception as error:
+        response = make_response(
+            jsonify({"errorType": str(sys.exc_info()[0]),
+                     "errorMessage": str(sys.exc_info()[1]),
+                     "errorLocation": sys.exc_info()[2].tb_lineno}),
+            400)
+
     return response
