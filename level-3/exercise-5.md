@@ -162,7 +162,7 @@ test harness gives you back:
 that the error type was a custom error in the `werkzeug` package.  In other 
 words, its not a error that is part of the standard library.
 
-    > ![info](../images/information) Just like our program requires `Flask`, it 
+    > ![info](../images/information.png) Just like our program requires `Flask`, it 
     > requires the `werkzeug` package.  So when we installed `Flask` from our
     > `requirements.txt` file, it also got installed.
     
