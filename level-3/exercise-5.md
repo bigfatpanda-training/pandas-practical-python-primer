@@ -243,7 +243,8 @@ the JSON payload result in a `KeyError` exception.
     because if you check the `curl` command you'll see that this element 
     is indeed missing.
     
-    * To address this bug we'll need to create a `set` that holds the add an `if` statement to our code
+    * To address this bug we'll need to create a `set` that holds the names of
+    the required elements and an `if` statement
     that verifies that all required data elements are present in the request's
     JSON payload:
     
@@ -270,3 +271,152 @@ the JSON payload result in a `KeyError` exception.
              "notes": request_payload['notes']})
         ...
         ```
+        
+        > ![info](../images/information.png) A `set` is like a `list` in that
+        is can hold an arbitrary number of heterogenous objects.  However,
+        unlike a list, it doesn't keep track of insertion order and only allows
+        a single entry for a given value.  It also supports very fast 
+        comparisons to other sets (which is what we are taking advantage of here).
+        
+        * The `if` statement requires some explanation. 
+            1. `required_data_elements`, 
+            by virtue of being a `set` object has the `issubset` method which allows
+            us to determine if all the elements of the set are included in another
+            container-type object that be converter to a set.
+            1. In this case, the container-type object that we want to compare
+            to is the list returned from `request_payload.keys()`.  That
+            list contains all the key values from the JSON payload.
+            1. So the fragment `required_data_elements.issubset(request_payload.keys())`
+            will evaluate to `True` if all the members of `required_data_elements`
+            are present in `request_payload.keys()`. Otherwise, it will 
+            evaluate to `False`.
+            1. The `if not` syntax means "if the thing that I'm evaluating does 
+            not evaluate to `True` then do X"
+             
+        * Inside the `if` statement, you can see that a helpful message will
+        be returned to the user instead of what we got before.  Try it yourself
+        and verify that you get the following response.
+        
+            ```
+            {
+              "error": "Missing required payload elements. The following 
+              elements are required: {'firstName', 'email', 'notes', 'id', 
+              'telephone', 'lastName'}"
+            }
+            ```
+
+#### Step 5: Fix the Bug that Allows You To Create Friends with Identical IDs
+    * As we've seen, the way that the API is currently constructed allows us
+    to create multiple friend resources that are identical.  That isn't right.
+    Each of our friends should only be in our list once.
+        * We might have friends that share certain data points, like first/last
+        name, or even telephone numbers, but they should still have a unique id
+        value.
+    
+    * You can see this bug in action to executing the following curl commands:
+        * Do this one 2x or more times: `curl 127.0.0.1:5000/api/v1/friends -X POST -H "content-type:application/json" -d '{"id":"dDuck", "firstName": "Donald", "lastName": "Duck", "telephone": "i-love-ducks", "email": "donald@disney.com", "notes": "A grumpy, easily agitated duck."}'`
+        * Do this to see all your friends: `curl 127.0.0.1:5000/api/v1/friends`
+        
+    * Let's add a check into our function that will prevent attempts to 
+    add a friend resource with an `id` value that already exists:
+     
+        ```python
+        ...     
+        for friend in datastore.friends:
+            if request_payload['id'].lower() == friend['id'].lower():
+                error_response = make_response(
+                    jsonify(
+                        {"error": "An friend resource already exists with the "
+                                  "given id: {}".format(request_payload['id'])}),
+                    400)
+                return error_response
+
+        datastore.friends.append(
+            {"id": request_payload['id'],
+             "first_name": request_payload['firstName'],
+             "last_name": request_payload['lastName'],
+        ...
+        ```
+        
+    * Now verify that you get the correct response when trying to create a 
+    duplicate friend using the `curl` commands above.  You should get this:
+    
+        ```
+        {
+          "error": "An friend resource already exists with the given id: dDuck1"
+        }
+        ```
+        
+#### Step 6: Take a Depth Breath and Congratulate Yourself!
+You've successfully squished alot of bugs in this section.  Depending on your
+personality, this could have been really fun or really, really, awful.
+
+If it was the latter of those two options for you, take heart.  You've made
+your API much more bulletproof than it was before. And while that takes time 
+and effort, it is absolutely necessary if you want to create web APIs that 
+people will actually use in the real world.
+
+To finish off this section, make sure that your `create_friend` function looks
+like this:
+
+    ```python
+    @app.route('/api/v1/friends', methods=['POST'])
+    def create_friend():
+        """
+        Create a new friend resource.
+    
+        Utilize a JSON representation in the request object to create
+        a new friend resource.
+        """
+    
+        try:
+            import sys
+            try:
+                request_payload = request.get_json()
+            except BadRequest:
+                error_response = make_response(
+                    jsonify({"error": "JSON payload contains syntax errors. Please "
+                                      "fix and try again."}),
+                    400)
+                return error_response
+    
+            if request_payload is None:
+                error_response = make_response(
+                    jsonify({"error": "No JSON payload present.  Make sure that "
+                                      "appropriate `content-type` header is "
+                                      "included in your request."}),
+                    400)
+                return error_response
+    
+            required_data_elements = {
+                "id", "firstName", "lastName", "telephone", "email", "notes"}
+    
+            if not required_data_elements.issubset(request_payload.keys()):
+                error_response = make_response(
+                    jsonify(
+                        {"error": "Missing required payload elements. "
+                                  "The following elements are "
+                                  "required: {}".format(required_data_elements)}),
+                    404)
+                return error_response
+    
+            datastore.friends.append(
+                {"id": request_payload['id'],
+                 "first_name": request_payload['firstName'],
+                 "last_name": request_payload['lastName'],
+                 "telephone": request_payload['telephone'],
+                 "email": request_payload['email'],
+                 "notes": request_payload['notes']})
+    
+            response = make_response(jsonify({"message": "Friend resource created."}),
+                                     201)
+        except Exception as error:
+            response = make_response(
+                jsonify({"errorType": str(sys.exc_info()[0]),
+                         "errorMessage": str(sys.exc_info()[1]),
+                         "errorLocation": sys.exc_info()[2].tb_lineno}),
+                400)
+    
+        return response
+    ```
+    

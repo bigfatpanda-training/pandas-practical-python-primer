@@ -65,8 +65,17 @@ def create_friend():
                     {"error": "Missing required payload elements. "
                               "The following elements are "
                               "required: {}".format(required_data_elements)}),
-                404)
+                400)
             return error_response
+
+        for friend in datastore.friends:
+            if request_payload['id'].lower() == friend['id'].lower():
+                error_response = make_response(
+                    jsonify(
+                        {"error": "An friend resource already exists with the "
+                                  "given id: {}".format(request_payload['id'])}),
+                    400)
+                return error_response
 
         datastore.friends.append(
             {"id": request_payload['id'],

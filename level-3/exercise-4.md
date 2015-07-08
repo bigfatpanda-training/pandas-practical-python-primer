@@ -91,4 +91,5 @@ holes:
 * Leave out the header that sets `content-type` to `application/json` -> `TypeError: 'NoneType' object is not subscriptable` 
 * Have a syntax error in the JSON payload. -> Stange HTML error message with a 400 status code.
 * Leave out the `firstName` element from the JSON payload. -> `KeyError`
-* POST the same JSON representation twice. -> Two resources are created with the same info.
+* POST the same JSON representation twice. -> 
+Two resources are created with the same info.  This is probably not what we want.
