@@ -3,12 +3,14 @@ Provides a Flask API to interact with Friendship data.
 """
 
 from flask import Flask, jsonify, make_response, request
-from werkzeug.exceptions import BadRequest
 
 from bfp_friends_api import datastore
+from bfp_friends_api import api_helpers
 
 app = Flask(__name__)
 
+FRIEND_RESOURCE_ELEMENTS = {"id", "firstName", "lastName",
+                            "telephone", "email", "notes"}
 
 """
 Operations for the Friends Resource Collection
@@ -29,32 +31,11 @@ def create_friend():
     """
 
     try:
-        request_payload = request.get_json()
-    except BadRequest:
-        error_response = make_response(
-            jsonify({"error": "JSON payload contains syntax errors. Please "
-                              "fix and try again."}),
-            400)
-        return error_response
-
-    if request_payload is None:
-        error_response = make_response(
-            jsonify({"error": "No JSON payload present.  Make sure that "
-                              "appropriate `content-type` header is "
-                              "included in your request."}),
-            400)
-        return error_response
-
-    required_data_elements = {
-        "id", "firstName", "lastName", "telephone", "email", "notes"}
-
-    if not required_data_elements.issubset(request_payload.keys()):
-        error_response = make_response(
-            jsonify(
-                {"error": "Missing required payload elements. "
-                          "The following elements are "
-                          "required: {}".format(required_data_elements)}),
-            400)
+        request_payload = api_helpers.json_payload(request)
+        api_helpers.verify_required_data_present(
+            request_payload, FRIEND_RESOURCE_ELEMENTS)
+    except ValueError as error:
+        error_response = make_response(jsonify({"error": str(error)}), 400)
         return error_response
 
     for friend in datastore.friends:
@@ -108,36 +89,15 @@ def fully_update_friend(id: str):
         HTTP Response (404): No matching existing resource to update.
     """
     try:
-        request_payload = request.get_json()
-    except BadRequest:
-        error_response = make_response(
-            jsonify({"error": "JSON payload contains syntax errors. Please "
-                              "fix and try again."}),
-            400)
-        return error_response
-
-    if request_payload is None:
-        error_response = make_response(
-            jsonify({"error": "No JSON payload present.  Make sure that "
-                              "appropriate `content-type` header is "
-                              "included in your request."}),
-            400)
-        return error_response
-
-    required_data_elements = {
-        "id", "firstName", "lastName", "telephone", "email", "notes"}
-
-    if not required_data_elements.issubset(request_payload.keys()):
-        error_response = make_response(
-            jsonify(
-                {"error": "Missing required payload elements. "
-                          "The following elements are "
-                          "required: {}".format(required_data_elements)}),
-            400)
+        request_payload = api_helpers.json_payload(request)
+        api_helpers.verify_required_data_present(
+            request_payload, FRIEND_RESOURCE_ELEMENTS)
+    except ValueError as error:
+        error_response = make_response(jsonify({"error": str(error)}), 400)
         return error_response
 
     for friend in datastore.friends:
-        if request_payload['id'].lower() == friend['id'].lower():
+        if id.lower() == friend['id'].lower():
             friend.update(
                 {"id": request_payload['id'],
                  "first_name": request_payload['firstName'],
@@ -159,7 +119,7 @@ def fully_update_friend(id: str):
 
 
 @app.route('/api/v1/friends/<id>', methods=['DELETE'])
-def delete_friend(id: str):
+def destroy_friend(id: str):
     """
     Delete a specific friend resource or return an error.
 

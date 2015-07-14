@@ -1,4 +1,21 @@
 [Previous](exercise-6.md) |  [Next](exercise-8.md)
+## Refactoring for DRY Compliance
+Well, if you haven't Googled it by now, I'll tell you what DRY stands for:
+**Don't repeat yourself.**  
+
+Violating this principle will get your in trouble with the cool kid 
+programmers in any language, not just Pythonistas.
+
+
+#### Step 1: DRY Compliance
+
+Before we go one, let's take the duplicate code out of `create_friend` and
+`fully_update_friend`.  This is the section that is common to both functions:
+```python
+
+```
+
+
 ## Adding HTTP DELETE Support in our Web Service API
 OK. This one is going to be easy!  Let's add the ability to delete our friends!
 
@@ -31,8 +48,10 @@ resource, just like we did in `fully_update_friend`.
     in this case we invoke the `list.remove` method on `datastore.friends` 
     (which is a list) to removing the matching entries instead of updating it.
     
-    > ![info](../images/information.png) The documentation on the `list.remove`
-    method is not the clearest.
+        > ![info](../images/information.png) The documentation on the `list.remove`
+        method is not the clearest. Basically, it finds the first location 
+        (index) of a given value in a list and deletes it.  It even works when 
+        value we are deleting is a dictionary.  **Cool!**
 
 #### Step 2: Test API Handling of `DELETE` Requests
 Much of the logic that we'll need for this function is the same as we used

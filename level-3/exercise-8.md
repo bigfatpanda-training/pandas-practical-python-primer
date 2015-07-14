@@ -1,38 +1,42 @@
-[Previous](exercise-5.md) |  [Next](exercise-7.md)
-## Adding HTTP PUT Support in our Web Service API
-I hope that you are starting to get the hang of adding functionality to your
-API by now.  We're going to finish off this session's training by adding
-the ability to replace and delete our friends (after all, haven't we all wanted
-to change or delete or friends from time to time?).
+[Previous](exercise-7.md) |  [Next](exercise-9.md)
+## Adding HTTP DELETE Support in our Web Service API
+OK. This one is going to be easy!  Let's add the ability to delete our friends!
 
-We will not be implementing the `PATCH` method due to a lack of time, but doing
-so would be an excellent way to solidify your knowledge and gain some more
-experience.
-
-#### Step 1: Create a `fully_update_friend` Function with the Appropriate URL Route
+#### Step 1: Create a `destroy_friend` Function
 ```python
-@app.route('/api/v1/friends/<id>', methods=['PUT'])
-def fully_update_friend(id: str):
+@app.route('/api/v1/friends/<id>', methods=['DELETE'])
+def destroy_friend(id: str):
     """
-    Update all aspects of a specific friend or return an error.
-
-    Use a JSON representation to fully update an existing friend
-    resource.
+    Delete a specific friend resource or return an error.
 
     Returns
-        HTTP Response (200): If an existing resource is successfully updated.
-        HTTP Response (400): No JSON payload, bad syntax, or missing data.
+        HTTP Response (200): Friend resource deleted.
         HTTP Response (404): No matching existing resource to update.
     """
-    pass
+
+    for friend in datastore.friends:
+        if friend["id"].lower() == id.lower():
+            datastore.friends.remove(friend)
+            return jsonify({"message": "Friend resource removed."})
+
+    error_response = make_response(
+        jsonify({"error": "No such friend exists."}), 404)
+    return error_response
+
 ```
 
-Here's the stub for our new function.  Notice that we are using the same
-URL template as we did for `get_friend`.  We've only modified the method
-on the `app.route` decorator.  `PUT` requests will route to this new method, 
-while `GET` requests to the same url will route to `get_friend`.  Pretty cool!
+* This one is pretty simple!  The loop is looking for a matching friend 
+resource, just like we did in `fully_update_friend`. 
+    * The difference is that 
+    in this case we invoke the `list.remove` method on `datastore.friends` 
+    (which is a list) to removing the matching entries instead of updating it.
+    
+        > ![info](../images/information.png) The documentation on the `list.remove`
+        method is not the clearest. Basically, it finds the first location 
+        (index) of a given value in a list and deletes it.  It even works when 
+        value we are deleting is a dictionary.  **Cool!**
 
-#### Step 2: Add the Functionality Borrowed from `create_friend`
+#### Step 2: Test API Handling of `DELETE` Requests
 Much of the logic that we'll need for this function is the same as we used
 in our `create_friend` method that handled `POST` requests.  So let's start
 by copying that code over into our new function.
@@ -96,7 +100,7 @@ Add the following code to complete our `fully_update_friend` function:
 ```python
 ...
 for friend in datastore.friends:
-    if id.lower() == friend['id'].lower():
+    if request_payload['id'].lower() == friend['id'].lower():
         friend.update(
             {"id": request_payload['id'],
              "first_name": request_payload['firstName'],
@@ -134,64 +138,7 @@ existing friend with the specified `id` so that we can update it.
     * If not match is found, we return an 404 response indicating to the user
     that no existing friend resource can be found to update.
     
-    > ![reminder](../images/reminder.png) Notice that there is a slight 
-    > difference in the `if` statements between the two functions.  In 
-    > `create_friend` the statement references `request_payload['id']` but here
-    > we reference the function parameter `id` in the comparison.
-    >
-    > Remember that when dealing with individual resources, the URL, not the
-    > payload indicates which resource to operate on.  This allows us to even
-    > change the `id` values of existing friend resources.  I'll let you decide
-    > if this is a bug or a feature. 
-    
-#### Step 4: Testing HTTP PUT Requests
-Let's verify that our new code works as expected.  Here are some tests and what
-you should get back from each command:
-* Try to update the `BFP` friend resource:
-    
-    ```bash
-    > curl 127.0.0.1:5000/api/v1/friends/bfp -X PUT -H "content-type:application/json" -d '{"id":"bfp", "firstName": "Really Really Fat", "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
-    
-    {
-      "message": "Friend resource updated."
-    }
-    ```
-
-* Make a call without the `content-type` header:
-
-    ```bash
-    > curl 127.0.0.1:5000/api/v1/friends/bfp -X PUT -d '{"id":"bfp", "firstName": "Really Really Fat", "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
-    
-    {
-      "error": "No JSON payload present.  Make sure that appropriate 
-      `content-type` header is included in your request and that you've 
-       specified a payload."
-    }
-    ```
-    
-* Make a call with a syntax error:
-    
-    ```bash
-    > curl 127.0.0.1:5000/api/v1/friends/bfp -X PUT -H "content-type:application/json" -d '{"id":"bfp", "firstName": "Really Really Fat" "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
-    
-    {
-      "error": "JSON payload contains syntax errors. Please fix and try again."
-    }
-    ```
-    
-* Make a call with a missing payload element:
-
-    ```bash
-    > curl 127.0.0.1:5000/api/v1/friends/bfp -X PUT -H "content-type:application/json" -d '{"id":"bfp", "firstName": "Really Really Fat", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
-    
-    {
-      "error": "Missing required payload elements. The following elements are 
-      required: {'email', 'telephone', 'notes', 'id', 'firstName', 'lastName'}"
-    }
-    
-    
-    ```
-
-
+#### Step 4: Refactoring our Code to be DRY-Compliant :)
+Stub for future development.
        
         
