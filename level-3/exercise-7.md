@@ -6,156 +6,155 @@ Well, if you haven't Googled it by now, I'll tell you what DRY stands for:
 Violating this principle will get your in trouble with the cool kid 
 programmers in any language, not just Pythonistas.
 
-
-#### Step 1: DRY Compliance
+#### Step 1: So What is Repeated in our Code?
 
 Before we go one, let's take the duplicate code out of `create_friend` and
 `fully_update_friend`.  This is the section that is common to both functions:
 ```python
-
-```
-
-
-## Adding HTTP DELETE Support in our Web Service API
-OK. This one is going to be easy!  Let's add the ability to delete our friends!
-
-#### Step 1: Create a `destroy_friend` Function
-```python
-@app.route('/api/v1/friends/<id>', methods=['DELETE'])
-def destroy_friend(id: str):
-    """
-    Delete a specific friend resource or return an error.
-
-    Returns
-        HTTP Response (200): Friend resource deleted.
-        HTTP Response (404): No matching existing resource to update.
-    """
-
-    for friend in datastore.friends:
-        if friend["id"].lower() == id.lower():
-            datastore.friends.remove(friend)
-            return jsonify({"message": "Friend resource removed."})
-
+...
+try:
+    request_payload = request.get_json()
+except BadRequest:
     error_response = make_response(
-        jsonify({"error": "No such friend exists."}), 404)
+        jsonify({"error": "JSON payload contains syntax errors. Please "
+                          "fix and try again."}),
+        400)
     return error_response
 
-```
+if request_payload is None:
+    error_response = make_response(
+        jsonify({"error": "No JSON payload present.  Make sure that "
+                          "appropriate `content-type` header is "
+                          "included in your request."}),
+        400)
+    return error_response
 
-* This one is pretty simple!  The loop is looking for a matching friend 
-resource, just like we did in `fully_update_friend`. 
-    * The difference is that 
-    in this case we invoke the `list.remove` method on `datastore.friends` 
-    (which is a list) to removing the matching entries instead of updating it.
+required_data_elements = {
+    "id", "firstName", "lastName", "telephone", "email", "notes"}
+
+if not required_data_elements.issubset(request_payload.keys()):
+    error_response = make_response(
+        jsonify(
+            {"error": "Missing required payload elements. "
+                      "The following elements are "
+                      "required: {}".format(required_data_elements)}),
+        400)
+    return error_response
     
-        > ![info](../images/information.png) The documentation on the `list.remove`
-        method is not the clearest. Basically, it finds the first location 
-        (index) of a given value in a list and deletes it.  It even works when 
-        value we are deleting is a dictionary.  **Cool!**
-
-#### Step 2: Test API Handling of `DELETE` Requests
-Much of the logic that we'll need for this function is the same as we used
-in our `create_friend` method that handled `POST` requests.  So let's start
-by copying that code over into our new function.
-
-```python
-@app.route('/api/v1/friends/<id>', methods=['PUT'])
-def fully_update_friend(id: str):
-    """
-    Update all aspects of a specific friend or return an error.
-
-    Use a JSON representation to fully update an existing friend
-    resource.
-
-    Returns
-        HTTP Response (200): If an existing resource is successfully updated.
-        HTTP Response (400): No JSON payload, bad syntax, or missing data.
-        HTTP Response (404): No matching existing resource to update.
-    """
-    try:
-        request_payload = request.get_json()
-    except BadRequest:
-        error_response = make_response(
-            jsonify({"error": "JSON payload contains syntax errors. Please "
-                              "fix and try again."}),
-            400)
-        return error_response
-
-    if request_payload is None:
-        error_response = make_response(
-            jsonify({"error": "No JSON payload present.  Make sure that "
-                              "appropriate `content-type` header is "
-                              "included in your request."}),
-            400)
-        return error_response
-
-    required_data_elements = {
-        "id", "firstName", "lastName", "telephone", "email", "notes"}
-
-    if not required_data_elements.issubset(request_payload.keys()):
-        error_response = make_response(
-            jsonify(
-                {"error": "Missing required payload elements. "
-                          "The following elements are "
-                          "required: {}".format(required_data_elements)}),
-            400)
-        return error_response
-```
-
-* Just like before, we have to verify that we don't have a missing payload, 
-JSON syntax errors, or missing data elements.  You can see that we added those
-checks again here?
-
-> ![alert](../images/alert.png) Does some seem wrong to you?  It should! We're
-violating the DRY principle of good programming.  Some Pythonista is screaming
-in horror at this very moment! Any guesses about what the
-DRY principle is?  
-
-
-#### Step 3: Add Unique Code Needed for Handling PUT Requests
-Add the following code to complete our `fully_update_friend` function: 
-```python
-...
 for friend in datastore.friends:
-    if request_payload['id'].lower() == friend['id'].lower():
-        friend.update(
-            {"id": request_payload['id'],
-             "first_name": request_payload['firstName'],
-             "last_name": request_payload['lastName'],
-             "telephone": request_payload['telephone'],
-             "email": request_payload['email'],
-             "notes": request_payload['notes']})
-
-        response = make_response(
-            jsonify({"message": "Friend resource updated."}), 201)
-        return response
-
-error_response = make_response(
-    jsonify(
-        {"error": "No friend resource exists that matches "
-                  "the given id: {}".format(request_payload['id'])}),
-    404)
-return error_response
+    if [some_variable] == friend['id'].lower():
 ...
 ```
+    
+* There are basically three different things that are being done in this 
+  section:
+    * Verifying a JSON payload is present and correctly formed.
+    * Verifying the all the required data elements are present in the payload.
+    * Checking to see if an existing friend resource exists for a given `id`.
+    I've indicated that the variable in the `if` statement can vary but the 
+    functionality is the same.
+    
+* We're going to find a way to extract these bits of code into functions so 
+that future maintainers of our growing codebase don't want to track us down 
+and kill us.
 
-* In our `create_friend` function, we looped through our existing list of 
-friends to make sure that another friend with a given id **did not** already
-exist. This time, we are doing the opposite - ensuring that there is an 
-existing friend with the specified `id` so that we can update it.
+#### Step 2: Adding a Function to See if a Friend Exists
+* Open `datastore.py` and add the following function to it:
+    ```python
+    def existing_friend(id:str) -> dict:
+        """
+        Return a representation of friend resource that matches a given
+        `id` if it exists.
+    
+        Args:
+            id (str): The id value to search for a resource with.
+    
+        Returns:
+            A dictionary representation of the friend resource or None if
+            no match is found.
+        """
+        for friend in friends:
+            if id.lower() == friend['id'].lower():
+                return friend
+    ```
+    
+    * Pretty simple right?  Check for the existence of an existing friend
+    resource based on the `id` parameter and return the friend dictionary 
+    if a match is found, otherwise return nothing.
+    
+#### Step 3: Replace Duplicate Code with `datastore.existing_friend`
+* Now, let's see how we can insert this into `create_friend` and 
+    `fully_update_friend`:
+    
+        ```python
+        # inside create_friend
+        
+        # replace this
+        for friend in datastore.friends:
+            if request_payload['id'].lower() == friend['id'].lower():
+                error_response = make_response(
+                    jsonify(
+                        {"error": "An friend resource already exists with the "
+                                  "given id: {}".format(request_payload['id'])}),
+                    400)
+                return error_response
+        
+        # with this
+        if datastore.existing_friend(id=request_payload['id']):
+            error_response = make_response(
+                jsonify(
+                    {"error": "An friend resource already exists with the "
+                              "given id: {}".format(request_payload['id'])}),
+                400)
+            return error_response
+        
+        ```
+        
+        ```python
+        # Inside fully_update_friend
+        
+        # Replace This
+        for friend in datastore.friends:
+        if id.lower() == friend['id'].lower():
+            friend.update(
+                {"id": request_payload['id'],
+                 "first_name": request_payload['firstName'],
+                 "last_name": request_payload['lastName'],
+                 "telephone": request_payload['telephone'],
+                 "email": request_payload['email'],
+                 "notes": request_payload['notes']})
 
-    * If a match is found, we update the existing friend entry with the new
-    values from the payload.
+            response = make_response(
+                jsonify({"message": "Friend resource updated."}), 201)
+            return response
+            
+        # With This
+        existing_friend = datastore.existing_friend(id)
+        if existing_friend:
+            existing_friend.update(
+                {"id": request_payload['id'],
+                 "first_name": request_payload['firstName'],
+                 "last_name": request_payload['lastName'],
+                 "telephone": request_payload['telephone'],
+                 "email": request_payload['email'],
+                 "notes": request_payload['notes']})
+        
+            response = make_response(
+                jsonify({"message": "Friend resource updated."}), 201)
+            return response
+        ```
+        
+* As an unintended bonus, we can also update `get_friend` so that it looks like
+this:
+    ```python
+    def get_friend(id: str):
+        """Return a representation of a specific friend or an error."""
     
-        > ![info](../images/information.png) The `dict.update` method updates
-        > a dictionary object with the keys/values of another object.  You
-        > can see the details of how this works in the 
-        > [Python documentation.](https://docs.python.org/3.5/library/stdtypes.html#dict.update)
-    
-    * If not match is found, we return an 404 response indicating to the user
-    that no existing friend resource can be found to update.
-    
-#### Step 4: Refactoring our Code to be DRY-Compliant :)
-Stub for future development.
-       
+        try:
+            return jsonify(datastore.existing_friend(id))
+        except TypeError:
+            error_response = make_response(
+                jsonify({"error": "No such friend exists."}), 404)
+            return error_response
+    ```
         

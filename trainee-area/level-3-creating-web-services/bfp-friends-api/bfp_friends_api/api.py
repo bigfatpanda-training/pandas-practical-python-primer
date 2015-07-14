@@ -38,14 +38,14 @@ def create_friend():
         error_response = make_response(jsonify({"error": str(error)}), 400)
         return error_response
 
-    for friend in datastore.friends:
-        if request_payload['id'].lower() == friend['id'].lower():
-            error_response = make_response(
-                jsonify(
-                    {"error": "An friend resource already exists with the "
-                              "given id: {}".format(request_payload['id'])}),
-                400)
-            return error_response
+    if datastore.existing_friend(id=request_payload['id']):
+        error_response = make_response(
+            jsonify(
+                {"error": "An friend resource already exists with the "
+                          "given id: {}".format(request_payload['id'])}),
+            400)
+        return error_response
+
 
     datastore.friends.append(
         {"id": request_payload['id'],
@@ -66,6 +66,14 @@ Operations for Individual Friend Resources
 @app.route('/api/v1/friends/<id>', methods=['GET'])
 def get_friend(id: str):
     """Return a representation of a specific friend or an error."""
+
+    try:
+        return jsonify(datastore.existing_friend(id))
+    except TypeError:
+        error_response = make_response(
+            jsonify({"error": "No such friend exists."}), 404)
+        return error_response
+
     for friend in datastore.friends:
         if friend["id"].lower() == id.lower():
             return jsonify(friend)
@@ -96,19 +104,19 @@ def fully_update_friend(id: str):
         error_response = make_response(jsonify({"error": str(error)}), 400)
         return error_response
 
-    for friend in datastore.friends:
-        if id.lower() == friend['id'].lower():
-            friend.update(
-                {"id": request_payload['id'],
-                 "first_name": request_payload['firstName'],
-                 "last_name": request_payload['lastName'],
-                 "telephone": request_payload['telephone'],
-                 "email": request_payload['email'],
-                 "notes": request_payload['notes']})
+    existing_friend = datastore.existing_friend(id)
+    if existing_friend:
+        existing_friend.update(
+            {"id": request_payload['id'],
+             "first_name": request_payload['firstName'],
+             "last_name": request_payload['lastName'],
+             "telephone": request_payload['telephone'],
+             "email": request_payload['email'],
+             "notes": request_payload['notes']})
 
-            response = make_response(
-                jsonify({"message": "Friend resource updated."}), 201)
-            return response
+        response = make_response(
+            jsonify({"message": "Friend resource updated."}), 201)
+        return response
 
     error_response = make_response(
         jsonify(
