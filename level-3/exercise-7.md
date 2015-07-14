@@ -336,9 +336,12 @@ in the `try` block so that it looks like this:
 defined `required_data_elements` in that one function instead of defining it
 as a constant?_
  
-* The answer is that I know that future API functionality (like supporting `PATCH`)
-would require these functions to be separated because while you would need to ensure
-that a valid JSON payload was given (1st function), it wouldn't need to have all
-the elements required checked for by our second function.  For the same reason
-I defined `FRIEND_RESOURCE_ELEMENTS` outside of a function, so that it could be
-used even when the `verify_required_data_present`.
+    * The answer is that I know that future API functionality (like supporting `PATCH`)
+    would require these functions to be separated because while you would need to ensure
+    that a valid JSON payload was given (1st function), it wouldn't need to have all
+    the elements required checked for by our second function.  
+    * For the same reason
+    I defined `FRIEND_RESOURCE_ELEMENTS` outside of a function, so that it could be
+    used even when the `verify_required_data_present`.
+    * This is just something that comes from experience.  You'll get there
+    someday too!
