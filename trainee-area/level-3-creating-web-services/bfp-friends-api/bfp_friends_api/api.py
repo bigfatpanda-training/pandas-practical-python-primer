@@ -31,29 +31,30 @@ def create_friend():
     """
 
     try:
-        request_payload = api_helpers.json_payload(request)
+        json_payload = api_helpers.json_payload(request)
         api_helpers.verify_required_data_present(
-            request_payload, FRIEND_RESOURCE_ELEMENTS)
+            request_payload=json_payload,
+            required_elements=FRIEND_RESOURCE_ELEMENTS)
     except ValueError as error:
         error_response = make_response(jsonify({"error": str(error)}), 400)
         return error_response
 
-    if datastore.existing_friend(id=request_payload['id']):
+    if datastore.existing_friend(id=json_payload['id']):
         error_response = make_response(
             jsonify(
                 {"error": "An friend resource already exists with the "
-                          "given id: {}".format(request_payload['id'])}),
+                          "given id: {}".format(json_payload['id'])}),
             400)
         return error_response
 
 
     datastore.friends.append(
-        {"id": request_payload['id'],
-         "first_name": request_payload['firstName'],
-         "last_name": request_payload['lastName'],
-         "telephone": request_payload['telephone'],
-         "email": request_payload['email'],
-         "notes": request_payload['notes']})
+        {"id": json_payload['id'],
+         "first_name": json_payload['firstName'],
+         "last_name": json_payload['lastName'],
+         "telephone": json_payload['telephone'],
+         "email": json_payload['email'],
+         "notes": json_payload['notes']})
 
     response = make_response(jsonify({"message": "Friend resource created."}),
                              201)

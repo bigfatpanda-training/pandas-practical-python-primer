@@ -6,7 +6,7 @@ members of the api.py module.
 from werkzeug.exceptions import BadRequest
 
 
-def json_payload(request):
+def json_payload(request) -> dict:
     """
     Verify that a flask.request object has a JSON payload and
     that it does not contain syntax errors.

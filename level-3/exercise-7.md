@@ -82,7 +82,6 @@ and kill us.
     resource based on the `id` parameter and return the friend dictionary 
     if a match is found, otherwise return nothing.
     
-#### Step 3: Replace Duplicate Code with `datastore.existing_friend`
 * Now, let's see how we can insert this into `create_friend` and 
     `fully_update_friend`:
     
@@ -158,3 +157,188 @@ this:
             return error_response
     ```
         
+    > ![checklist](../images/reminder.png) Notice that we didn't use and `if`
+    > statement here like we did in the other functions.  Generally, Pythonistas
+    > use a EAFP (easier to ask forgiveness than permission) coding style rather
+    > than a LBYL (look before you leap) style.  
+    > 
+    > This style is characterized by the use of `try/except` blocks rather 
+    > than if statements.  We could have converted the `if` statements in 
+    > `create_friend` and `fully_update_friend` but I though this was a better
+    > place to do so because the logic is much simplier.  
+    >
+    > Either method will work, but one is considered more Pythonic is most
+    > circumstances.
+    
+#### Step 3: Create a Function that Ensures JSON Payloads are Present and Valid
+Next, let's turn our attention to the following section of duplicated code
+that handles requests from users with missing headers and missing/invalid 
+JSON payloads:  
+```python
+try:
+    request_payload = request.get_json()
+except BadRequest:
+    error_response = make_response(
+        jsonify({"error": "JSON payload contains syntax errors. Please "
+                          "fix and try again."}),
+        400)
+    return error_response
+
+if request_payload is None:
+    error_response = make_response(
+        jsonify({"error": "No JSON payload present.  Make sure that "
+                          "appropriate `content-type` header is "
+                          "included in your request and that you've "
+                          "specified a payload."}),
+        400)
+    return error_response
+```
+
+* Create a new moduled call `api_helpers.py`.
+* Inside this new module add the following:
+
+    ```python
+    """
+    This module provides functions that are commonly used by various
+    members of the api.py module.
+    """
+    
+    from werkzeug.exceptions import BadRequest
+    
+    
+    def json_payload(request) -> dict:
+        """
+        Verify that a flask.request object has a JSON payload and
+        that it does not contain syntax errors.
+    
+        Args:
+            request (flask.request): A request object that you want to
+                verify has a valid JSON payload.
+    
+        Raises:
+            ValueError: If the incoming request object is either missing
+                a JSON payload or has one with syntax errors.
+        """
+        try:
+            request_payload = request.get_json()
+        except BadRequest:
+            raise ValueError("JSON payload contains syntax errors. Please "
+                             "fix and try again.")
+    
+        if request_payload is None:
+            raise ValueError("No JSON payload present.  Make sure that "
+                             "appropriate `content-type` header is "
+                             "included in your request and that you've "
+                             "specified a payload.")
+    
+        return request_payload
+    ```
+    
+    * This module contains the essential logic from our previously duplicated
+    code.  In short, if any error is encounter based on the content of the 
+    incoming request, a ValueError is raised.  Otherwise the validated
+    JSON payload is returned.
+    
+    
+* Replace the duplicated code in `create_friend` and `fully_update_friend` with
+this:
+    
+    ```python
+    try:
+        request_payload = api_helpers.json_payload(request)
+    except ValueError as error:
+        error_response = make_response(jsonify({"error": str(error)}), 400)
+        return error_response
+    ```
+    
+    >  ![alert]("../images/alert.png") Don't forget to import `api_helpers` 
+    into `api.py` or this won't work. PyCharm should alert you to this problem
+    via a red squiggly line.
+    
+#### Step 4: Create a Function that Validates JSON Payloads have all Required Elements
+As the last step in this exercise, we need to extract this final piece of 
+duplicate code into a function:
+
+```python
+required_data_elements = {
+        "id", "firstName", "lastName", "telephone", "email", "notes"}
+
+if not required_data_elements.issubset(request_payload.keys()):
+    error_response = make_response(
+        jsonify(
+            {"error": "Missing required payload elements. "
+                      "The following elements are "
+                      "required: {}".format(required_data_elements)}),
+        400)
+    return error_response
+```
+
+* Create another function in `api_helpers.py` called `verify_required_data_present`
+    ```python
+    def verify_required_data_present(request_payload: dict, required_elements: set):
+        """
+        Verify that a request_payload has all the keys indicated
+        in required_elements.
+    
+        Args:
+            request_payload (dict): A set of request_payload to evaluate.
+            required_elements (set): The names of keys that must be present
+                in request_payload.
+    
+        Raises:
+            ValueError: If any of the names in required_elements is not a
+                member of request_payload.keys()
+        """
+    
+        if not required_elements.issubset(request_payload.keys()):
+            raise ValueError(
+                "Missing required payload elements. "
+                "The following elements are "
+                "required: {}".format(required_elements))
+    ```
+    
+    * Notice that this function raises a `ValueError` exception when the
+    specified `request_payload` value doesn't have all the required data elements.
+    This is useful because it is the same error that is raised in our previously
+    added function, which means it can be handled by the same `try/except` block
+    in the calling functions.
+    
+* Replace the duplicate code in `create_friend` and `fully_update_friend` by
+augmenting the code we added in the last step to include a call to 
+`api_helpers.verify_required_data_present` 
+in the `try` block so that it looks like this:
+    
+    ```python
+    try:
+        json_payload = api_helpers.json_payload(request)
+        api_helpers.verify_required_data_present(
+            request_payload=json_payload,
+            required_elements=FRIEND_RESOURCE_ELEMENTS)
+    except ValueError as error:
+        error_response = make_response(jsonify({"error": str(error)}), 400)
+        return error_response
+    ```
+    
+    > ![question](../images/question.png) Is PyCharm complaining about 
+    > `FRIEND_RESOURCE_ELEMENTS`?  That's good because we haven't defined it yet.
+    > 
+    > Notice that when we created this last function and eliminate the duplicate
+    > code we no longer had a place where the required payload elements were
+    > defined (`id`, `firstName`, `lastName`, etc.).
+    >
+    > You can tell from the syntax of `FRIEND_RESOURCE_ELEMENTS` that I created
+    > a constant to hold the set of values previously assigned to 
+    > `required_data_elements`.  Make sure you do that (at the top of your file)
+    > as well if you want the program to work.
+    
+* You might be wondering to yourself, _why are there two separate functions in
+`api_helpers.py` since they are always both used together?  And why not just
+defined `required_data_elements` in that one function instead of defining it
+as a constant?_
+ 
+* The answer is that I know that future API functionality (like supporting `PATCH`)
+would require these functions to be separated because while you would need to ensure
+that a valid JSON payload was given (1st function), it wouldn't need to have all
+the elements required checked for by our second function.  For the same reason
+I defined `FRIEND_RESOURCE_ELEMENTS` outside of a function, so that it could be
+used even when the `verify_required_data_present`.
