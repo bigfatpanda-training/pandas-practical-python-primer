@@ -356,8 +356,9 @@ your API much more bulletproof than it was before. And while that takes time
 and effort, it is absolutely necessary if you want to create web APIs that 
 people will actually use in the real world.
 
-To finish off this section, make sure that your `create_friend` function looks
-like this:
+To finish off this section, let's remove the test harness that we added at
+the beginning of [exercise 4](exercise-4.md).  After that, make sure that 
+your `create_friend` function looks like this:
 
     ```python
     @app.route('/api/v1/friends', methods=['POST'])
