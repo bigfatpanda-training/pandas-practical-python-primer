@@ -64,7 +64,7 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", path: "misc/vagrant-pyenv-prereqs.sh"
-  config.vm.provision "shell", path: "misc/bash_profile.sh"
-  config.vm.provision "shell", path: "misc/pyenv-installation.sh"
+  config.vm.provision "shell", path: "system-setup/install-dependencies.sh"
+  config.vm.provision "shell", path: "system-setup/update-bash-profile.sh"
+  config.vm.provision "shell", path: "system-setup/setup-pyenv.sh"
 end
