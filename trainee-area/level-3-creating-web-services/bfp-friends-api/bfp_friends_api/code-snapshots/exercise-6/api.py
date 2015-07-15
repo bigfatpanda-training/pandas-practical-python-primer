@@ -153,7 +153,7 @@ def fully_update_friend(id: str):
     error_response = make_response(
         jsonify(
             {"error": "No friend resource exists that matches "
-                      "the given id: {}".format(request_payload['id'])}),
+                      "the given id: {}".format(id)}),
         404)
     return error_response
 

@@ -2,7 +2,9 @@
 Provides a Flask API to interact with Friendship data.
 """
 
-from flask import Flask, jsonify, make_response, request
+import sqlite3
+
+from flask import Flask, jsonify, make_response, request, g
 
 from bfp_friends_api import datastore
 from bfp_friends_api import api_helpers
@@ -12,13 +14,34 @@ app = Flask(__name__)
 FRIEND_RESOURCE_ELEMENTS = {"id", "firstName", "lastName",
                             "telephone", "email", "notes"}
 
+
+@app.before_request
+def connect_to_datastore():
+    """
+    Establish a connection to the store for each request.
+
+    Make the connection available on Flask's special 'g' object.
+    """
+    g.datastore = sqlite3.connect("/tmp/friends.db")
+
+@app.teardown_request
+def disconnect_from_datastore(exception):
+    """
+    Close the connection to the datastore after each request.
+    """
+    datastore = getattr(g, 'datastore', None)
+    if datastore is not None:
+        datastore.close()
+
+
 """
 Operations for the Friends Resource Collection
 """
 @app.route('/api/v1/friends', methods=['GET'])
 def get_friends():
     """Return a representation of the collection of friend resources."""
-    return jsonify({"friends": datastore.friends})
+    friends_collection = datastore.get_friends(g.datastore)
+    return jsonify({"friends": friends_collection})
 
 
 @app.route('/api/v1/friends', methods=['POST'])
@@ -39,7 +62,7 @@ def create_friend():
         error_response = make_response(jsonify({"error": str(error)}), 400)
         return error_response
 
-    if datastore.existing_friend(id=json_payload['id']):
+    if datastore.get_friend(g.datastore, id=json_payload['id']):
         error_response = make_response(
             jsonify(
                 {"error": "An friend resource already exists with the "
@@ -47,15 +70,7 @@ def create_friend():
             400)
         return error_response
 
-
-    datastore.friends.append(
-        {"id": json_payload['id'],
-         "first_name": json_payload['firstName'],
-         "last_name": json_payload['lastName'],
-         "telephone": json_payload['telephone'],
-         "email": json_payload['email'],
-         "notes": json_payload['notes']})
-
+    datastore.add_friend(g.datastore, json_payload)
     response = make_response(jsonify({"message": "Friend resource created."}),
                              201)
     return response
@@ -69,7 +84,7 @@ def get_friend(id: str):
     """Return a representation of a specific friend or an error."""
 
     try:
-        return jsonify(datastore.existing_friend(id))
+        return jsonify(datastore.get_friend(g.datastore, id))
     except TypeError:
         error_response = make_response(
             jsonify({"error": "No such friend exists."}), 404)
@@ -97,16 +112,9 @@ def fully_update_friend(id: str):
         error_response = make_response(jsonify({"error": str(error)}), 400)
         return error_response
 
-    existing_friend = datastore.existing_friend(id)
+    existing_friend = datastore.get_friend(g.datastore, id)
     if existing_friend:
-        existing_friend.update(
-            {"id": request_payload['id'],
-             "first_name": request_payload['firstName'],
-             "last_name": request_payload['lastName'],
-             "telephone": request_payload['telephone'],
-             "email": request_payload['email'],
-             "notes": request_payload['notes']})
-
+        datastore.fully_update_friend(g.datastore, request_payload)
         response = make_response(
             jsonify({"message": "Friend resource updated."}), 201)
         return response
@@ -114,7 +122,7 @@ def fully_update_friend(id: str):
     error_response = make_response(
         jsonify(
             {"error": "No friend resource exists that matches "
-                      "the given id: {}".format(request_payload['id'])}),
+                      "the given id: {}".format(id)}),
         404)
     return error_response
 
@@ -129,8 +137,7 @@ def destroy_friend(id: str):
         HTTP Response (404): No matching existing resource to update.
     """
     try:
-        existing_friend = datastore.existing_friend(id)
-        datastore.friends.remove(existing_friend)
+        datastore.delete_friend(g.datastore, id)
     except ValueError:
         error_response = make_response(
             jsonify({"error": "No such friend exists."}), 404)
