@@ -156,23 +156,3 @@ def fully_update_friend(id: str):
                       "the given id: {}".format(id)}),
         404)
     return error_response
-
-
-@app.route('/api/v1/friends/<id>', methods=['DELETE'])
-def delete_friend(id: str):
-    """
-    Delete a specific friend resource or return an error.
-
-    Returns
-        HTTP Response (200): Friend resource deleted.
-        HTTP Response (404): No matching existing resource to update.
-    """
-
-    for friend in datastore.friends:
-        if friend["id"].lower() == id.lower():
-            datastore.friends.remove(friend)
-            return jsonify({"message": "Friend resource removed."})
-
-    error_response = make_response(
-        jsonify({"error": "No such friend exists."}), 404)
-    return error_response

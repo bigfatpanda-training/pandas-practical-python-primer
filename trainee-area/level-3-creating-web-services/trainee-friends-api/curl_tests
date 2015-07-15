@@ -31,6 +31,6 @@ PUT /api/v1/friends/<id>
 
 DELETE /api/v1/friends/<id>
     Valid
-        curl http://127.0.0.1:5000/api/v1/friends/VinDi -X DELETE
+        curl http://127.0.0.1:5000/api/v1/friends/dduck -X DELETE
     Non-Existent Friend
         curl http://127.0.0.1:5000/api/v1/friends/nobody -X DELETE
