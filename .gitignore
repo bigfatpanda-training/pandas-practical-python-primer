@@ -60,4 +60,5 @@ target/
 *.conf
 *.iml
 .idea
+.vagrant
 *.json
