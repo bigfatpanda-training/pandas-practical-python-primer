@@ -15,7 +15,7 @@ training levels.  Each level will correspond with one practical use of Python.
 * Level-5: [Creating Websites](dragon-scrolls/level-5/readme.md)
 
 ## Where Stuff Is
-* Instruction materials in the `dragon-scrolls` folder, with subfolders for
+* Instructional materials in the `dragon-scrolls` folder, with subfolders for
 each training level.  Inside each level folder is a `readme.md` file which 
 will contain links to all the other instructions for that level.
 
@@ -23,8 +23,12 @@ will contain links to all the other instructions for that level.
 `dragon-scrolls`, the subfolders are separated by training levels.
     * In each training level folder (ex. `level-1-command-line-interfaces`)
     you find two additional folders: `bfp-reference` and `dragon-warrior`.
-        * `bfp-reference` contains my versions of the code files and exist
+        * `bfp-reference` contains my final versions of the code files and exist
         as a reference if you need to copy something over or get behind.
+            * Because the code will often evolve from one state to 
+            a more enlightened state as the exercises progress, you'll find
+            a `code-snapshots` sub-folder that will contain, well, snapshots of 
+            the code files at the end of various exercises.  
         * `dragon-warrior` is where you will be putting the code that you 
         for each training level.
         

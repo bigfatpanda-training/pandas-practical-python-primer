@@ -48,3 +48,6 @@ Discussion on what each member wants to learn in the class:
   * Fill in the blank, "By the end of class I ..."
   
 
+[Start Training](system-setup.md)
+  
+

@@ -1,50 +1,22 @@
-![Welcome to Level 0](http://vignette3.wikia.nocookie.net/kungfupanda/images/4/46/Level-Zero.jpg/revision/20111215042422)
-# Welcome to Level Zero
+# System Setup
+Before we begin, we'll need to get some software onto our machines to write
+our code and someplace to test it.
 
-### Class Introduction
+### Using a Virtual Machine
+In the vast majority of circumstances, the Python code that you write will
+eventually run on some flavor of Linux.
 
-**The Way of the Dragon Warrior (Class Philosophy)**  
-Thank you so much for being a part of this class.  Python is an amazing language
-that is used just about everywhere and can do just about anything.  At the same
-time it is very beginner friendly and has a huge open-source community around 
-it.  You've made a great choice to learn it.
+Because of this (and because debugging Windows issues is enough to drive you
+mad) we'll all be using an Ubuntu virtual machine to run the code that you
+create and the class examples.
 
-Now, we'll all know this proverb of physical fitness: **no pain, no gain**.  The 
-same thing can be said about learning a new programming language.  It takes work!
-  
-But also just like in physical health, hard work at coding can have great 
-rewards.  By the end of this course, my hope is that you'll have the necessary
-foundation to keep improving your skills and be on your way to becoming
-a true Python Dragon Warrior. 
+You have a few different choices for how you want to approach this:
 
-**The Way of Big Fat Panda (Class Rules)**  
-Like any coach, I've got some rules.  I ask you to follow them as I believe that
-they will help you and your classmates to learn:
+1. Use Vagrant to create a local VM.
+2. Create a Ubuntu VM in AWS using a personal account.
+3. Utilize nitrous.io to create an VM that is accessible via their console.
 
-1. Don't miss class.  We're going to cover **a lot** of material in a short time
-frame and it will be difficult to catch up.  If you aren't committed to being
-here, then please give your spot to someone who is.
-    * Now, if you're sick, your kiddo is sick, or your house floods - I'll 
-    understand and I'll meet with you outside of class to get your caught up.
-    
-2. Don't work on other stuff during class.  **Multitasking is a myth.**  You'll 
-either be learning the material or doing something else.  We'll take regular 
-breaks so you can check your email, etc.
+Each of these methods has positives / negatives and all of them will take a
+little bit of time to get setup.  
 
-3. I know it's hard to ask questions.  I've been there, not really understanding
-something but not wanting to look dumb. Take heart, I guarantee that every 
-single person in the class will not understand or be plain wrong about something
-during the course, **including me** - because I actually am dumb ;)
-    * To help break people out of this fear, I will make a really big deal of 
-    my own type-o's and mistakes so hopefully your's will feel like the minor
-    thing they really are.
-    * I will also directly ask people questions in class.  **This might feel 
-    awkward at first, both for me and you**, but I think it will help us 
-    establish at atmosphere where asking questions is easier.
-    
-**Let's Talk about You!**  
-Discussion on what each member wants to learn in the class:
-  * Why did you sign up for this class?
-  * Fill in the blank, "By the end of class I ..."
-  
-
+### Installing PyCharm
