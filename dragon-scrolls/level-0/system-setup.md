@@ -53,10 +53,21 @@ machine.  This operation is called "cloning".
 Alright?  Let's get started.
 
 ### Training Steps
+
+**Fork the Class Repo**
+
 1. Visit the class repo at [https://github.com/bigfatpanda-training/pandas-practical-python-primer](https://github.com/bigfatpanda-training/pandas-practical-python-primer)
 2. Click the ![github-fork.png](../images/github-fork.png) button to fork (make a 
-copy of) the project in your own Github account.  **Congratulations!**  You're
-done with the first part.
+copy of) the project in your own Github account.  
+3. You should be taken to your copy of the class repo when the process 
+completes. **Congratulations!**  The first step is done.  You should see
+something like this (but it will have your username instead of eikonomega).
+
+    ![forked repo](../images/github-forked-repo.png)
+
+**Clone the Repo to your Machine**
+
+
 
 ## Using a Virtual Machine
 In the vast majority of circumstances, the Python code that you write will
