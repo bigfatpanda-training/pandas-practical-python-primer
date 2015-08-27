@@ -1,18 +1,27 @@
 # Vagrant
-[Vagrant](http://www.vagrantup.com) is a tool that creates development 
-environments from a configuration file call, unsurprisingly, `Vagrantfile`.
+[Vagrant](http://www.vagrantup.com) is a tool that creates uniform development 
+environments (virtual machines) that can be shared amongst team members.  
+In other words, it is a way of getting an identical development setup on all 
+computers, regardless of the underlying OS (Windows/Mac).
 
 We will be using it to create a uniform environment to learn Python in our
-class. This allows us to focus on Python rather than the various environment
+class. This allows us to focus on Python rather than various environment
 differences.
 
-Also, most of the time, Python applications are deployed onto Linux servers.  Practicing with a Linux system will better prepare you for your full-time Python employment. ;)
-
 ## Prereqs
-For our purposes, you must have 
-[VirtualBox](https://www.virtualbox.org/wiki/Downloads) installed on your
-system to use Vagrant.
+* Download and install [Vagrant](https://www.vagrantup.com/downloads.html).
+* Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads). 
 
+    > ![Information](../images/information.png)  Vagrant can also work with
+    other VM providers like VMWare. For class however, we'll be Virtualbox
+    because it is **free**. Cha-Ching!
+    
+
+## Microsoft Warning
+I've seen problems using Vagrant on, ahem, older PCs.  So, if you've got
+an older PC, you might encounter some problems.  I've never seen one that 
+couldn't be fixed with some TLC, but just an FYI.
+    
 ## Command Cheatsheet
 
   * `vagrant up`: 

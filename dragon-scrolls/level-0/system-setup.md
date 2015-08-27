@@ -1,8 +1,64 @@
 # System Setup
-Before we begin, we'll need to get some software onto our machines to write
-our code and someplace to test it.
+Before we begin, we'll need to get some software onto our machines so that
+we can access the class materials, write Python, and test our code.
 
-### Using a Virtual Machine
+## Install Git / Creating a GitHub Account
+The first thing we need to do is get access to the class materials.  To do this
+we'll need to install a program called Git on our computers and create a 
+Github account.
+
+Git is, by far, the most popular version control / source control program in
+the world today.  Developers use version control systems to efficiently track
+changes to project files that occur over time **and** provide a mechanism to 
+effectively work with others on the same project.
+
+The class materials as stored in a Git repository that is available online
+at Github.  We'll need Git on our systems and a Github account to download the
+class materials (and updates to them throughout our course).
+
+If you haven't used Git before - great!  This will be a great introduction and
+we'll take it slow.
+
+### Training Steps
+1. Download and install the [latest version of Git](https://git-scm.com/downloads).
+This will allow you to run Git on your local machine and interact with the
+repositories in Github.
+
+    > ![Reminder](../images/reminder.png) Mac users may find they've already
+    > got Git installed on their systems via the xCode command lines tools.  To
+    > find out, just try to execute `git version` from the command line and see
+    > if you got anything back.
+    >
+    > If you want to use the latest version of Git, go ahead and download it
+    > using the link above and then add `/usr/local/git/bin` to your path so that
+    > the system uses the latest version instead of the xCode one.
+    
+2. [Create an account](https://github.com/join) if you don't already have one 
+at Github.  The basic account is free and that's all you'll be needing.
+
+
+## Fork the Class Repo & Clone it to your System
+If you're new to Git, you probably just said **WAT!?**  Not a problem.  One
+step at a time.
+
+In the world of Github (and services like it) if you want to make a personal
+copy of somebody else's project you "fork" it.  This creates a copy of a
+project under your account which you can then mess with but the original 
+isn't affected.  When you fork a project, Github also remembers the original
+repo so that you can "pull" down updates from it.
+
+After you fork the class repo, you'll need to get a copy of it on your local 
+machine.  This operation is called "cloning".
+
+Alright?  Let's get started.
+
+### Training Steps
+1. Visit the class repo at [https://github.com/bigfatpanda-training/pandas-practical-python-primer](https://github.com/bigfatpanda-training/pandas-practical-python-primer)
+2. Click the ![github-fork.png](../images/github-fork.png) button to fork (make a 
+copy of) the project in your own Github account.  **Congratulations!**  You're
+done with the first part.
+
+## Using a Virtual Machine
 In the vast majority of circumstances, the Python code that you write will
 eventually run on some flavor of Linux.
 
@@ -23,11 +79,12 @@ The most complex is the using AWS, and if you want to go that route, you'll
 probably need a significant amount of previous experience to know how to 
 create the instance, connect to it, etc.
 
-Link to Vagrant Setup
-Link to Nitrous IO Setup
+Here are some links to further specific instructions for these methods:
+* [Class Setup with Vagrant](vagrant.md)
+* [Class Setup with Nitrous IO](nitrous.md)
 
-### Installing PyCharm
-Using an IDE **can** be very helpful.  Particularly for beginners, they
+## Installing PyCharm
+Using an IDE **can** be very helpful. Particularly for beginners, they
 can be immensely time saving - primarily because of the code completion
 that they offer.
 
