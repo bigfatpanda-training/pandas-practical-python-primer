@@ -72,7 +72,7 @@ you should see something that looks like this:
 
     ![clone-repo-url](../images/github-clone-repo.png)
     
-2. Make sure that the you've chosen the `HTTPS` link and then copy the 
+    - Make sure that the you've chosen the `HTTPS` link and then copy the 
 URL in the dialogue box to your clipboard.  
 
 3. Open a terminal window.  Windows uses should use the 'Git Bash' program
@@ -81,19 +81,28 @@ linux terminal.  For Mac users, I highly recommend iTerm2.  Alternatively,
 Mac users can also use the built-in Terminal program.
 
 4. Pick a location where you want to clone your fork of the class repo.  
-- If you are fairly new to using a terminal, I suggest that you put it in the 
+    - If you are fairly new to using a terminal, I suggest that you put it in the 
 directory that the terminal window places you in.  This will make it easier 
 to remember when you put things in later classes.  Either way, make sure 
 you write down when you decided to clone the repo.
  
 5. Execute the following command to clone the repo: 
 `git clone [paste the url you picked up in step 2 here]`
-- Git will ask you for your Github username/password and then spit out a
+    - Git will ask you for your Github username/password and then spit out a
 whole bunch of information at you if you entered them correctly as it downloads
-all the class files.
-- Verify that this worked by trying to enter the repo folder and listing the contents:
-    - `cd pandas-practical-python-primer`
-    - `ls -la`
+all the class files.  Here's what it should look like:
+
+        Cloning into 'pandas-practical-python-primer'...
+        remote: Counting objects: 752, done.
+        remote: Compressing objects: 100% (17/17), done.
+        remote: Total 752 (delta 8), reused 0 (delta 0), pack-reused 735
+        Receiving objects: 100% (752/752), 1.06 MiB | 1.63 MiB/s, done.
+        Resolving deltas: 100% (333/333), done.
+        Checking connectivity... done.
+
+    - Verify that this worked by trying to enter the repo folder and listing the contents:
+        - `cd pandas-practical-python-primer`
+        - `ls -la`
 
 ## Using a Virtual Machine
 In the vast majority of circumstances, the Python code that you write will
@@ -118,7 +127,6 @@ create the instance, connect to it, etc.
 
 Here are some links to further specific instructions for these methods:
 * [Class Setup with Vagrant](vagrant.md)
-* [Class Setup with Nitrous IO](nitrous.md)
 
 ## Installing PyCharm
 Using an IDE **can** be very helpful. Particularly for beginners, they
