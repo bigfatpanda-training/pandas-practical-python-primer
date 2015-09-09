@@ -15,8 +15,8 @@ training levels.  Each level will correspond with one practical use of Python.
 * Level-5: [Creating Websites](dragon-scrolls/level-5/readme.md)
 
 ## Where Stuff Is
-* Instructional materials in the `dragon-scrolls` folder, with subfolders for
-each training level.  Inside each level folder is a `readme.md` file which 
+* Instructional materials are in the `dragon-scrolls` folder, with subfolders 
+for each training level.  Inside each level folder is a `readme.md` file which 
 will contain links to all the other instructions for that level.
 
 * The code files live in subfolders of `training`.  Just like inside 
