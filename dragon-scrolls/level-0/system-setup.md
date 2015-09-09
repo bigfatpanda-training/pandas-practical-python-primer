@@ -105,6 +105,23 @@ all the class files.  Here's what it should look like:
     - Verify that this worked by trying to enter the repo folder and listing the contents:
         - `cd pandas-practical-python-primer`
         - `ls -la`
+        
+**Well Done!** You've made it to the end of this section.  Go eat a cookie!
+
+## Installing PyCharm
+Using an IDE **can** be very helpful. Particularly for beginners, they
+can be immensely time saving - primarily because of the code completion
+that they offer.
+
+I strongly suggest that you use the most popular Python IDE, [PyCharm](https://www.jetbrains.com/pycharm/).
+That's the tool that I'll be using in class and it's got some great features
+that will really help you as your are getting started with Python.
+
+There are multiple editions of the tool offered.  For our class, I suggest
+that you download a trial of the professional edition if you didn't receive
+a key already.  The open-source version is quite versatile, but it does lack
+support for remote interpreters, which we will be using. Don't worry about 
+what a remote interpreter is ;)
 
 ## Using a Virtual Machine
 In the vast majority of circumstances, the Python code that you write will
@@ -129,18 +146,3 @@ create the instance, connect to it, etc.
 
 Here are some links to further specific instructions for these methods:
 * [Class Setup with Vagrant](vagrant.md)
-
-## Installing PyCharm
-Using an IDE **can** be very helpful. Particularly for beginners, they
-can be immensely time saving - primarily because of the code completion
-that they offer.
-
-I strongly suggest that you use the most popular Python IDE, [PyCharm](https://www.jetbrains.com/pycharm/).
-That's the tool that I'll be using in class and it's got some great features
-that will really help you as your are getting started with Python.
-
-There are multiple editions of the tool offered.  For our class, I suggest
-that you download a trial of the professional edition if you didn't receive
-a key already.  The open-source version is quite versatile, but it does lack
-support for remote interpreters, which we will be using. Don't worry about 
-what a remote interpreter is ;)
