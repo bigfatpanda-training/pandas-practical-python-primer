@@ -92,6 +92,7 @@ you write down when you decided to clone the repo.
 whole bunch of information at you if you entered them correctly as it downloads
 all the class files.  Here's what it should look like:
 
+        ```bash
         Cloning into 'pandas-practical-python-primer'...
         remote: Counting objects: 752, done.
         remote: Compressing objects: 100% (17/17), done.
@@ -99,6 +100,7 @@ all the class files.  Here's what it should look like:
         Receiving objects: 100% (752/752), 1.06 MiB | 1.63 MiB/s, done.
         Resolving deltas: 100% (333/333), done.
         Checking connectivity... done.
+        ```
 
     - Verify that this worked by trying to enter the repo folder and listing the contents:
         - `cd pandas-practical-python-primer`
