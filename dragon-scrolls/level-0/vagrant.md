@@ -34,8 +34,29 @@ We'll be doing the same thing here.
     - The `config.vm.box` variable specifies the "base image" that we'll be 
     using.  A base image is just a bare OS without anything added to it.  We'll
     get to the adding stuff in a bit.
-    - 
+    - The `config.vm.network` entry allows us to map a virtual port to an 
+    actual port on your host system.  We'll use this later in the course
+    when we are building websites.
+    - The 3 entries of `config.vm.provision` reference files in the `system-setup`
+    directory that will be run after the system is booted that install 
+    all the necessary dependencies for us to do our work.
+    
+    > ![Homework](../images/reminder.png) Check out the files in the 
+    `system-setup` directory.  They are all shell scripts that Vagrant 
+    runs to provision(setup) the machine.  Can you figure out what they
+    are doing?
 
-  * In the root folder of this repository is a `Vagrantfile` for everyone to use during class.
-  * Use the `vagrant up` and `vagrant ssh` to get to the command line of your VM.
-  * It gives us a clean install of an Ubuntu 14.04 VM but does install some requisites that will be needed for our work - namely some development libraries and Git.  If you need to go back in the future and see what it installed (for your own work!) you can see in the [supplemental provision shell script](../misc/vagrant-pyenv-prereqs.sh)
+2. Create your virtual machine by running `vagrant up`.
+    - This operation will take a significant amount of time the first time 
+    you run it because the system has to download the OS image.  The 
+    time that this takes will be largely dependent on your network speed.
+    
+3. Log in to the machine by executing this command: `vagrant ssh`.  Is this
+doesn't work, the system failed to build.  Wah wah.  We'll have to work
+together on this because your system is probably "special".
+    - You should get a new prompt that looks like this: `vagrant@vagrant-ubuntu-trusty-64:~$`
+
+4. Run the following tests to make sure everything is working correctly:
+    - `pyenv`: Should display something.
+    - `dragon-warrior`: Should take you to `/vagrant/training` directory.
+    - `git`: Should display something.

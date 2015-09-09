@@ -6,7 +6,7 @@
 * Quick Hits
   * Snacks and break schedule. 
   * Git: Upstream Repositories
-    * Add the original bigfatpanda-training repo as an **upstream repo**: `git remote add upstream https://github.com/bigfatpanda-training/pandas-practical-python-primer.git`  
+    * Add the original bigfatpanda-training repo as an **upstream repo**: ``  
     * Grab the latest changes from the upstream remote: `git fetch remote`
     * Merge those changes into your **master** branch: `git merge upstream/master`
 * Python
