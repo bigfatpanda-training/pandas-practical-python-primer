@@ -9,10 +9,11 @@ Github account.
 
 Git is, by far, the most popular version control / source control program in
 the world today.  Developers use version control systems to efficiently track
-changes to project files that occur over time **and** provide a mechanism to 
-effectively work with others on the same project.
+changes to project files that occur over time (or retrieve them in case of 
+a system crash) **and** provide a mechanism to effectively work with others on 
+the same project.
 
-The class materials as stored in a Git repository that is available online
+The class materials are stored in a Git repository that is available online
 at Github.  We'll need Git on our systems and a Github account to download the
 class materials (and updates to them throughout our course).
 
@@ -43,9 +44,9 @@ step at a time.
 
 In the world of Github (and services like it) if you want to make a personal
 copy of somebody else's project you **fork** it.  This creates a copy of a
-project under your account which you can then mess with but the original 
-isn't affected.  When you fork a project, Github also remembers the original
-repo so that you can "pull" down updates from it.
+project under your account which you can then mess to your hearts content 
+but the original isn't affected.  When you fork a project, Github also remembers 
+the original repo so that you can "pull" down updates from it.
 
 After you fork the class repo, you'll need to get a copy of it on your local 
 machine.  This operation is called "cloning".
@@ -72,8 +73,8 @@ you should see something that looks like this:
 
     ![clone-repo-url](../images/github-clone-repo.png)
     
-    - Make sure that the you've chosen the `HTTPS` link and then copy the 
-URL in the dialogue box to your clipboard.  
+    > ![alert.png](../images/alert.png) Make sure that the you've chosen the 
+    `HTTPS` link and then copy the URL in the dialogue box to your clipboard.  
 
 3. Open a terminal window.  Windows uses should use the 'Git Bash' program
 that was installed on your system by the Git installer.  It approximates a
