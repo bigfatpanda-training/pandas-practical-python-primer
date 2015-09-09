@@ -4,8 +4,9 @@
 ## Class Setup
 Today we're going to start using Python!  Here are a couple of things
 to do before each class:
+    
     - [Grab the latest class updates](../level-0/git-merging-upstream-changes.md)
-    - [Rebuild the Vagrant VM](../level-0/rebuild-vagrant-vm.md)
+    - [Rebuild the Vagrant VM](../level-0/vagrant-rebuild-vm.md)
 
 ### PyCharm Project Setup
 * Open a new project folder: `[class-folder]/trainee-area/level-3/using-web-services`
