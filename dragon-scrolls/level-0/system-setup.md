@@ -57,8 +57,8 @@ Alright?  Let's get started.
 **Fork the Class Repo**
 
 1. Visit the class repo at [https://github.com/bigfatpanda-training/pandas-practical-python-primer](https://github.com/bigfatpanda-training/pandas-practical-python-primer)
-2. Click the ![github-fork.png](../images/github-fork.png) button to fork (make a 
-copy of) the project in your own Github account.  
+2. Click the ![github-fork.png](../images/github-fork.png) button to fork 
+(make a copy of) the project in your own Github account.  
 3. You should be taken to your copy of the class repo when the process 
 completes. **Congratulations!**  The first step is done.  You should see
 something like this (but it will have your username instead of eikonomega).
@@ -87,9 +87,13 @@ to remember when you put things in later classes.  Either way, make sure
 you write down when you decided to clone the repo.
  
 5. Execute the following command to clone the repo: 
-`git clone [paste the url you picked up in step 2 here]` 
-
-
+`git clone [paste the url you picked up in step 2 here]`
+- Git will ask you for your Github username/password and then spit out a
+whole bunch of information at you if you entered them correctly as it downloads
+all the class files.
+- Verify that this worked by trying to enter the repo folder and listing the contents:
+    - `cd pandas-practical-python-primer`
+    - `ls -la`
 
 ## Using a Virtual Machine
 In the vast majority of circumstances, the Python code that you write will
