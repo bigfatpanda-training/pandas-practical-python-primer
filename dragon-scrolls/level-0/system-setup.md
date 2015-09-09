@@ -76,16 +76,18 @@ you should see something that looks like this:
     > ![alert.png](../images/alert.png) Make sure that the you've chosen the 
     `HTTPS` link and then copy the URL in the dialogue box to your clipboard.  
 
-3. Open a terminal window.  Windows uses should use the 'Git Bash' program
+3. Open a terminal window.  Windows users should use the 'Git Bash' program
 that was installed on your system by the Git installer.  It approximates a
 linux terminal.  For Mac users, I highly recommend iTerm2.  Alternatively,
 Mac users can also use the built-in Terminal program.
 
 4. Pick a location where you want to clone your fork of the class repo.  
-    - If you are fairly new to using a terminal, I suggest that you put it in the 
-directory that the terminal window places you in.  This will make it easier 
-to remember when you put things in later classes.  Either way, make sure 
-you write down when you decided to clone the repo.
+    > ![information](../images/information.png) If you are fairly new to using 
+    > a terminal, I suggest that you put it in the directory that the terminal 
+    > window places you in.  
+    > 
+    > This will make it easier to remember when you put things in later classes.  
+    > Either way, make sure you **write down when you decided to clone the repo.**
  
 5. Execute the following command to clone the repo: 
 `git clone [paste the url you picked up in step 2 here]`
