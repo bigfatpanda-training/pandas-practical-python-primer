@@ -42,7 +42,7 @@ If you're new to Git, you probably just said **WAT!?**  Not a problem.  One
 step at a time.
 
 In the world of Github (and services like it) if you want to make a personal
-copy of somebody else's project you "fork" it.  This creates a copy of a
+copy of somebody else's project you **fork** it.  This creates a copy of a
 project under your account which you can then mess with but the original 
 isn't affected.  When you fork a project, Github also remembers the original
 repo so that you can "pull" down updates from it.
@@ -74,7 +74,20 @@ you should see something that looks like this:
     
 2. Make sure that the you've chosen the `HTTPS` link and then copy the 
 URL in the dialogue box to your clipboard.  
-3. Open 
+
+3. Open a terminal window.  Windows uses should use the 'Git Bash' program
+that was installed on your system by the Git installer.  It approximates a
+linux terminal.  For Mac users, I highly recommend iTerm2.  Alternatively,
+Mac users can also use the built-in Terminal program.
+
+4. Pick a location where you want to clone your fork of the class repo.  
+- If you are fairly new to using a terminal, I suggest that you put it in the 
+directory that the terminal window places you in.  This will make it easier 
+to remember when you put things in later classes.  Either way, make sure 
+you write down when you decided to clone the repo.
+ 
+5. Execute the following command to clone the repo: 
+`git clone [paste the url you picked up in step 2 here]` 
 
 
 
