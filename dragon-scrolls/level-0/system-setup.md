@@ -67,6 +67,15 @@ something like this (but it will have your username instead of eikonomega).
 
 **Clone the Repo to your Machine**
 
+1. On your Github repo page (the one you just got to in the previous step), 
+you should see something that looks like this:
+
+    ![clone-repo-url](../images/github-clone-repo.png)
+    
+2. Make sure that the you've chosen the `HTTPS` link and then copy the 
+URL in the dialogue box to your clipboard.  
+3. Open 
+
 
 
 ## Using a Virtual Machine
