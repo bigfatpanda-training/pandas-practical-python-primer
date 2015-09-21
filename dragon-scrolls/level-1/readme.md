@@ -17,6 +17,8 @@ of PyCharm.  To do this, take the following steps:
     - If asked, always choose to open up the project in a new window.
     - You should be presented with an empty editor and a window on the left
     side of the screen showing the files in the directory.
+    - If you are presented with a `Unregistered VCS Root Detected` window, you
+    can safely ignore it.
     
 - We now need to make a couple of changes to the settings so that everything
 works correctly.  The first one is a little tricky, the second one is pretty easy.
@@ -39,9 +41,17 @@ will get confused about how files relate to each other.
 correctly handle code hinting and imports.  You do this in the `project structure`
 area of the settings/preferences.  Make sure to indicate that `trainee-friends-api`
 is marked as a `sources` folder.
-![Project Structure Settings](level-3-project-structure.png)
+![Project Structure Settings](../images/pycharm-project-structure.png)
 - Probably restart PyCharm due to software bug in latest version.
 
 ## Training Topics
+In this training level we are going to be talking about the basic building 
+blocks of Python.  We'll approach it using only the minimum necessary 
+technospeak.
+
+By the end of the training exercises, you should have a surface level
+familiarity for most of the things that you'll see in Python code.
+
+Let's get started!
 
 [Start Training](exercise-1.md)
