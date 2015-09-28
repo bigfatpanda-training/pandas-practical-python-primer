@@ -1,8 +1,6 @@
 ![Welcome to Level 0](http://vignette3.wikia.nocookie.net/kungfupanda/images/4/46/Level-Zero.jpg/revision/20111215042422)
 # Welcome to Level Zero
 
-## Class Introduction
-
 ### The Way of the Dragon Warrior (Class Philosophy)  
 Thank you so much for being a part of this class.  Python is an amazing language
 that is used just about everywhere and can do just about anything.  At the same
@@ -18,12 +16,13 @@ foundation to keep improving your skills and be on your way to becoming
 a true Python Dragon Warrior. 
 
 ### The Way of Big Fat Panda (Class Rules)  
-Like any coach, I've got some rules.  I ask you to follow them as I believe that
-they will help you and your classmates to learn:
+**This is my grumpy section - it won't last too long.** 
+Like any coach, I've got some rules. I ask you to follow them as I believe 
+that they will help you and your classmates to learn:
 
-1. **Don't miss class.**  We're going to cover **a lot** of material in a short time
-frame and it will be difficult to catch up.  If you aren't committed to being
-here, then please give your spot to someone who is.
+1. **Don't miss class.**  We're going to cover **a lot** of material in a short 
+time frame and it will be difficult to catch up.  If you aren't committed to 
+being here, then please give your spot to someone who is.
     * Now, if you're sick, your kiddo is sick, or your house floods - I'll 
     understand and I'll meet with you outside of class to get your caught up.
     
@@ -31,10 +30,11 @@ here, then please give your spot to someone who is.
 either be learning the material or doing something else.  We'll take regular 
 breaks so you can check your email, etc.
 
-3. **Ask Questions!**  I know it's hard to ask questions.  I've been there, not really understanding
-something but not wanting to look dumb. Take heart, I guarantee that every 
-single person in the class will not understand or be plain wrong about something
-during the course, **including me** - because I actually am dumb ;)
+3. **Ask Questions!**  I know it's hard to ask questions.  I've been there, 
+not really understanding something but not wanting to look dumb. Take heart, 
+I guarantee that every single person in the class will not understand or be 
+plain wrong about something during the course, **including me** - because I 
+actually am dumb ;)
     * To help break people out of this fear, I will make a really big deal of 
     my own type-o's and mistakes so hopefully your's will feel like the minor
     thing they really are.
