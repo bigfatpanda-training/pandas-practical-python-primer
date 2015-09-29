@@ -33,6 +33,9 @@ repositories in Github.
     > If you want to use the latest version of Git, go ahead and download it
     > using the link above and then add `/usr/local/git/bin` to your path so that
     > the system uses the latest version instead of the xCode one.
+    >
+    > Here's a tutorial on how to 
+    > [update your path on a Mac.](http://coolestguidesontheplanet.com/add-shell-path-osx/)
     
 2. [Create an account](https://github.com/join) if you don't already have one 
 at Github.  The basic account is free and that's all you'll be needing.
@@ -84,7 +87,8 @@ Mac users can also use the built-in Terminal program.
 4. Pick a location where you want to clone your fork of the class repo.  
     > ![information](../images/information.png) If you are fairly new to using 
     > a terminal, I suggest that you put it in the directory that the terminal 
-    > window places you in.  
+    > window places you in on Mac/Linux machines or at the root `C:` directory
+    > on Windows.
     > 
     > This will make it easier to remember when you put things in later classes.  
     > Either way, make sure you **write down when you decided to clone the repo.**
@@ -92,8 +96,8 @@ Mac users can also use the built-in Terminal program.
 5. Execute the following command to clone the repo: 
 `git clone [paste the url you picked up in step 2 here]`
     - Git will ask you for your Github username/password and then spit out a
-whole bunch of information at you if you entered them correctly as it downloads
-all the class files.  Here's what it should look like:
+whole bunch of information at you. If you entered your information correctly 
+it will download all the class files.  Here's what it should look like:
 
         ```bash
         Cloning into 'pandas-practical-python-primer'...
