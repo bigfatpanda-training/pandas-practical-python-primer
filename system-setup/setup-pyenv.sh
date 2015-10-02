@@ -3,7 +3,7 @@
 # Add PYENV and base Python versions
 su - vagrant -c "curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash"
 su - vagrant -c "pyenv install 3.4.3"
-su - vagrant -c "pyenv install 2.7.9"
+# su - vagrant -c "pyenv install 2.7.9"
 
 # Create VirtualEnvs for Training Levels
 su - vagrant -c "pyenv virtualenv 3.4.3 dragon-warrior"

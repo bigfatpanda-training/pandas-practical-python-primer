@@ -5,8 +5,9 @@ your enemies go blind through the pure awesomeness of your code!
 
 
 ## Class Syllabus
-Your journey to becoming a dragon warrior will be separated in different 
+Your journey to becoming a dragon warrior will be separated into different 
 training levels.  Each level will correspond with one practical use of Python.
+
 * Level-0: [Introductions & System Setup](dragon-scrolls/level-0/readme.md)
 * Level-1: [The Basics & Zen of Python](dragon-scrolls/level-1/readme.md)
 * Level-2: [Creating Command Line Interfaces (CLIs)](dragon-scrolls/level-2/readme.md)
@@ -21,7 +22,7 @@ will contain links to all the other instructions for that level.
 
 * The code files live in subfolders of `training`.  Just like inside 
 `dragon-scrolls`, the subfolders are separated by training levels.
-    * In each training level folder (ex. `level-1-command-line-interfaces`)
+    * In each training level folder (ex. `level-2-command-line-interfaces`)
     you find two additional folders: `bfp-reference` and `dragon-warrior`.
         * `bfp-reference` contains my final versions of the code files and exist
         as a reference if you need to copy something over or get behind.

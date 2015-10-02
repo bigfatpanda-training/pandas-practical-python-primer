@@ -17,3 +17,12 @@ the directory containing the `Vagrantfile`:
   * `vagrant halt`: Stores the hard-drive state of the VM and stops it.
 
   * `vagrant destroy`: Obliterates the VM and all contents.
+  
+## Rebuilding the Machine
+From time to time, you'll find a reason to rebuild the Vagrant VM.  This is 
+trivial to do - yeah!  Here's the steps to follow:
+
+- Destroy your old VM: `vagrant destroy`
+- Rebuild the VM with new changes: `vagrant up`
+- Log into the VM: `vagrant ssh`
+- Rule the world!

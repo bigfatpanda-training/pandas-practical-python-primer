@@ -6,11 +6,15 @@ Today we're going to start using Python!  Here are a couple of things
 to do before each class:
     
 - [Grab the latest class updates](../level-0/git-merging-upstream-changes.md)
-- [Rebuild the Vagrant VM](../level-0/vagrant-rebuild-vm.md)
+- [Rebuild the Vagrant VM](../level-0/vagrant-cheatsheet.md)
 
 ### PyCharm Project Setup
 For each training level of our program, we'll create a new project inside
-of PyCharm.  To do this, take the following steps:
+of PyCharm. To do this, take the following steps:
+
+> Depending on whether you are on a Mac or PC, the names of menu
+items can vary slightly.  I work primarily on a Mac, but will note these
+differences wherever I am aware of them. 
 
 - Open the class folder as a new project: `File` -> `Open` -> Select `[class-folder]/trainee-area/level...` -> Click `Open/Choose`
     - Make sure that you pick the correct training level.
