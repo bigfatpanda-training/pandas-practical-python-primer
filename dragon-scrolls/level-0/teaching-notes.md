@@ -15,3 +15,7 @@ from desktop UI.  Must start from command line with `charm`.  I don't have
 a way of telling if this will work for Windows machines.
 
 - Take time to explain the layout of the course materials.
+- Use repl.it to complete the Python test question.
+
+- Homework!  Read Code lay-out and Naming Conventions sections of PEP8 and
+be prepared to answer questions about it.  
