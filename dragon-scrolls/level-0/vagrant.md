@@ -60,7 +60,7 @@ together on this because your system is probably "special".
 
 4. Run the following tests to make sure everything is working correctly:
     - `pyenv`: Should display something.
-    - `dragon-warrior`: Should take you to `/vagrant/training` directory.
+    - `dragonwarrior`: Should take you to `/vagrant/training` directory.
     - `git`: Should display something.
     
 5. Ok - Sweet.  Things are looking good. Now let's see how to turn our machine
