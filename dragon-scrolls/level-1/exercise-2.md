@@ -49,7 +49,5 @@ what happens:
     ['I hate Panda.']
     ```
 
-So, whenever we are talking about a object(thing) in Python, we can ask
-these two questions: 
-- What are it's characteristics (attributes)?
-- What can it do (methods/functions)?
+- Now our object has some interesting attributes.  Namely, the data
+that we just put into it.  Let's 

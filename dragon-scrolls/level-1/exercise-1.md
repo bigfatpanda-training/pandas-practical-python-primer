@@ -13,7 +13,7 @@ thing that has certain characteristics and can do stuff:
 - It has color, shape, size.
 - It can call people (who does that anymore?), text people, SnapChat them, etc...
     
-It's the same thing with objects, they have characteristics (called 
+It's the same thing with objects, they have characteristics ( 
 **attributes**) and things that they can do (called **methods** or **functions**
 depending on the context).
 
