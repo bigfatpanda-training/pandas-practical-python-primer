@@ -5,7 +5,7 @@ we stated in exercise #1.  We will use a **list**.
 
 Ok.  So let's see what we can do with this thing!
 
-#### Training Steps:
+#### Instructions:
 - In your terminal window type `level-1` to get to the right directory.
     
     > You can't normally type level-1 to get to a directory like this, but
@@ -45,9 +45,41 @@ add something to the list.  Let's do that and then just poke it again to see
 what happens:
     ```python
     >>> my_cool_list.append('I hate Panda.')
+    >>> my_cool_list.append('When was the last time he took a bath?')
     >>> my_cool_list
-    ['I hate Panda.']
+    ['I hate Panda.', 'When was the last time he took a bath?']
     ```
+    
+    > ![Important](../images/information.png) You can find out most of 
+    the other methods and attributes an object has by passing the object
+    to the `dir()` or `help()` functions.  See what happens when you do
+    that.
 
 - Now our object has some interesting attributes.  Namely, the data
-that we just put into it.  Let's 
+that we just put into it.  It gives you a summary of that data when you poke
+it like we did, but Python also gives you the ability to access individual 
+attributes of lists by specify their index value like so.
+    ```python
+    >>> my_cool_list[0]
+    'I hate Panda.'
+    >>> my_cool_list[1]
+    'When was the last time he took a bath?'
+    ```
+    
+    > ![Question](../images/question.png) Why does `my_cool_list[0]` give
+    you the first element of the list?
+    
+#### There Is No Secret Ingredient
+In "There Is No Secret Ingredient" sections, you'll be given a series of
+steps to take on your own.  Doing them will greater help solidify your
+understanding of the concepts being taught.  This is where you prove if 
+you really want to be a Dragon Warrior.
+
+1. Assign a new list object to the `my_cool_list` name.
+1. Add at least 5 entries to it.  You can use both strings (ex.`'example'`) 
+or numbers (ex. `123`).
+1. Access various members of your list via their index positions.
+1. What methods can you use to rearrange the order of the list elements?
+1. Figure out how to remove items from your list.  How many are there?
+
+
