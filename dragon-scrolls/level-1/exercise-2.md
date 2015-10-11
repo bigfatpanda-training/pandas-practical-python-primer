@@ -1,11 +1,11 @@
 [Previous](exercise-1.md) |  [Next](exercise-3.md)
-### Exercise 2: Let's Prove Exercise #1
+## Exercise 2: Let's Prove Exercise #1
 Alright.  Let's pick one of the basic objects in Python to demonstrate what
 we stated in exercise #1.  We will use a **list**. 
 
 Ok.  So let's see what we can do with this thing!
 
-#### Instructions:
+### Instructions:
 - In your terminal window type `level-1` to get to the right directory.
     
     > You can't normally type level-1 to get to a directory like this, but
@@ -69,7 +69,7 @@ attributes of lists by specify their index value like so.
     > ![Question](../images/question.png) Why does `my_cool_list[0]` give
     you the first element of the list?
     
-#### There Is No Secret Ingredient
+### There Is No Secret Ingredient
 In "There Is No Secret Ingredient" sections, you'll be given a series of
 steps to take on your own.  Doing them will greater help solidify your
 understanding of the concepts being taught.  This is where you prove if 

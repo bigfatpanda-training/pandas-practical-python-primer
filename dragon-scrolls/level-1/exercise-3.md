@@ -1,7 +1,7 @@
 [Previous](exercise-2.md) |  [Next](exercise-4.md)
-### Exercise 3: Types(Classes) & Their Hierarchies
+## Exercise 3: Types(Classes) & Their Hierarchies
 
-#### Object Types(Classes)
+### Object Types(Classes)
 Ok.  So, we've gotten a basic introduction to what **objects** are.  Now 
 we are going to discuss the related concepts of Types & Classes.
  
@@ -35,7 +35,7 @@ Finally, when an object comes from a class, people say that it's **type** is
 the name of the class.  Knowing an object's type tells you what you can
 expect as far as methods and attributes.
 
-#### Type(Class) Hierarchies
+### Type(Class) Hierarchies
 Classes are often arranged in a hierarchical fashion.  Like a family tree, 
 characteristics from classes higher up the chart ("parent classes") pass 
 methods and attributes down to those lower on the chart ("child classes").

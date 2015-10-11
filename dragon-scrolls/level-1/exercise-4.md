@@ -1,5 +1,5 @@
 [Previous](exercise-3.md) |  [Next](exercise-5.md)
-### Exercise 4: Sequence Types
+## Exercise 4: Sequence Types
 There are three common types that belong to the Sequence family: 
 strings, tuples, and lists.
 
@@ -71,7 +71,7 @@ Byte Arrays
 A bytearray object is a mutable array. They are created by the built-in bytearray() constructor. Aside from being mutable (and hence unhashable), byte arrays otherwise provide the same interface and functionality as immutable bytes objects.
 
 The extension module array provides an additional example of a mutable sequence type, as does the collections module.    
-#### There Is No Secret Ingredient
+### There Is No Secret Ingredient
 In "There Is No Secret Ingredient" sections, you'll be given a series of
 steps to take on your own.  Doing them will greater help solidify your
 understanding of the concepts being taught.  This is where you prove if 

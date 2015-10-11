@@ -1,5 +1,5 @@
 [Previous](readme.md) |  [Next](exercise-2.md)
-### Exercise 1: In Python, Everything is an "Object"
+## Exercise 1: In Python, Everything is an "Object"
 So... Python is an object-oriented language.  You may have heard that term
 before.  It's used to group a certain set of languages together that 
 deal with the concept of, tada, objects.
