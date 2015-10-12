@@ -1,4 +1,4 @@
-[Previous](readme.md) |  [Next](exercise-2.md)
+[Previous](homework.md) |  [Next](exercise-2.md)
 ## Exercise 1: In Python, Everything is an "Object"
 So... Python is an object-oriented language.  You may have heard that term
 before.  It's used to group a certain set of languages together that 
@@ -13,8 +13,8 @@ thing that has certain characteristics and can do stuff:
 - It has color, shape, size.
 - It can call people (who does that anymore?), text people, SnapChat them, etc...
     
-It's the same thing with objects, they have characteristics ( 
-**attributes**) and things that they can do (called **methods** or **functions**
+It's the same thing with objects, they have characteristics (**attributes**) 
+and things that they can do (called **methods** or **functions**
 depending on the context).
 
 So, whenever we are talking about a object(thing) in Python, we can ask
