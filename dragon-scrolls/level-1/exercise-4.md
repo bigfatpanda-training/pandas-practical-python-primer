@@ -7,8 +7,10 @@ The Python documentation says that these types "represent finite ordered sets
 indexed by non-negative numbers."  Let's translate:
 - Sequences are containers for other objects.
 - They keep(or remember) the order of the objects that they contain.
-- You can access the elements of a sequence via non-negative index values.
+- You can access the elements of a sequence via their non-negative index values.
 You've seen this already: `my_cool_list[0]`
+    - However, see what happens if you try to use a small negative number
+    as the index value.  What happens?  What about a large negative index number?
 
 Here are some other common characteristics of Sequence types:
 - You can use the `len()` function to see how many objects are held 
@@ -39,9 +41,6 @@ inside the sequence.
             `[1, 3, 5]` You can see that it only returned every second element.
             Change it to three and it will only return every three element. 
 
-Sequences also support slicing: a[i:j] selects all items with index k such that i <= k < j. When used as an expression, a slice is a sequence of the same type. This implies that the index set is renumbered so that it starts at 0.
-
-Some sequences also support “extended slicing” with a third “step” parameter: a[i:j:k] selects all items of a with index x where x = i + n*k, n >= 0 and i <= x < j.
 
 Sequences are distinguished according to their mutability:
 
@@ -56,9 +55,6 @@ A string is a sequence of values that represent Unicode code points. All the cod
 Tuples
 The items of a tuple are arbitrary Python objects. Tuples of two or more items are formed by comma-separated lists of expressions. A tuple of one item (a ‘singleton’) can be formed by affixing a comma to an expression (an expression by itself does not create a tuple, since parentheses must be usable for grouping of expressions). An empty tuple can be formed by an empty pair of parentheses.
 
-Bytes
-A bytes object is an immutable array. The items are 8-bit bytes, represented by integers in the range 0 <= x < 256. Bytes literals (like b'abc') and the built-in function bytes() can be used to construct bytes objects. Also, bytes objects can be decoded to strings via the decode() method.
-
 Mutable sequences
 Mutable sequences can be changed after they are created. The subscription and slicing notations can be used as the target of assignment and del (delete) statements.
 
@@ -67,21 +63,7 @@ There are currently two intrinsic mutable sequence types:
 Lists
 The items of a list are arbitrary Python objects. Lists are formed by placing a comma-separated list of expressions in square brackets. (Note that there are no special cases needed to form lists of length 0 or 1.)
 
-Byte Arrays
-A bytearray object is a mutable array. They are created by the built-in bytearray() constructor. Aside from being mutable (and hence unhashable), byte arrays otherwise provide the same interface and functionality as immutable bytes objects.
-
 The extension module array provides an additional example of a mutable sequence type, as does the collections module.    
-### There Is No Secret Ingredient
-In "There Is No Secret Ingredient" sections, you'll be given a series of
-steps to take on your own.  Doing them will greater help solidify your
-understanding of the concepts being taught.  This is where you prove if 
-you really want to be a Dragon Warrior.
 
-1. Assign a new list object to the `my_cool_list` name.
-1. Add at least 5 entries to it.  You can use both strings (ex.`'example'`) 
-or numbers (ex. `123`).
-1. Access various members of your list via their index positions.
-1. What methods can you use to rearrange the order of the list elements?
-1. Figure out how to remove items from your list.  How many are there?
 
 
