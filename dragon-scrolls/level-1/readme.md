@@ -1,9 +1,15 @@
 ![Welcome to Level 1](http://g-ecx.images-amazon.com/images/G/01/DVD/Paramount/detailpages/KungFuPanda/KungFuPnda_M1L.jpg)
 # Level One: The Zen & Basics of Python
+In this level, we will be covering Python community standards, and overview
+of Object-Oriented programming terminology, basic Python data structures, 
+and setting up PyCharm for your projects.
 
 ## Class Setup
-Today we're going to start using Python!  Here are a couple of things
-to do before each class:
+Prior to each class, you'll want to get the latest materials from my version
+of the class repository.  You may also need to rebuild to your virtual machine
+if I've made a big change to its structure, or if you powered down your 
+machine without suspending it (and therefore hosed it).  Here are the links
+to both of those things:
     
 - [Grab the latest class updates](../level-0/git-merging-upstream-changes.md)
 - [Rebuild the Vagrant VM](../level-0/vagrant-cheatsheet.md)
