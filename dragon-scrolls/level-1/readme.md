@@ -49,7 +49,7 @@ will get confused about how files relate to each other.
 
 - Tell PyCharm where your root source code is for this project so that it will
 correctly handle code hinting and imports.  You do this in the `project structure`
-area of the settings/preferences.  Make sure to indicate that `trainee-friends-api`
+area of the settings/preferences.  Make sure to indicate that `dragon-warrior`
 is marked as a `sources` folder.
 ![Project Structure Settings](../images/pycharm-project-structure.png)
 - Probably restart PyCharm due to software bug in latest version.
