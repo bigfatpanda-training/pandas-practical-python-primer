@@ -4,3 +4,6 @@
 - Remember that some people will have to use `charm` to start
 PyCharm correctly.
 
+## Git 
+- Show everyone how to push their local changes to Github.
+- Contributing to open-source projects via pull requests.

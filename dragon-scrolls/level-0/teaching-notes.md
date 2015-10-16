@@ -19,3 +19,15 @@ a way of telling if this will work for Windows machines.
 
 - Homework!  Read Code lay-out and Naming Conventions sections of PEP8 and
 be prepared to answer questions about it.  
+
+
+## Tentative Schedule
+| Classs Topic | Class Dates | 
+|--------------|-------------|
+| System Setup | 10/5        |
+| Python Basics| 10/12, 10/19            |
+| Command Line Interfaces| 10/26, 11/2            |
+| Interacting w/ Web Services| 11/9, 11/16 |
+| Creating Web Services| 11/23, 11/30, 12/7 |
+| Creating Web Sites| 12/14 |
+
