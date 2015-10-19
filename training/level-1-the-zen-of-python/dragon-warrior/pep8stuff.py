@@ -28,6 +28,4 @@ def quicker_multiple_of_three_and_five(top_limit):
 
     return sum(multiples)
 
-
-print("The sum of all unique multiples of 3 and 5 which given an "
-      "upper limit of X is to consider is: answer")
+print("The sum of all unique multiples of 3 and 5 which given an upper limit of X is to consider is: answer")
