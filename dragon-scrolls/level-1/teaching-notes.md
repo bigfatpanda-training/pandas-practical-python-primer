@@ -7,3 +7,6 @@ PyCharm correctly.
 ## Git 
 - Show everyone how to push their local changes to Github.
 - Contributing to open-source projects via pull requests.
+
+## Python
+- Go Over Function Defintion & Exception Handling
