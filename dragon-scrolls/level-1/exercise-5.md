@@ -69,4 +69,34 @@ Unicode code points. Practically, they are a sequence of characters.
     > `string_2 = 'Dog said, "That\'s really tasty!"'`
 - Unlike other sequence types, it can only hold other objects of its own type.
 - Strings have a [lot of methods](https://docs.python.org/3/library/stdtypes.html#string-methods) 
-not shared by other immutable types.  
+not shared by other immutable types.
+
+### There Is No Secret Ingredient: Strings
+1. Create the following `string` objects:
+```python
+>>> bfp = "You're just a big, fat panda! No, I am THE big, fat panda!"
+```
+1. Inspect the object with `dir` and `help` to see what methods are available
+on the string.
+1. Use the `count` method to see how many times 'fat' appears in the string.
+1. Determine and prove what the difference is between `find` and `index`.
+1. Create a copy of `bfp` that has the opposite case: `bfp_2 = bfp.swapcase()`
+1. What are the 3 methods you could use to prove that these strings are
+equivalent if you don't consider case.
+1. What does the `partition` method do? How do you use it?
+    
+    > ![Check](..images/reminder.png) How do you just get the 3rd value returned
+by this method?  Remember that a string is just another sequence type.
+1. What about `split`?  What are two different ways that you can call it?
+1. The `join` method is interesting.  You use it like this: `my_string.join(sequence)`
+    - What the value of `my_string` is will be used to join together all the
+    elements of the sequence that you pass to the `join` method.
+    - This is confusing in the abstract, so here is a concrete example:
+        
+        ```python
+        >>> "!".join(["I", "like", "Pizza"])
+        I!like!Pizza
+        ```
+1. Use `split` and `join` to separate your string into a list and then
+put it back together again.
+1. Talk about the easiest use case for `format`.
