@@ -9,4 +9,6 @@ PyCharm correctly.
 - Contributing to open-source projects via pull requests.
 
 ## Python
+- Strings Methods
+- Tuples vs. List vs. Sets Time/Space Performance
 - Go Over Function Defintion & Exception Handling
