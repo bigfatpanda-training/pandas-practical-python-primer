@@ -1,10 +1,5 @@
 # Intro to CLIs
-A CLI, or **command line interface**, is a program that exposes 
-its functionality via the command-line.  I know, what a shock.
 
-We've already been using a very sophisticated CLI - Vagrant.  Today, 
-we are going to create our very own CLI that copies files using only 
-the Python Standard Library.
 
 ## Goal 1: Create an ArgumentParser class
 1. Create our module and add a docstring to it
