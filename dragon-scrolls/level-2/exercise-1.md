@@ -53,7 +53,21 @@ you know it by heart.
 ### Yeah! `import` Like a Rock Star!
 The use of the `import` statement is universal outside of the most trivial
 Python programs.  It is generally easy to use, but really quite complicated 
-once you try to understand it.  
+once you try to understand it.
+
+For our purposes, here are the crucial bits to understand:
+- The `import` statement loads the contents of another module (or package) and
+assigns a name to it in the local the local scope/namespace.  In other words, 
+it gives you access to code located in other files.
+
+- When Python first encounters a call to `import`, it looks for the requested
+module in the following order:
+    1. Previously loaded modules: `sys.modules`
+    1. Modules and packages of the Standard Library.
+    1. Locations generally used for local code (stuff you develop) and 3rd
+    party modules/packages that you've installed.  Generally, you can 
+    
+
 
 ### There Is No Secret Ingredient
 1. Create a module in the `dragon-warrior` folder for this level called:
