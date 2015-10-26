@@ -1,19 +1,15 @@
-# Intro to CLIs
-A CLI, or **command line interface**, is a program that exposes 
-its functionality via the command-line.  I know, what a shock.
+[Previous](exercise-1.md) |  [Next](exercise-3.md)
+## Exercise 2: Create an ArgumentParser Object
+Alright Dragon Warrior - let's review:
 
-We've already been using a very sophisticated CLI - Vagrant.  Today, 
-we are going to create our very own CLI that copies files using only 
-the Python Standard Library.
+1. What type of object is a factory (or object generator) that creates other 
+objects based on an internal pattern?
+1. After a object is created, what function can you use to tell which 
+factory object created it?
 
-## Goal 1: Create an ArgumentParser class
-1. Create our module and add a docstring to it
-2. Import the argparse module/library?
-3. How do we learn stuff about the module?  
-    * help()
-    * [Official Documentation](https://docs.python.org/3/)
-    
-4. Create an instance of the `argparse.ArgumentParser` class.
+### There Is No Secret Ingredient
+1. Create an instance of the `argparse.ArgumentParser` class and assign it a
+name.
 5. What are the options that we can pass to the constructor?
     * description
     * epilog
