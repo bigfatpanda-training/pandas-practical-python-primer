@@ -1,10 +1,5 @@
 """
-Demonstrate the time/space performance differences between
-various objects:
-
-Sequences: lists and tuples
-Sets: sets and frozensets
-Mappings: dicts
+Demonstrate the time/space performance differences between lists and tuples.
 """
 import sys
 import timeit
