@@ -1,2 +1,2 @@
-awscli==1.7.39
 click==4.1
+ipython==4.0.0
