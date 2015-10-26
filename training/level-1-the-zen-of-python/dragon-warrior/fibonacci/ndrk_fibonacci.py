@@ -5,7 +5,7 @@ third_number = 3
 running_total = 2   # Seeding with 2 because it is the first even number and not included in the while loop
 
 
-def is_even_number(number) -> bool:
+def is_even_number(number: int) -> bool:
     if number % 2 == 0:
         return True
     else:
