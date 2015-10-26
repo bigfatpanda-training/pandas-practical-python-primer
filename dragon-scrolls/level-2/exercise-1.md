@@ -50,7 +50,7 @@ documented. In other words, they come before everything else.
 encoded in [PEP257](https://www.python.org/dev/peps/pep-0257/) until 
 you know it by heart.
 
-### Yeah! `import` Like a Rock Star!
+### Yeah! `import` Like a Little Baby Rock Star!
 The use of the `import` statement is universal outside of the most trivial
 Python programs.  It is generally easy to use, but really quite complicated 
 once you try to understand it.
@@ -65,7 +65,8 @@ module in the following order:
     1. Previously loaded modules: `sys.modules`
     1. Modules and packages of the Standard Library.
     1. Locations generally used for local code (stuff you develop) and 3rd
-    party modules/packages that you've installed.  Generally, you can 
+    party modules/packages that you've installed.  Generally, you can see
+    the 
     
 
 
