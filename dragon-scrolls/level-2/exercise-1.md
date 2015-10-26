@@ -55,20 +55,22 @@ The use of the `import` statement is universal outside of the most trivial
 Python programs.  It is generally easy to use, but really quite complicated 
 once you try to understand it.
 
-For our purposes, here are the crucial bits to understand:
+For our purposes today, here are the crucial bits to understand:
 - The `import` statement loads the contents of another module (or package) and
 assigns a name to it in the local the local scope/namespace.  In other words, 
 it gives you access to code located in other files.
 
 - When Python first encounters a call to `import`, it looks for the requested
-module in the following order:
+module/package in the following order:
     1. Previously loaded modules: `sys.modules`
     1. Modules and packages of the Standard Library.
     1. Locations generally used for local code (stuff you develop) and 3rd
     party modules/packages that you've installed.  Generally, you can see
-    the 
+    the locations that it will look to by examining `sys.path`.
     
-
+    > ![Question](../images/question.png) What do you think the `.` means
+    in `sys.modules` or `sys.path`.  You've seen the dot notation before.
+    What did it signify then?
 
 ### There Is No Secret Ingredient
 1. Create a module in the `dragon-warrior` folder for this level called:
@@ -76,10 +78,15 @@ module in the following order:
    
     > ![Review](../images/reminder.png) What's the difference between a 
     **module** and a **package**?
+
 1. Add a docstring to your module.  It doesn't matter too much right now
 what it says.  Perhaps start with this: `This module provides a CLI that...`
-1. Import the `argparse` module.
+
+1. Import the `argparse` and `sys` modules.
     
-    > ![Review](../images/reminder.png) The `argparse` module is part of
-    the Python Standard Library.  According to PEP8, where should it's 
-    import statement go?
+    > ![Review](../images/reminder.png) The `argparse` and `sys` modules 
+    are part of the Python Standard Library.  According to PEP8, where should 
+    they be imported?
+    
+1. Determine which modules/packages the interpreter loads automatically and what
+paths it will look in for other things that you attempt to `import`.

@@ -4,3 +4,7 @@ Go over the different options with the class.
 
 # Review Homework
 Have everyone rename their files to [github_id]_fibonacci
+
+# Credentials & Cloud-Based Source Code Control
+Talk about the importance of not ever, **ever** having usernames/passwords
+in your code files.  Always keep them in the environment or configuration files.
