@@ -1,30 +1,26 @@
 """
-This modules provides various function for operating on
+This modules provides various functions for operating on files.
+
+Functions:
+    copy_files: Copy file(s) to a specified location.
 """
 
-def copy_files(files: list, destination: str, new_filenames: list=None):
+import subprocess
+
+
+def copy_files(files: list, destination: str):
     """
     Copy files to a given destination.
 
-    First attempt to copy the file while maintaining current permissions.
-    If this fails, it attempt to copy without maintaining permissions.
-
+    Args:
+        files: A list of files to copy.
+        destination: A str specifying the destination for copied
+            files.
     """
 
     for file in files:
-
-        if new_filenames is not None:
-            try:
-                file_destination = "{}/{}".format(
-                    destination, new_filenames[files.index(file)])
-            except IndexError:
-                print("No matching new name found for file: {}".format(file))
-                continue
-        else:
-            file_destination = destination
-
         operation_result = subprocess.check_output(
-            args=['cp', '-vp', file, file_destination],
+            args=['cp', '-vp', file, destination],
             stderr=subprocess.STDOUT)
 
-        print(operation_result.decode('utf-8').strip('\n'))
+        print(operation_result)

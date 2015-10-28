@@ -1,136 +1,84 @@
 [Previous](exercise-5.md) |  [Next](exercise-7.md)
 ## Exercise 6: Building a `copy_files` Function
-Alright, it's time to do some awesome stuff!
+In this exercise, we are going to build a function that will take
+the arguments that we get from the command line and copy some
+files from one location to another.
 
-Most programs stretch across multiple modules in a package structure.
-It's time for yours to start doing that as well.
+### There Is No Secret Ingredient: Create the Function
+1. In `file_ops.py` Add a module docstring that says something like this:
+    
+    ```python
+    """This modules provides various functions for operating on files."""
+    ```
+1. Create a function called `copy_files`:
+    - Should take two parameters:
+        - `files`: Which you should annotate as a list.
+        - `destination`: Which should be annotated as a string.
+        
+1. Add a multi-line docstring for the function. We will use 
+[Google's method](https://google-styleguide.googlecode.com/svn/trunk/pyguide.html?showone=Comments#Comments) for documenting the function arguments.
 
-#### What's a Package Again?
-A package in Python is a group of modules that share a common
-directory structure.  All that you have to do change a normal 
-directory into a package is to and an empty `__init__.py` file
-in the directory.
+1. Create a `for` loop to iterate over each file in files.  For the
+moment, just add a `pass` statement inside of the loop.
 
-If this exists, it will allow modules within the package to import
-things from each other.
+##### Snapshot of `file_ops.py`
+Here a snapshot of what your `file_ops.py` module should look like
+right now.  Now that our code files are getting longer, I'll provide
+these from time to time.
 
-### There is No Secret Ingredient
-1. Create a new directory `[your_github_username]` in the 
-`level-2-command-line-interfaces/dragon-warrior` folder.  Then create
-a new `__init__.py` file inside of it.  
+```python
+"""
+This modules provides various functions for operating on files.
+"""
 
-    > ![Extra](../images/reminder.png) You can use the `New` -> 
-    `Python Package` PyCharm command if you right-click on the `dragon-warrior`
-     to perform both of these steps for you.  Just remember to delete the
-     `__author__` metadata tag from the `__init__.py` file it creates.
-1. Move your CLI program into it and rename it to `stdlib_cli.py`.
-1. Create another Python module named `file_ops.py` inside the package.
-1. Here's what the folder structure should look like:
-```bash
->>> ls [your_github_username]
-file_ops.py  __init__.py  stdlib_cli.py
+
+def copy_files(files: list, destination: str):
+    """
+    Copy files to a given destination.
+
+    Args:
+        files: A list of files to copy.
+        destination: A str specifying the destination for copied
+            files.
+    """
+
+    for file in files:
+        pass
 ```
 
+> ![Question](../images/question.png) Now that our function exists, what 
+should be added to the module docstring according to PEP 257?
 
-## Goal 4: Organizational Pitstop
-* Pythonic way of indicating that a script is callable as a program. 
-`if __name__ == "__main__"` construct.  What does this get you?
-* Break things into smaller chunks with functions.
-    * Create a function that parses command line input and returns the result.
-    * Create a function stub that will be used to copy the files.
-    
-## Goal 5: Introduction to Subprocess
+### Interlude: Introduction to Subprocess
 The subprocess module allows us to make calls to other programs on your 
-system, Python or otherwise.  We can then capture the output of these 
-programs for evaluation.
+system, Python or otherwise.  We can also capture the output of the programs
+that we call for evaluation.
 
-1. import the `subprocess` module
-2. Add content to the function stub that we created earlier to process
-the program arguments and copy the files.
-    * Use `help(subprocess.check_output)` or online documentation to see
-    what this function does.
-    * How to iterate over an object?
-        * For loops, `iter()`, and `hasattr()`
-3. How might we go about utilizing `subprocess.check_output` to actually 
-copy files to a different location?
-    * What are the necessary arguments?
-    * What type of arguments does the underlying program (`cp`) take
-    that might be useful to use?
-4. How to we get the result of the `subprocess.checkout_output` operation?
-5. How can we display the result to the user?
-    * How can we get rid of the newline that appears to be printed?
-    * Talk about method chaining: `str.method().method()`
-    
-## Goal 6: Adding Conditional Logic and Exception Handling
-In this step we are going to add somethings into our program that *can* make
-it explode depending on the input we receive from the user.  We'll look at
-a couple of different ways of dealing with this added complexity.
+We're going to use it to actually perform the copy operation and perhaps more
+later.  Ok, definitely more.
 
-1. Add an if/else statement to check for the existence of non-empty new_names 
-function parameter value.
-    * Options for checking if for non-empty : `if new_names vs. if new_names is not None`
-        * Objects that evaluate to `False` in if statements:
-            * None
-            * False
-            * zero for numeric types
-            * Empty sequences (tuples, lists, strings, etc)
-            * Empty dictionaries
-    * What is going on with `new_filenames[files.index(file)])`?
-    * Review `str.format()`
-    * So what is going to happen if there aren't enough names in `new_names`
-    to match the number of files in `files`?
-    
-2. Add Exception handling to deal with the IndexError that we've discovered!
-    * Talk about error handling in Python: `try...except...else...finally`
-    ```
-    try:
-        1/0
-    except ZeroDivisionError:
-        print("You did something illegal.")
-    else:
-        print("What you did was fine.")
-    finally:
-        print("You did something and it doesn't matter to me what it was.")
-    ```
-    * What goes in each section?
-    * How much should go into the `try` block?
-    * Add exception handling for the `IndexError` that will occur if we attempt
-    to reference an index that doesn't exist in `new_filenames`.
-    * Run the program using a variety of inputs trying to exercise the 
-    different code paths.
+### There Is No Secret Ingredient: Finishing `copy_files`
+1. import the `subprocess` module. PEP8: Where does it go?
+1. In the loop, add this:
 
-
-## Goal 7: Becoming a multi-purpose CLI
-We've made great progress thus far.  Now let's take the next (and final) step
-in this training level and turn our CLI into something that can handle more
-than one type of task.  Specifically, let's add the ability for our 
-program to move files as well as copy them.
-
-1. Add subparsers to your argparse.Argument parser object.  Talk about what
-this is doing to the object.  
-    ```
-    subcommand_parsers = parser.add_subparsers(
-            title="Available Commands",
-            description="The following sub-commands are available.",
-            dest="command")
-    subcommand_parsers.required = True
+    ```python
+    for file in files:
+        operation_result = subprocess.check_output(
+            args=['cp', '-vp', file, destination],
+            stderr=subprocess.STDOUT)
     ```
     
-    * Objects have attributes which are themselves objects.
-    * What does `self._subparsers` mean?  `self` and "private" attributes.
-    
-2. Create two subparsers for the `move` and `copy` commands.
-    ```
-    copy_parser = subcommand_parsers.add_parser(name='copy', help="Copy Files")
-    move_parser = subcommand_parsers.add_parser(name='move', help="Move Files")
-    ```
-    
-    * Temporarily comment out the all of the `parser.add_argument` calls
-    and see how the program now looks from the command line.
-    
-3. Add the `parser` arguments to both `move_parser` and `copy_parser`.
-    * See how this affects the program operation.
-    * Pay attention to how code is being repeated here.  This is a bad
-    thing.  Violation of DRY.  We'll come back to it later if we have time.
-
-     
+    - About `subprocess.check_output` 
+        - Executes a command one the system specified and returns the output.
+        
+        - The `args` list is used to construct the command to be executed. 
+        Putting each item in a list allows Python to properly escape characters.
+        Might want to double check that.
+        - `stderr=subprocess.STDOUT` makes the function return normal and
+        error output. Otherwise, error messages can be lost.
+        
+        - Check out `help(subprocess.check_output)` or the online docs for 
+        alot more information on this function and what you can do with it.
+    - In our case, we are executing the Linux `cp` command with a couple of
+    flags, the file to copy, and the destination.
+1. Add a call to `print` to output `operation_result` for each loop iteration.
