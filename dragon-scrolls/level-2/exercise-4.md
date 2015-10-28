@@ -87,5 +87,11 @@ while `destination` should take a single value.
 on the command line in whichever order and get something like this for the 
 output:
 ```python
-
+>>> python stdlib_cli.py -d /example/location -f example_file1 example_file2
+Namespace(destination='/example/location', filenames=['example_file1', 'example_file2'])
 ```
+
+1. Do some edge case checking:
+    - Does the program allow you to specify multiple files?
+    - Does it error (as it should) if you try to give it multiple destinations?
+    - Anything else you can think of to check?
