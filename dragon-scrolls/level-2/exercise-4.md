@@ -67,3 +67,25 @@ They can also take values and can appear in any order.  But the real neat
 thing is that you can also make them required.  This effectively allows you
 to have required keyword arguments for your programs, allowing your users
 to specify them in whatever order they want.
+
+To change a positional argument to an required keyword argument you have to:
+
+1. Change the name (the first parameter in `add_argument`) into something that 
+begins with either `-` or `--`.  
+    
+    > ![info](..images/information.png) You can actually specify both a short
+    flag `-` and long flag `-` name.  Look in the docs for an example of this.
+    
+2. Pass `required=True` in your call to `add_argument`.
+ 
+### There Is No Secret Ingredient
+1. Update `filesnames` and `destination` positional arguments to be 
+required keyword arguments.  `filesnames` should still take multiple values
+while `destination` should take a single value.
+
+1. When you've got it right, you should be able to specify the two arguments
+on the command line in whichever order and get something like this for the 
+output:
+```python
+
+```
