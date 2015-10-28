@@ -22,5 +22,3 @@ args = parser.parse_args()
 print('Args:')
 pprint.pprint(args)
 
-#print('prog:',parser.prog)
-#print('epilog:',parser.epilog)
