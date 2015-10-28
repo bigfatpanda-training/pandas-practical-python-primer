@@ -24,11 +24,11 @@ a new `__init__.py` file inside of it.
      to perform both of these steps for you.  Just remember to delete the
      `__author__` metadata tag from the `__init__.py` file it creates.
 1. Move your CLI program into it and rename it to `stdlib_cli.py`.
-1. Create another Python module named `file_io.py` inside the package.
+1. Create another Python module named `file_ops.py` inside the package.
 1. Here's what the folder structure should look like:
 ```bash
 >>> ls [your_github_username]
-file_io.py  __init__.py  stdlib_cli.py
+file_ops.py  __init__.py  stdlib_cli.py
 ```
 
 
