@@ -17,7 +17,6 @@ parser.add_argument('-d', '--destination', required=True,
                     help='Location to copy files to.')
 
 program_arguments = parser.parse_args()
-print(program_arguments)
 
 file_ops.copy_files(
     files=program_arguments.filenames,

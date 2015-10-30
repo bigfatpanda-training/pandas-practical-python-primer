@@ -16,7 +16,16 @@ to be your subfolder.
 `testfile_2`.
 2. Add a line of text to each of those files.
 3. `import` your `file_ops` module.
-4. 
+4. Add a call to `file_ops.copy_files` at the bottom of your script and 
+pass it `program_arguments.filenames` and `program_arguments.destination`
+as the two parameters.
+5. Get rid of the `print` statement that outputs the program arguments from
+your parser's `parse_args()` method.  We don't really need it anymore.
+6. Try to copy your test files to `/home/vagrant`.
+
+python stdlib_cli.py -f testfile_1 testfile_2 -d /home/vagrant
+b'\xe2\x80\x98testfile_1\xe2\x80\x99 -> \xe2\x80\x98/home/vagrant/testfile_1\xe2\x80\x99\n'
+b'\xe2\x80\x98testfile_2\xe2\x80\x99 -> \xe2\x80\x98/home/vagrant/testfile_2\xe2\x80\x99\n'
 
 
 ## Goal 4: Organizational Pitstop
