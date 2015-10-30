@@ -1,9 +1,38 @@
-[Previous](exercise-9.md) |  [Next](exercise-11.md)  
-[Example Code](../../training/level-2-command-line-interfaces/bfp-reference/exercise_10)
+##### [Previous](exercise-9.md) |  [Next](exercise-11.md)  
+
 ## Exercise 10: Oh My, Our Program Broke an Arm
+[Code Files](../../training/level-2-command-line-interfaces/bfp-reference/exercise_10)
 
 So, our program is great. It can copy files. **But, it's a little bit fragile.**
-Let's demonstrate.
+Let's demonstrate:
+
+1. Attempt to copy an non-existent file:
+
+    ```python
+    >>> python stdlib_cli.py -f nonexistent_file -d /home/vagrant
+    Traceback (most recent call last):
+      File "exercise_10/stdlib_cli.py", line 36, in <module>
+        destination=program_arguments.destination)
+      File "/vagrant/training/level-2-command-line-interfaces/bfp-reference/exercise_10/file_ops.py", line 24, in copy_files
+        stderr=subprocess.STDOUT)
+      File "/home/vagrant/.pyenv/versions/3.4.3/lib/python3.4/subprocess.py", line 620, in check_output
+        raise CalledProcessError(retcode, process.args, output=output)
+    subprocess.CalledProcessError: Command '['cp', '-vp', 'nonexistent_file', '/home/vagrant']' returned non-zero exit status 1
+    ```
+    
+2. How about specifying a non-existent destination?  Or perhaps a directory you
+don't have access to?
+    ```python
+    >>> python stdlib_cli.py -f testfile_1 -d /home/non-existent
+    Traceback (most recent call last):
+      File "exercise_10/stdlib_cli.py", line 36, in <module>
+        destination=program_arguments.destination)
+      File "/vagrant/training/level-2-command-line-interfaces/bfp-reference/exercise_10/file_ops.py", line 24, in copy_files
+        stderr=subprocess.STDOUT)
+      File "/home/vagrant/.pyenv/versions/3.4.3/lib/python3.4/subprocess.py", line 620, in check_output
+        raise CalledProcessError(retcode, process.args, output=output)
+    subprocess.CalledProcessError: Command '['cp', '-vp', 'exercise_10/testfile_1', '/home/non-existent']' returned non-zero exit status 1
+    ```
         
 ## Goal 6: Adding Conditional Logic and Exception Handling
 In this step we are going to add somethings into our program that *can* make
