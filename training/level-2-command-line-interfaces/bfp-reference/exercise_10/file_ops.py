@@ -19,8 +19,27 @@ def copy_files(files: list, destination: str):
     """
 
     for file in files:
-        operation_result = subprocess.check_output(
-            args=['cp', '-vp', file, destination],
-            stderr=subprocess.STDOUT)
-
-        print(operation_result.decode().rstrip())
+        # Can you see the unnecessary processing in this block?
+        # See past the new error handling keywords.
+        try:
+            operation_result = subprocess.check_output(
+                args=['cp', '-vp', file, destination],
+                stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as error:
+            if "cannot stat" in error.output.decode():
+                print("ERROR: '{}' doesn't exist.  Therefore, "
+                      "it can't be moved.".format(file))
+            elif "Not a directory" in error.output.decode():
+                print(
+                    "ERROR: Can't move '{file}' to '{directory}'. "
+                    "'{directory}' doesn't exist.".format(
+                        file=file, directory=destination))
+            elif "Permission denied" in error.output.decode():
+                print(
+                    "ERROR: Can't move '{1}' to '{0}'. You do not "
+                    "have access rights to '{0}' "
+                    "or its parent(s).".format(destination, file))
+            else:
+                print("ERROR: {}".format(error.output.decode()))
+        else:
+            print(operation_result.decode().rstrip())
