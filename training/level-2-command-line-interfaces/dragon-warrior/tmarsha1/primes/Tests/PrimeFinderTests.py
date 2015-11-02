@@ -2,6 +2,10 @@
 Test the Prime Finder class
 
 Still working on getting dependency injection working.
+Injecting the Generator into the Finder allows for many possibilities.
+From the testing perspective this would allow me to inject a mock object
+for the Generator that returns a set value speeding up the testing of the
+Prime Finder class.
 """
 
 import unittest
