@@ -1,0 +1,9 @@
+alc sum of all even fibonacci # up to but not including 4 million
+
+1, 1, 2, 3, 5, 8, 13, 21, 34, 55...
+
+Every third number is even
+
+In order to run tests and main script, it is necessary to remove the source
+attribute from the dragon-warrior folder and apply it to the
+tmarsha1_fibonacci_homework folder.
