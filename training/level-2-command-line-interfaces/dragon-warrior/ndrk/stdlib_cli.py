@@ -1,5 +1,5 @@
 """
-This module provides a CLI that does something.
+This module provides a CLI that copies files.
 """
 import argparse
 

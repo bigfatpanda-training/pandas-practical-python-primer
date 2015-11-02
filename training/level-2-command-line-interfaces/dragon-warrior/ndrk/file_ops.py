@@ -1,4 +1,10 @@
-"""This module provides various functions for operating on files."""
+"""
+This module provides various functions for operating on files.
+
+Functions:
+    copy_files: Copy file(s) to a specified destination
+
+"""
 
 import subprocess
 
@@ -13,10 +19,22 @@ def copy_files(files: list, destination: str):
     """
 
     for file in files:
-        result = subprocess.check_output(
-            args=['cp', '-vp', file, destination],
-            stderr=subprocess.STDOUT
-        )
+        try:
+            result = subprocess.check_output(
+                args=['cp', '-vp', file, destination],
+                stderr=subprocess.STDOUT
+            )
 
-        print(
-            "Copying " + result.decode('utf-8').rstrip())
+            print(
+                "Copying " + result.decode('utf-8').strip())
+        except subprocess.CalledProcessError as error:
+            exception_msg = error.output.decode()
+
+            if "cannot stat" in exception_msg:
+                print("ERROR: '{}' doesn't exist.".format(file))
+            elif "Not a directory" in exception_msg:
+                print("ERROR: '{}' doesn't exist.".format(destination))
+            elif "Permission denied" in exception_msg:
+                print("ERROR: You don't have permission to '{}'.".format(destination))
+            else:
+                print(error.output.decode())
