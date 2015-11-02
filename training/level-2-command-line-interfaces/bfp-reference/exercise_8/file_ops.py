@@ -23,4 +23,4 @@ def copy_files(files: list, destination: str):
             args=['cp', '-vp', file, destination],
             stderr=subprocess.STDOUT)
 
-        print(operation_result)
+        print(operation_result.decode().rstrip())

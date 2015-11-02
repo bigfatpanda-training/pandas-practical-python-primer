@@ -20,7 +20,7 @@ parser.add_argument(
 
 parser.add_argument(
     "output_filename",
-    nargs="?",
+    nargs=1,
     metavar="OUTPUT_FILENAME",
     help="Name if file for results."
 )
