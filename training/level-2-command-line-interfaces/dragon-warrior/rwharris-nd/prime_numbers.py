@@ -45,7 +45,7 @@ def prime_number(n: int) -> int:
         if result:
             count += 1
         if (count == n):
-            return number;
+            return number
         number += 1
 
 
