@@ -3,6 +3,7 @@ This modules provides various functions for operating on files.
 
 Functions:
     copy_files: Copy file(s) to a specified location.
+    move_files: Move file(s) to a specified location.
 """
 
 import subprocess
@@ -19,7 +20,7 @@ def copy_files(files: list, destination: str):
 
     Raises:
         subprocess.CalledProcessError: When the call to `cp` results in
-        a non-zero exit code and is not handled in this function.
+            a non-zero exit code and is not handled in this function.
     """
 
     for file in files:
@@ -45,5 +46,33 @@ def copy_files(files: list, destination: str):
                     "or its parent(s).".format(destination, file))
             else:
                 print("ERROR: {}".format(error.output.decode()))
+        else:
+            print(operation_result.decode().rstrip())
+
+
+def move_files(files: list, destination: str):
+    """
+    Copy files to a given destination.
+
+    Args:
+        files: A list of files to copy.
+        destination: A str specifying the destination for copied
+            files.
+
+     Raises:
+        subprocess.CalledProcessError: When the call to `mv` results in
+            a non-zero exit code and is not handled in this function.
+    """
+
+    for file in files:
+        # Can you see the unnecessary processing in this block?
+        # See past the new error handling keywords.
+        try:
+            operation_result = subprocess.check_output(
+                args=['mv', '-v', file, destination],
+                stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as error:
+            # TODO: Fill this in.
+            print("ERROR: {}".format(error.output.decode()))
         else:
             print(operation_result.decode().rstrip())
