@@ -45,7 +45,7 @@ def process_user_input() -> argparse.Namespace:
     move_parser = subcommand_parsers.add_parser(name='move', help="Move Files")
 
     move_parser.add_argument("-f", "--filenames", nargs="+", metavar="FILENAME",
-                             required=True, help="Names of files to copy.")
+                             required=True, help="Names of files to move.")
 
     move_parser.add_argument(
         '-d', '--destination', required=True,

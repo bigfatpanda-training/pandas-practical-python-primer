@@ -29,24 +29,41 @@ def process_user_input() -> argparse.Namespace:
         dest="command")
     subcommand_parsers.required = True
 
-    common_arguments = argparse.ArgumentParser(add_help=False)
-    common_arguments.add_argument(
+    # Copy Command Subparser
+    copy_parser = subcommand_parsers.add_parser(name='copy', help="Copy Files")
+    copy_parser.add_argument(
         "-f", "--filenames", nargs="+", metavar="FILENAME",
-        required=True, help="Names of files to operate on.")
+         required=True, help="Names of files to copy.")
 
-    common_arguments.add_argument(
+    copy_parser.add_argument(
         '-d', '--destination', required=True,
         help='Location to copy files to.')
 
-    # Copy Command Subparser
-    copy_parser = subcommand_parsers.add_parser(
-        name='copy', parents=[common_arguments],
-        help="Copy Files")
-
     # Move Command Subparser
-    move_parser = subcommand_parsers.add_parser(
-        name='move', parents=[common_arguments],
-        help="Move Files")
+    move_parser = subcommand_parsers.add_parser(name='move', help="Move Files")
+
+    move_parser.add_argument(
+        "-f", "--filenames", nargs="+", metavar="FILENAME",
+        required=True, help="Names of files to move.")
+
+    move_parser.add_argument(
+        '-d', '--destination', required=True,
+        help='Location to copy files to.')
+
+    delete_parser = subcommand_parsers.add_parser(
+        name='delete', help="Delete Files")
+    delete_parser.add_argument(
+        "-f", "--filenames", nargs="+", metavar="FILENAME",
+        required=True, help="Names of files to delete.")
+
+    rename_parser = subcommand_parsers.add_parser(
+        name='rename', help="Rename Files")
+    rename_parser.add_argument(
+        "-f", "--filenames", nargs="+", metavar="FILENAME",
+        required=True, help="Names of files to rename.")
+    rename_parser.add_argument(
+        "-n", "--new-filenames", nargs="+", metavar="NEW_FILENAME",
+        required=True, help="New names for files.")
 
     return parser.parse_args()
 
