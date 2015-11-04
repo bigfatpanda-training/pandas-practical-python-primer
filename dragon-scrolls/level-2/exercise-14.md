@@ -21,6 +21,7 @@ Use `click` to recreate parts of your current CLI:
  - Try to "refactor" the common functionality of `copy_files` and `move_files`
  into a separate function.
  - Try a variety of inputs on all your functions and implement error checking.
+ - Add support for recursive copy/delete operations.
 
 
 ### Takeaways
