@@ -1,6 +1,9 @@
-"""This is module provides various functions for operating on files"""
+"""
+This is module provides various functions for operating on files
 
-import argparse
+Functions:
+    copy_files: Copy file(s) to a specified location.
+"""
 
 import subprocess
 
@@ -16,22 +19,28 @@ def copy_files(files: list, destination: str):
 
 
     for file in files:
-        result = subprocess.check_output(
-            args=['cp', '-vp', file, destination],
-            stderr=subprocess.STDOUT)
-        print(
-            result.decode('utf-8').strip())
+        try:
+            result = subprocess.check_output(
+                args=['cp', '-vp', file, destination],
+                stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as error:
+            output = error.output.decode()
+            if "cannot stat" in output:
+                print("ERROR: '{}' doesn't exist.".format(file))
+            elif "Not a directory" in output:
+                print("ERROR: Cannot move '{file}'  to '{directory}'. "
+                    "'{directory}' does not exist.".format(
+                    file=file, directory=destination))
+            elif "Permission denied" in output:
+                print("ERROR: Can't move '{0}' to '{1}'. You do not "
+                "have access rights to '{1}'".format(
+                    file, destination))
+            else:
+                print(output)
+                raise
+        else:
+            print(
+                result.decode('utf-8').strip())
+        finally:
+            pass
 
-def return_args():
-    parser = argparse.ArgumentParser(
-        prog="My Program",
-        description="This is a useful description.",
-        epilog="This is epic.")
-
-    parser.add_argument("-f", "--filenames", nargs="+", metavar="FILENAME",
-                        required=True, help="Name of file(s) to copy.")
-
-    parser.add_argument("-d", "--destination", metavar="DESTINATION",
-                    required=True, type=str, help="Destination file path.")
-
-    return parser.parse_args()
