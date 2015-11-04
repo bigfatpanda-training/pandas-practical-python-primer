@@ -9,6 +9,7 @@ Functions:
 import subprocess
 
 
+
 def copy_files(filenames: list, destination: str):
     """
     Copy files to a given destination.
@@ -65,11 +66,33 @@ def move_files(filenames: list, destination: str):
     """
 
     for file in filenames:
-        # Can you see the unnecessary processing in this block?
-        # See past the new error handling keywords.
         try:
             operation_result = subprocess.check_output(
                 args=['mv', '-v', file, destination],
+                stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as error:
+            # TODO: Fill this in.
+            print("ERROR: {}".format(error.output.decode()))
+        else:
+            print(operation_result.decode().rstrip())
+
+
+def delete_files(filenames: list):
+    """
+    Delete file(s).
+
+    Args:
+        filenames: A list of files to copy.
+
+     Raises:
+        subprocess.CalledProcessError: When the call to `mv` results in
+            a non-zero exit code and is not handled in this function.
+    """
+
+    for file in filenames:
+        try:
+            operation_result = subprocess.check_output(
+                args=['rm', '-v', file],
                 stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as error:
             # TODO: Fill this in.

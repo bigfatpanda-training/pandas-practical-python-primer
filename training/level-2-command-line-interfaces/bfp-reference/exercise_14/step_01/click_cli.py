@@ -31,5 +31,12 @@ def _move_files(filenames, destination):
     file_ops.move_files(filenames, destination)
 
 
+@cli.command(name="delete", short_help="Delete file(s).",
+             help="Delete one or more files.")
+@click.argument('filenames', nargs=-1, metavar="FILENAME", required=True)
+def _delete_files(filenames, destination):
+    file_ops.delete_files(filenames)
+
+
 if __name__ == "__main__":
     cli()
