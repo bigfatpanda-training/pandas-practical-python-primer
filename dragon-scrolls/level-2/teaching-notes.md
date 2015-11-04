@@ -2,6 +2,10 @@
 It's time to think about your purchase of PyCharm.
 Go over the different options with the class.
 
+# Git
+- `development` branches
+- 
+
 # Review Homework
 
 # Credentials & Cloud-Based Source Code Control

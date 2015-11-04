@@ -3,20 +3,26 @@ Prime - Print the Nth prime element
 
 A simple factoring brute force algorithm to test and generate prime numbers.
 
-Optimizations check only odd number candidates and only prime factors up to the sqrt
-of the candidate.
+Optimizations check only odd number candidates and only prime factors up to the
+sqrt of the candidate.
 """
 
-# Steve Tapp 11/2/15
+def is_prime(primes: list, candidate: int) -> bool:
+    """
+    Check if a number in a sequence is a prime number.
 
+    Args:
+        primes: A list of prime numbers.
+        candidate: A int to check for potential primy-ness
 
-# Check if a number in a sequence is a prime number.
+    Returns:
+        A bool indicating if candidate is a prime number.
+    """
 
-def isPrime (primes, candidate):
     prime = True
     i = 0
     while primes[i] <= candidate**0.5 and prime:
-        prime = candidate % primes[i]
+        prime = bool(candidate % primes[i])
         i += 1
 
     return prime
@@ -24,24 +30,23 @@ def isPrime (primes, candidate):
 
 # Generate a list of prime numbers to specified length.
 
-def primeList(listLength):
+def prime_list(listLength):
     if listLength < 1 :
         return []
 
     primes = [2]
     candidate = 3
     while listLength > len(primes):
-        if isPrime(primes, candidate):
+        if is_prime(primes, candidate):
             primes.append(candidate)
         candidate += 2
 
     return primes
 
 
-# Main program
+if __name__ == "__main__":
+    the_prime_which_i_seek = 10001
+    primes=prime_list(the_prime_which_i_seek)
 
-the_prime_which_i_seek = 10001
-primes=primeList(the_prime_which_i_seek)
-
-#print(primes)
-print('The',the_prime_which_i_seek ,'Nth prime element is', primes[-1])
+    #print(primes)
+    print('The',the_prime_which_i_seek ,'Nth prime element is', primes[-1])

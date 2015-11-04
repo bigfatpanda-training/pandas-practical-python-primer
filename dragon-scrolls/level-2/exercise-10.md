@@ -1,7 +1,7 @@
 ##### [Previous](exercise-9.md) |  [Next](exercise-11.md)  
 
 ## Exercise 10: Oh My, Our Program Broke an Arm
-[Code Files](../../training/level-2-command-line-interfaces/bfp-reference/exercise_10)
+[Code Files](../../training/level-2-command-line-interfaces/bfp-reference/exercise_09)
 
 So, our program is great. It can copy files. **But, it's a little bit fragile.**
 Let's demonstrate:

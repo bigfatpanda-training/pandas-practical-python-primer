@@ -32,7 +32,7 @@ def process_user_input() -> argparse.Namespace:
     common_arguments = argparse.ArgumentParser(add_help=False)
     common_arguments.add_argument(
         "-f", "--filenames", nargs="+", metavar="FILENAME",
-        required=True, help="Names of files to copy.")
+        required=True, help="Names of files to operate on.")
 
     common_arguments.add_argument(
         '-d', '--destination', required=True,
@@ -60,7 +60,7 @@ if __name__ == '__main__':
             destination=program_arguments.destination)
     elif program_arguments.command == 'move':
         file_ops.move_files(
-            files=program_arguments.filenames,
+            filenames=program_arguments.filenames,
             destination=program_arguments.destination)
 
 
