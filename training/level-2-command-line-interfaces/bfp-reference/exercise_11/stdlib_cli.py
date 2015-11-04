@@ -63,7 +63,7 @@ if __name__ == '__main__':
             destination=program_arguments.destination)
     elif program_arguments.command == 'move':
         file_ops.move_files(
-            files=program_arguments.filenames,
+            filenames=program_arguments.filenames,
             destination=program_arguments.destination)
 
 

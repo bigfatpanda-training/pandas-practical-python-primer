@@ -1,9 +1,6 @@
 """
 This module provides a CLI allows users to perform a variety of
 file related tasks.
-
-BONUS: Find a way to avoid having to designate the same arguments over for
-the copy/move subparsers.
 """
 import argparse
 
@@ -77,7 +74,7 @@ if __name__ == '__main__':
             destination=program_arguments.destination)
     elif program_arguments.command == 'move':
         file_ops.move_files(
-            files=program_arguments.filenames,
+            filenames=program_arguments.filenames,
             destination=program_arguments.destination)
 
 
