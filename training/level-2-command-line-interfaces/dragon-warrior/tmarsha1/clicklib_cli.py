@@ -7,7 +7,6 @@ import click
 
 import file_ops
 
-# use click.argument and click.option
     
 @click.group()
 def file_cli():
@@ -15,43 +14,49 @@ def file_cli():
         
         
 @file_cli.command()
-@click.argument('filename')
+@click.argument('filename', nargs=-1)
 @click.argument('destination')
 def copy_positional(filename, destination):
-    file_ops.copy_files([filename], destination)
+    for file in filenames:
+        file_ops.copy_files(file, destination)
     
     
 @file_cli.command()
-@click.argument('filename')
+@click.argument('filename', nargs=-1)
 @click.argument('destination')
 def move_positional(filename, destination):
-    file_ops.move_files([filename], destination)
+    for file in filenames:
+        file_ops.move_files(file, destination)
     
     
 @file_cli.command()
-@click.argument('filename')
+@click.argument('filename', nargs=-1)
 def delete_positional(filename):
-    file_ops.delete_files([filename])
+    for file in filename:
+        file_ops.delete_files(file)
     
     
 @file_cli.command()
-@click.option('-f', '--filename', required=True)
+@click.option('-f', '--filename', multiple=True, required=True)
 @click.option('-d', '--destination', required=True)
 def copy_keyword(filename, destination):
-    file_ops.copy_files([filename], destination)
+    for file in filename:
+        file_ops.copy_files(file, destination)
     
 
 @file_cli.command()
-@click.option('-f', '--filename', required=True)
+@click.option('-f', '--filename', multiple=True, required=True)
 @click.option('-d', '--destination', required=True)
 def move_keyword(filename, destination):
-    file_ops.move_files([filename], destination)
+    for file in filename:
+        file_ops.move_files(file, destination)
 
     
 @file_cli.command()
-@click.option('-f', '--filename', required=True)
-def delete_keyword(filename, destination):
-    file_ops.delete_files([filename], destination)
+@click.option('-f', '--filename', multiple=True, required=True)
+def delete_keyword(filename):
+    for file in filename:
+        file_ops.delete_files(file)
 
     
 if __name__ == '__main__':

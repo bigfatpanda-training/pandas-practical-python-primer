@@ -9,89 +9,117 @@ Functions:
 import subprocess
 
 
-def copy_files(files: list, destination: str):
+class FolderNotFoundError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+        
+
+class InsufficientRightsError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
+
+def _process_files(
+        command: str, 
+        options: str, 
+        file: str, 
+        destination: str
+) -> str:
+    try:
+        byte_result = subprocess.check_output(
+            args=[command, options, file, destination],
+            stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as file_error:
+        message = file_error.output.decode()
+
+        if "cannot stat" in message:
+            raise FileNotFoundError()
+        elif "Not a directory" in message:
+            raise FolderNotFoundError(destination)
+        elif "Permission" in message:
+            raise InsufficientRightsError(destination)
+        else:
+            print(message)
+    else:
+        result = byte_result.decode()
+        result = result. rstrip()
+        return result    
+    
+    
+def copy_files(file: str, destination: str):
     """
     Copy files to a given destination.
 
     Args:
-        files: A list of files to copy.
+        files: The file(s) to copy.
+        destination: A string specifying the destination of the file(s).
+    """
+
+    try:
+        result = _process_files("cp", "-vp", file, destination)
+    except FileNotFoundError:
+        print("ERROR: '{}' does not exist.".format(file))
+    except FolderNotFoundError:
+        print("ERROR: '{}' destination does not exist.".format(
+            destination)
+        )
+    except InsufficientRightsError:
+        print("ERROR: Insufficient rights to destination '{}'.".format(
+            destination)
+        )
+    else:
+        print(result)
+
+
+def move_files(file: str, destination: str):
+    """
+    Move file(s) to a given destination.
+
+    Args:
+        files: The file(s) to move.
         destination: A string specifying the destination of the files.
     """
 
-    for file in files:
-        try:
-            byte_result = subprocess.check_output(
-                args=['cp', '-vp', file, destination],
-                stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError as file_error:
-            message = file_error.output.decode()
-
-            if "cannot stat" in message:
-                print("ERROR: '{}' does not exist.".format(file))
-            elif "failed to access" in message:
-                print("ERROR: '{}' destination does not exist.".format(destination))
-            elif "Permission" in message:
-                print("ERROR: Insufficient rights to destination '{}'.".format(destination))
-        else:
-            result = byte_result.decode()
-            result = result. rstrip()
-            print(result)
-        finally:
-            pass
+    try:
+        result = _process_files("mv", "-v", file, destination)
+    except FileNotFoundError:
+        print("ERROR: '{}' does not exist.".format(file))
+    except FolderNotFoundError:
+        print(
+            "ERROR: '{}' destination does not exist.".format(destination)
+        )
+    except InsufficientRightsError:
+        print("ERROR: Insufficient rights to destination '{}'.".format(
+            destination)
+        )
+    else:
+        print(result)
 
 
-def move_files(files: list, destination: str):
+def delete_files(file: str):
     """
-    Move files to a given destination.
+    Deletes file(s).
 
     Args:
-        files: A list of files to move.
-        destination: A string specifying the destination of the files.
+        files: The file(s) to delete.
     """
 
-    for file in files:
-        try:
-            byte_result = subprocess.check_output(
-                args=['mv', '-v', file, destination],
-                stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError as file_error:
-            message = file_error.output.decode()
+    try:
+        byte_result = subprocess.check_output(
+            args=['rm', '-v', file],
+            stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as file_error:
+        message = file_error.output.decode()
 
-            if "cannot stat" in message:
-                print("ERROR: '{}' does not exist.".format(file))
-            elif "failed to access" in message:
-                print("ERROR: '{}' destination does not exist.".format(destination))
-            elif "Permission" in message:
-                print("ERROR: Insufficient rights to destination '{}'.".format(destination))
+        if "cannot remove" in message:
+            print("ERROR: '{}' does not exist.".format(file))
         else:
-            result = byte_result.decode()
-            result = result. rstrip()
-            print(result)
-        finally:
-            pass
-
-
-def delete_files(files: list):
-    """
-    Deletes files.
-
-    Args:
-        files: A list of files to delete.
-    """
-
-    for file in files:
-        try:
-            byte_result = subprocess.check_output(
-                args=['rm', '-v', file],
-                stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError as file_error:
-            message = file_error.output.decode()
-
-            if "cannot remove" in message:
-                print("ERROR: '{}' does not exist.".format(file))
-        else:
-            result = byte_result.decode()
-            result = result. rstrip()
-            print(result)
-        finally:
-            pass
+            print(message)
+    else:
+        result = byte_result.decode()
+        result = result. rstrip()
+        print(result)
