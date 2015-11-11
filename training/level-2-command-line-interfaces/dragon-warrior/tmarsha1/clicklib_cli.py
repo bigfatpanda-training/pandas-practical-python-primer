@@ -15,16 +15,16 @@ def file_cli():
 @file_cli.command()
 @click.argument('filename', nargs=-1)
 @click.argument('destination')
-def copy_positional(filenames, destination):
-    for file in filenames:
+def copy_positional(filename, destination):
+    for file in filename:
         file_ops.copy_files(file, destination)
 
 
 @file_cli.command()
 @click.argument('filename', nargs=-1)
 @click.argument('destination')
-def move_positional(filenames, destination):
-    for file in filenames:
+def move_positional(filename, destination):
+    for file in filename:
         file_ops.move_files(file, destination)
 
 
