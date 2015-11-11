@@ -55,7 +55,7 @@ def copy_files(file: str, destination: str):
     Copy files to a given destination.
 
     Args:
-        files: The file(s) to copy.
+        file: The file(s) to copy.
         destination: A string specifying the destination of the file(s).
     """
 
@@ -80,7 +80,7 @@ def move_files(file: str, destination: str):
     Move file(s) to a given destination.
 
     Args:
-        files: The file(s) to move.
+        file: The file(s) to move.
         destination: A string specifying the destination of the files.
     """
 
@@ -105,7 +105,7 @@ def delete_files(file: str):
     Deletes file(s).
 
     Args:
-        files: The file(s) to delete.
+        file: The file(s) to delete.
     """
 
     try:
