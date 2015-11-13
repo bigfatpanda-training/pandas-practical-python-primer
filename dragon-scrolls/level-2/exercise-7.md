@@ -1,5 +1,5 @@
 [Previous](exercise-6.md) |  [Next](exercise-8.md)
-## Exercise 7: Importing `file_io` and Delegating To It
+## Exercise 7: Importing `file_ops` and Delegating To It
 In this exercise we'll attempt to actually copy some files.  
 **Awesome!**
 
