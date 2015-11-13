@@ -89,3 +89,5 @@ provided an awesome package called [`requests`](http://docs.python-requests.org/
 that really simplifies working with web APIs.  This is one of the reasons 
 Python is awesome, because there are so many people out there creating 
 awesome stuff and sharing it for free.
+
+| [Next Exercise](exercise-02.md)
