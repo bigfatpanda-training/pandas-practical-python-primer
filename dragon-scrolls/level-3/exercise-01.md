@@ -74,38 +74,20 @@ body/payload.
             the headers of the request.
         - About the Response
             - `HTTP/1.1 200 OK` Tells you the protocol of the response along
-            with the **status code** and short description of that code.  
+            with the **status code** and short description of that code. 
             Status codes are extremely important and we will be talking 
             more about them as we go on.
+            - The rest of the lines are headers.
     
 ### Interacting with Web Services in Python
-* There is a package in the standard library, `urllib2`, which can be used to 
-  interact with web services.  However, it is not very easy to use... :(
-* But, a friendly Pythonista named Kenneth Reitz came along and provided an 
-awesome package called [`requests`](http://docs.python-requests.org/en/latest/) that really simplifies working with web
-apis.  This is one of the reasons Python is awesome, because there are 
-so many people out there creating awesome stuff and sharing it for free.
+- There is a package in the standard library, `urllib2`, which can be used to 
+  interact with web services.  However, just like we found with CLIs, there
+  are community based alternatives.  In this particular case, almost no one
+  uses the standard library. 
+- This is because a friendly Pythonista named Kenneth Reitz came along and 
+provided an awesome package called [`requests`](http://docs.python-requests.org/en/latest/) 
+that really simplifies working with web APIs.  This is one of the reasons 
+Python is awesome, because there are so many people out there creating 
+awesome stuff and sharing it for free.
 
-### Step 1: Create the a Proper Module Outline
-* Create a module named: `your_id_business_search.py`
-* Add a docstring with information on the API that we'll be interacting with.
-    * The docs for the API are available at: [`http://api.searchcompany.us`](http://api.searchcompany.us)
-    * Remember that the Pythonic way of doing docstrings in enshrined in [PEP257](https://www.python.org/dev/peps/pep-0257/)
-* Make the module able to be imported or executed as a script.
-   
-   ```python
-   if __name__ == "__main__":
-      pass
-   ```
-* import the `requests` library
-
-   ```python
-   """
-   your docstring
-   """
-   
-   import requests
-   
-   if __name__ == "__main__":
-      pass
-   ```
+| [Next Exercise](exercise-02.md)
