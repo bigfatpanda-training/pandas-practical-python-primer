@@ -28,5 +28,5 @@ a new `__init__.py` file inside of it.
 1. Here's what the folder structure should look like:
 ```bash
 >>> ls [your_github_username]
-file_io.py  __init__.py  stdlib_cli.py
+file_ops.py  __init__.py  stdlib_cli.py
 ```

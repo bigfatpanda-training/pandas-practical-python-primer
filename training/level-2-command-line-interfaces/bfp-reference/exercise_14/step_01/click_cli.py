@@ -5,8 +5,8 @@ file related tasks.
 
 import click
 
-
 import file_ops
+
 
 @click.group()
 def cli():

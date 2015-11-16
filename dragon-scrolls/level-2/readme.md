@@ -18,13 +18,5 @@ library and then with the `click` third party library.
 - Definition and examples of CLIs
 - Creating a CLI with the Python Standard Library
 - Creating a CLI with the Click 3rd party library
-- Introduction to the `import` system
-- The meaning and purpose of `if __name__ == "__main__"
-
-## Homework Assignments
-The following are possible homework assignments for this level - **not to 
-mention the ones that I'll make up on the fly**:
-- PEP 257: Docstring Conventions
-- 
 
 [Start Training](exercise-1.md)

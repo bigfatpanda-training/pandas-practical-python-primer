@@ -1,5 +1,7 @@
-[Previous](exercise-1.md) |  [Next](exercise-3.md)
-### Step 2: Use the `requests` library to search for companies based on name 
+[Previous](exercise-02.md) |  [Next](exercise-04.md)
+## Exercise 4: Let's `GET` To It.
+[Code Files](../../training/level-3-interacting-with-web-services/bfp-reference/exercise_03)
+
 * Use the `requests.get()` function to search for companies that have a given
 string in their name.
 ```python
@@ -18,3 +20,7 @@ if __name__ == "__main__":
 understandable way.
     * Alternatively, run the program with `ipython` and you won't have to 
     import the `pprint` module as it does this under the covers for you.
+
+### There Is No Secret Ingredient
+    
+| [Next Exercise](exercise-05.md)
