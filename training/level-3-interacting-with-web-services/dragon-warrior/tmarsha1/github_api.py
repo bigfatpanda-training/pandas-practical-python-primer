@@ -58,6 +58,7 @@ def github_repos_issues(username: str, repo_name: str) -> requests.Response:
     Obtain the issues for a given user in Github.
     Args:
         username: A string specifying a valid Github username
+        repo_name: A string specifying a valid repository name for a user
 
     Returns:
         A requests.Response object
