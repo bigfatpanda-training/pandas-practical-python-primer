@@ -89,6 +89,7 @@ def _extract_arguments():
 if __name__ == '__main__':
     program_arguments = _extract_arguments()
 
+    # noinspection PyInterpreter
     if program_arguments.command == 'copy':
         file_ops.copy_files(
             program_arguments.input_filenames,
