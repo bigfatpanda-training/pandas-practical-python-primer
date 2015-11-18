@@ -51,7 +51,7 @@ read about in the [online docs](http://docs.python-requests.org/en/latest/api/#r
 - Drop to the command line and run your program interactively so that we
 can print these things out and see what they contain:
     ```python
-    >>> python -i github.api
+    >>> python -i github_api.py
     >>> import pprint
     >>> print(github_info.status_code)
     200
