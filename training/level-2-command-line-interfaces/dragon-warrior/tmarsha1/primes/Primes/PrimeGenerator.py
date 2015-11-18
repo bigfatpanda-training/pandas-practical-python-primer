@@ -11,7 +11,7 @@ class PrimeGenerator(object):
 
         self._prime_list = []
 
-    def find_prime(self, nth_value):
+    def find_prime(self, nth_value: int) -> int:
         """
         Find the nth_value prime number.
 
@@ -29,7 +29,7 @@ class PrimeGenerator(object):
 
         return self._prime_list[-1]
 
-    def _is_prime(self, index):
+    def _is_prime(self, index: int) -> bool:
         result = True
 
         for prime in self._prime_list:
