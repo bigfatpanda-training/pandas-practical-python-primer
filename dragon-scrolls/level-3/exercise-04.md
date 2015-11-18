@@ -8,7 +8,12 @@ It's time to start interacting with your first API in Python. **Awesome!**
 Add the following to `github_api.py`:
  
 ```python
-def github_entry_point():
+def github_entry_point() -> requests.Response:
+    """
+    HTTP GET `https://api.github.com`
+
+    Obtain information about the Github API from its entry point.
+    """
     url = "https://api.github.com"
     response = requests.get(url)
     return response
