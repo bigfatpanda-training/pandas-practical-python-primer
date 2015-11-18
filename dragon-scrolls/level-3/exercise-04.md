@@ -8,7 +8,12 @@ It's time to start interacting with your first API in Python. **Awesome!**
 Add the following to `github_api.py`:
  
 ```python
-def github_entry_point():
+def github_entry_point() -> requests.Response:
+    """
+    HTTP GET `https://api.github.com`
+
+    Obtain information about the Github API from its entry point.
+    """
     url = "https://api.github.com"
     response = requests.get(url)
     return response
@@ -51,7 +56,7 @@ read about in the [online docs](http://docs.python-requests.org/en/latest/api/#r
 - Drop to the command line and run your program interactively so that we
 can print these things out and see what they contain:
     ```python
-    >>> python -i github.api
+    >>> python -i github_api.py
     >>> import pprint
     >>> print(github_info.status_code)
     200
