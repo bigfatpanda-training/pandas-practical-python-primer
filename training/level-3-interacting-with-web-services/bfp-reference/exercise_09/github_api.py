@@ -24,11 +24,17 @@ class Github:
         user_info: Provide information on a given Github user.
         user_repos: Provide information on a given users repositories.
         repo_issues: Provide information on a given repo's issues.
+        create_issue: Create a new issue on a repo.
+        update_issue: Update an issue on a repo.
+        create_repo: Create a new repo for the authenticated user.
+        update_repo: Update a repo for a specified user.
+        delete_repo: Delete a repo for a specified user.
     """
     urls = requests.get("https://api.github.com").json()
 
     def __init__(self, oauth_token: str):
         self.oauth_token = oauth_token
+        self.headers = {'Authorization': 'token {}'.format(self.oauth_token)}
 
     def user_info(self, username: str) -> requests.Response:
         """
@@ -104,13 +110,12 @@ class Github:
         if labels is None:
             labels = []
 
-        headers = {'Authorization': 'token {}'.format(self.oauth_token)}
         url = (self.urls['repository_url'].format(
             owner=username, repo=repo_name) + "/issues")
         payload = dict(title=title, body=body, assignee=assignee,
                        milestone=milestone, labels=labels)
 
-        return requests.post(url, headers=headers, json=payload)
+        return requests.post(url, headers=self.headers, json=payload)
 
     def update_issue(self, username: str, repo_name: str,
                      issue_number: int, title: str, body: str=None,
@@ -154,13 +159,113 @@ class Github:
         if state is not None:
             payload['state'] = state
 
-        headers = {'Authorization': 'token {}'.format(self.oauth_token)}
         url = (self.urls['repository_url'].format(
             owner=username, repo=repo_name) + "/issues/" + str(issue_number))
 
-        return requests.patch(url, headers=headers, json=payload)
+        return requests.patch(url, headers=self.headers, json=payload)
+
+    def create_repo(self, name: str, description: str, homepage: str=None,
+                    private: bool=False, has_issues: bool=True,
+                    has_wiki: bool=True, has_downloads: bool=True,
+                    auto_init: bool=False, gitignore_template: str=None,
+                    license_template: str=None):
+        """
+        Create a new repository for a given user.  You must be able
+        to authenticate as the user for this to work.
+
+        Args:
+            name (str): The name of the new repo.
+
+            All other parameters are optional members of the JSON
+            request payload.  See the API docs for more information:
+            https://developer.github.com/v3/repos/#create
+
+        Returns:
+            A requests.Response object.
+        """
+        payload = dict(
+            name=name,
+            description=description,
+            private=private,
+            has_issues=has_issues,
+            has_wiki=has_wiki,
+            has_downloads=has_downloads,
+            auto_init=auto_init,
+            gitignore_template=gitignore_template,
+            license_template=license_template)
+
+        url = (self.urls['current_user_url'] + '/repos')
+        return requests.post(url, headers=self.headers, json=payload)
+
+    def update_repo(self, username: str, repo_name: str,
+                    name: str=None, description: str=None, homepage: str=None,
+                    private: bool=False, has_issues: bool=True,
+                    has_wiki: bool=True, has_downloads: bool=True,
+                    default_branch: str=None):
+        """
+        Update a give user's repo.
+
+        Args:
+            username: Github username repo belongs to.
+            repo_name: Name of the repo
+
+            All other parameters are optional members of the JSON
+            request payload.  See the API docs for more information:
+            https://developer.github.com/v3/repos/#edit
+
+
+        Returns:
+            A requests.Response object.
+        """
+        if name is None:
+            name = repo_name
+
+        payload = dict(
+            name=name,
+            description=description,
+            homepage=homepage,
+            private=private,
+            has_issues=has_issues,
+            has_wiki=has_wiki,
+            has_downloads=has_downloads,
+            default_branch=default_branch)
+
+        url = (self.urls['repository_url'].format(
+            owner=username, repo=repo_name))
+
+        return requests.patch(url, headers=self.headers, json=payload)
+
+    def delete_repo(self, username: str, repo_name: str):
+        """
+        Delete a repo from a given user's account.
+
+        Args:
+            username: The user to whom the repo belongs.
+            repo_name: The repo to delete.
+
+        Returns:
+            A requests.Request object.
+        """
+        url = (self.urls['repository_url'].format(
+            owner=username, repo=repo_name))
+        return requests.delete(url, headers=self.headers)
+
+
 
 
 if __name__ == "__main__":
     github = Github(oauth_token=credentials.tokens['github'])
+    # new_repo = github.create_repo(
+    #     name='Test Repo',
+    #     description='This is my test repo.',
+    #     gitignore_template='Python',
+    #     license_template='mit')
+    #
+    # updated_repo = github.update_repo(
+    #     username='bigfatpanda-training',
+    #     repo_name=new_repo.json()['name'],
+    #     description="This is my UPDATED description.",
+    #     homepage="BFPisSoooooooCool.com")
+
+
 
