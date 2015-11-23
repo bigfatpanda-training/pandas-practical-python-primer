@@ -24,6 +24,8 @@ class Github:
         user_info: Provide information on a given Github user.
         user_repos: Provide information on a given users repositories.
         repo_issues: Provide information on a given repo's issues.
+        create_issue: Create a new issue on a repo.
+        update_issue: Update an issue on a repo.
     """
     urls = requests.get("https://api.github.com").json()
 
