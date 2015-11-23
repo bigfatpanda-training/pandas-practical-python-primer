@@ -69,7 +69,6 @@ def github_repo_issues(username: str, repo_name: str) -> requests.Response:
     url = (
         github_api_info['repository_url'].format(
             owner=username, repo=repo_name) + "/issues")
-    print(url)
     response = requests.get(url)
     return response
 
