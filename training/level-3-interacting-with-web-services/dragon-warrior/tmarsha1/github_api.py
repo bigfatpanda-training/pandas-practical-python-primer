@@ -5,11 +5,7 @@ GitHub api stuff
 from datetime import datetime
 import pprint
 import requests
-from configuration_panda import ConfigurationPanda
-from Models import Credentials
 from Models import GitHubCredentials
-
-credentials = ConfigurationPanda(['PROGRAM_CREDENTIALS'])
 
 
 class Github:
@@ -156,10 +152,41 @@ class Github:
         return requests.patch(url, headers=headers, json=payload)
 
 
+    def get_repository(self, username: str, repo_name: str) -> requests.Response:
+        # GET /repos/:owner/:repo
+        pass
+    def create_repository(self):
+        pass
+    def update_repository(self):
+        pass
+    def delete_repository(self):
+        pass
+    def create_pull_request(self, username: str, repo_name: str,
+                            **kwargs) -> requests.Response:
+        """
+
+        Args:
+            owner:
+            repo:
+            kwargs:
+
+
+        Returns:
+
+        Reference:
+            https://developer.github.com/v3/pulls/#create-a-pull-request
+
+        """
+
+        headers = {'Authorization': 'token {}'.format(self.oauth_token)}
+        issues_url = "https://api.github.com/repos/{owner}/{repo}/pulls"
+        url = issues_url.format(owner=username, repo=repo_name)
+        return requests.post(url, headers=headers, json=kwargs)
+
+
 if __name__ == "__main__":
     newCredentials = GitHubCredentials.GitHubCredentials()
-
-    github = Github(oauth_token=newCredentials.tokens)
+    github = Github(oauth_token=newCredentials.tokens())
 
     #github_info = Github.urls
     #pprint.pprint(dict(github_info))
@@ -177,16 +204,26 @@ if __name__ == "__main__":
     #    print(issue["title"])
     #pprint.pprint(issues.json())
 
-    new_issue = github.create_issue(
+    # Issue handling
+    # new_issue = github.create_issue(
+    #     username="troylmarshall",
+    #     repo_name="pandas-practical-python-primer",
+    #     title="Example Issue {id}".format(id=datetime.now()))
+    #
+    # edit_issue = github.edit_issue(
+    #     username="troylmarshall",
+    #     repo_name="pandas-practical-python-primer",
+    #     title="EDITED Example Issue",
+    #     issue_number=new_issue.json()['number'],
+    #     body="This is my edited issue.",
+    #     assignee="troylmarshall",
+    #     labels=["label1", "label2"])
+
+    new_pull_request = github.create_pull_request(
         username="troylmarshall",
         repo_name="pandas-practical-python-primer",
-        title="Example Issue {id}".format(id=datetime.now()))
-
-    #edit_issue = github.edit_issue(
-    #    username="troylmarshall",
-    #    repo_name="pandas-practical-python-primer",
-    #    title="EDITED Example Issue",
-    #    issue_number=new_issue.json()['number'],
-    #    body="This is my edited issue.",
-    #    assignee="troylmarshall",
-    #    labels=["label1", "label2"])
+        title="A pull title",
+        head="head",
+        base="master",
+        body="body")
+    print(new_pull_request.json())

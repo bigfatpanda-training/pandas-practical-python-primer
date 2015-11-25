@@ -8,5 +8,6 @@ class GitHubCredentials(Credentials):
     def __init__(self):
         pass
 
-    def tokens(self):
-        return GitHubCredentials.__credentials.tokens["github"]
+    def tokens(self) -> str:
+        api_key = GitHubCredentials.__credentials.tokens["github"]
+        return str(api_key)
