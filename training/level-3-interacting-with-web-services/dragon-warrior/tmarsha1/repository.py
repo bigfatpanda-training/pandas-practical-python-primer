@@ -117,8 +117,8 @@ def delete_repository(user: str, repository: str):
 def create_pull_request(user: str, repository: str):
     github = github_api.Github(oauth_token=newCredentials.tokens())
     payload = {"title": "A programmatic pull request",
-        "head": "{user}:master".format(user=user),
-        "base": "bigfatpanda-training:master",
+        "head": "bigfatpanda-training:master",
+        "base": "master",
         "body": "Submitted from CLI"}
     new_pull_request = github.create_pull_request(username=user,
         repo_name=repository, kwargs=payload)
