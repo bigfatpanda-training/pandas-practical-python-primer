@@ -64,11 +64,11 @@ def create_issue(user: str, repository: str, title: str):
 @click.option('-r', '--repository', required=True)
 @click.option('-t', '--title', required=True)
 @click.option('-id', required=True)
-def edit_issue(user: str, repository: str, title: str, id: int):
+def edit_issue(user: str, repository: str, title: str, issue: int):
     github = github_api.Github(oauth_token=newCredentials.tokens())
     mod_title = (title + ' {stamp}').format(stamp=datetime.now())
     edit_issue = github.edit_issue(username=user, repo_name=repository,
-                                   issue_number=id, title=mod_title,
+                                   issue_number=issue, title=mod_title,
                                    body="This is my edited issue.",
                                    assignee="troylmarshall",
                                    labels=["Test1", "Test2"])
@@ -118,7 +118,7 @@ def create_pull_request(user: str, repository: str):
     github = github_api.Github(oauth_token=newCredentials.tokens())
     payload = {"title": "A programmatic pull request",
         "head": "{user}:master".format(user=user),
-        "base": "master",
+        "base": "bigfatpanda-training:master",
         "body": "Submitted from CLI"}
     new_pull_request = github.create_pull_request(username=user,
         repo_name=repository, kwargs=payload)
