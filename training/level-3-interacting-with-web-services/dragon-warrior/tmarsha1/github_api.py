@@ -238,7 +238,28 @@ class Github:
         """
 
         headers = {'Authorization': 'token {}'.format(self.oauth_token)}
-        issues_url = "https://api.github.com/repos/{owner}/{repo}/pulls"
-        url = issues_url.format(owner=username, repo=repo_name)
+        pulls_url = "https://api.github.com/repos/{owner}/{repo}/pulls"
+        url = pulls_url.format(owner=username, repo=repo_name)
         return requests.post(url, headers=headers, json=kwargs["kwargs"])
 
+
+    def update_pull_request(self, username: str, repo_name: str, pull: int,
+                            **kwargs) -> requests.Response:
+        """
+
+        Args:
+            username:
+            repo_name:
+            pull:
+            kwargs:
+
+        Returns:
+
+        Reference:
+            https://developer.github.com/v3/pulls/#update-a-pull-request
+        """
+
+        headers = {'Authorization': 'token {}'.format(self.oauth_token)}
+        update_url = "https://api.github.com/repos/{owner}/{repo}/pulls/{pull}"
+        url = update_url.format(owner=username, repo=repo_name, pull=pull)
+        return requests.patch(url, headers=headers, json=kwargs["kwargs"])

@@ -125,5 +125,20 @@ def create_pull_request(user: str, repository: str):
     pprint.pprint(new_pull_request.json())
 
 
+
+# update_pull_request -u bigfatpanda-training -r pandas-practical-python-primer -p 99
+@repository_cli.command()
+@click.option('-u', '--user', required=True)
+@click.option('-r', '--repository', required=True)
+@click.option('-p', '--pull', required=True)
+def update_pull_request(user: str, repository: str, pull: int):
+    github = github_api.Github(oauth_token=newCredentials.tokens())
+    payload = {"title": "Update pull request from CLI",
+        "body": "{date}".format(date=datetime.now())}
+    new_pull_request = github.update_pull_request(username=user,
+        repo_name=repository, pull=pull, kwargs=payload)
+    pprint.pprint(new_pull_request.json())
+
+
 if __name__ == "__main__":
     repository_cli()
