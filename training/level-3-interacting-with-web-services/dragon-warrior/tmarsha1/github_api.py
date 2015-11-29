@@ -62,6 +62,15 @@ class Github:
         return response
 
 
+
+        #user_url = self.user_info(username=username)
+        #repos_url = user_url
+        #pprint.pprint(repos_url)
+        #url = repos_url['repos_url']
+        #response = requests.get(url)
+        #return response
+
+
     def repos_issues(self, username: str, repo_name: str) -> requests.Response:
         """
         Obtain the issues for a given user in Github.
@@ -179,17 +188,16 @@ class Github:
         Args:
             owner:
             repo:
-            kwargs:
+            **kwargs:
 
         Returns:
 
         Reference:
             https://developer.github.com/v3/repos/#edit
         """
-
         headers = {'Authorization': 'token {}'.format(self.oauth_token)}
-        url = "https://api.github.com/repos/{owner}/{repo}".format(
-            owner=owner, repo=repo)
+        edit_url = "https://api.github.com/repos/{owner}/{repo}"
+        url = edit_url.format(owner=owner, repo=repo)
         return requests.patch(url, headers=headers, json=kwargs["kwargs"])
 
 
@@ -232,3 +240,4 @@ class Github:
         issues_url = "https://api.github.com/repos/{owner}/{repo}/pulls"
         url = issues_url.format(owner=username, repo=repo_name)
         return requests.post(url, headers=headers, json=kwargs["kwargs"])
+
