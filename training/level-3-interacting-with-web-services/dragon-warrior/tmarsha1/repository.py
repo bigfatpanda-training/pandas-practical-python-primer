@@ -110,14 +110,14 @@ def delete_repository(user: str, repository: str):
     pprint.pprint(result)
 
 
-# create_pull_request -u TroyLMarshall -r pandas-practical-python-primer
+# create_pull_request -u bigfatpanda-training -r pandas-practical-python-primer
 @repository_cli.command()
 @click.option('-u', '--user', required=True)
 @click.option('-r', '--repository', required=True)
 def create_pull_request(user: str, repository: str):
     github = github_api.Github(oauth_token=newCredentials.tokens())
     payload = {"title": "A programmatic pull request",
-        "head": "bigfatpanda-training:master",
+        "head": "TroyLMarshall:master",
         "base": "master",
         "body": "Submitted from CLI"}
     new_pull_request = github.create_pull_request(username=user,

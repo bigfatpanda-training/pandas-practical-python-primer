@@ -133,6 +133,7 @@ class Github:
         Args:
             username:
             repo_name:
+            issue_number:
             title:
             body:
             assignee:
@@ -225,8 +226,8 @@ class Github:
         """
 
         Args:
-            owner:
-            repo:
+            username:
+            repo_name:
             kwargs:
 
 
