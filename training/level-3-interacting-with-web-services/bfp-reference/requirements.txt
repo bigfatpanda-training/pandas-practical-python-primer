@@ -1,1 +1,2 @@
 requests==2.8.1
+configuration-panda==0.12
