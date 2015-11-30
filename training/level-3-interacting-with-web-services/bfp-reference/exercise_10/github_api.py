@@ -250,25 +250,76 @@ class Github:
             owner=username, repo=repo_name))
         return requests.delete(url, headers=self.headers)
 
+    def create_pull_request(self, username: str, repo_name: str,
+                            title: str, head: str, base: str,
+                            body: str=None):
+        """
+        Create a pull request on a given repository.
+
+        Args:
+            username (str): The owner of the repo to create the pull request on.
+            repo_name (str): The name of the repo to create the pull request on.
+            title (str): The title of the pull request.
+            head (str): A string indicating the repo:branch that the changes
+                are located on that will be part of the pull request.  The
+                syntax is [repo:branch].
+            base (str): The branch on repo_name that will receive the changes.
+            body (str): An optional description for the pull request.
+
+        Returns:
+            A requests.Response object.
+
+        """
+        url = (self.urls['repository_url'].format(
+            owner=username, repo=repo_name) + '/pulls')
+        payload = dict(title=title, head=head, base=base, body=body)
+        return requests.post(url, headers=self.headers, json=payload)
+
+
+    def update_pull_request(self, username: str, repo_name: str,
+                            pull_request_id: int,
+                            title: str=None, body: str=None, state: str=None):
+        """
+        Update a specified pull request on a given repository.
+
+        Args:
+            username (str): The owner of the repo to create the pull request on.
+            repo_name (str): The name of the repo to create the pull request on.
+            pull_request_id (int): The unique ID for the pull request.
+
+            All other parameters are optional members of the JSON
+            request payload.  See the API docs for more information:
+            https://developer.github.com/v3/pulls/#update-a-pull-request
+
+        Returns:
+            A requests.Response object.
+
+        """
+        url = (
+            self.urls['repository_url'].format(owner=username, repo=repo_name) +
+            '/pulls/{number}'.format(number=pull_request_id))
+
+        payload = dict(title=title, body=body)
+        if state is not None:
+            payload['state'] = state
+
+        return requests.post(url, headers=self.headers, json=payload)
+
 
 if __name__ == "__main__":
     github = Github(oauth_token=credentials.tokens['github'])
-    new_repo = github.create_repo(
-        name='Test Repo 45',
-        description='This is my test repo.',
-        gitignore_template='Python',
-        license_template='mit')
+    new_pull_request = github.create_pull_request(
+        username='bigfatpanda-training',
+        repo_name='pandas-practical-python-primer',
+        title="New Class Materials",
+        head="eikonomega:master",
+        base="master",
+        body="Here are some new class materials.")
 
-    updated_repo = github.update_repo(
-        username='eikonomega',  # Replace with your Github username.
-        repo_name=new_repo.json()['name'],
-        description="This is my UPDATED description.",
-        homepage="BFPisSoooooooCool.com")
-
-
-    # Uncomment to delete repo.
-    # deleted_repo = github.delete_repo(
-        # username='bigfatpanda-training',  # Replace with your Github username.
-        # repo_name=new_repo.json()['name'])
-
-
+    updated_pull_request = github.update_pull_request(
+        username='bigfatpanda-training',
+        repo_name='pandas-practical-python-primer',
+        pull_request_id=new_pull_request.json()['number'],
+        title="Updated Pull Request",
+        body="Here are some really good, new class materials.",
+        state="Open")
