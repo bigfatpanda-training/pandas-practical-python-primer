@@ -2,17 +2,22 @@
 ## Exercise 3: Storing & Importing Friendship Information
 [Code Files](../../training/level-4-creating-web-services/bfp-reference/exercise_02)
 
-No API is really useful without data.  After all, it is data that we will be
-retrieving, creating, updating, and deleting via an API.
+No API is really useful without data.  After all, it is data that people (and
+machines) retrieve, create, update, and delete via an API.
 
 We need a place to keep our data.  Later on, we'll use a database for this.
-Right now however, we'll just use another module.
+Right now however, we'll just use another module, called `datastore`.
 
-### There Is No Secret Ingredient
+This will allow us to get going quickly, but also has a downside.  All
+updates to our program data will only live in memory.  Whenever we restart
+the API, the data will be reset to whatever is defined in the `datastore`
+module.
+
+### There Is No Secret Ingredient: A Place for Our Data
 - Create a new module in your `friends_api` package called `datastore.py`.
 - Add the following `dict` object to the file.  This will be your initial 
 set of friends.  Congratulations:
-
+    
     ```python
     friends = [
         {
@@ -35,24 +40,22 @@ set of friends.  Congratulations:
     ```
     
 - Update `friends.py` to import the `datastore` module:
-
-
-#### Step 2: Access `datastore.friends` from `api.py`
-- How do we access data from one module in another module?  We `import` it!
-- Add the following to `api.py`: 
+    
     ```python
     from flask import Flask, jsonify
     
     from friends_api import datastore
     ...
     ```
-- Drop to the command line and run `python -i trainee_friends_api.api` and 
+
+- Drop to the command line and run `python -i -m friends_api.friends` and 
 see if you can access `datastore.friends`.  
-    - This should break with a 
-    
-    > ![alert](../images/alert.png) If you prefer the default `python` 
-    interpreter, don't forget to add the `-m' option.  If you don't, your 
-    program won't handle the import statements correctly and will break.
+
+    > ![New Information](../images/information.png) Up to this point in 
+    > your training, you've never seen the `-m` flag used before.  You have
+    > to use it when executing a package module as a script (like we are doing
+    > here).  Otherwise, the `import` statements that refer to other package 
+    > modules will break.  
 
     
 
