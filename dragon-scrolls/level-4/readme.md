@@ -23,4 +23,4 @@ enhancements to our API that would standard features of a real-world program:
     * Some sort of authentication requirement so that random people (or 
     machines!) can't change your list of friends.
 
-[Start Training](exercise-1.md)
+[Start Training](exercise-01.md)
