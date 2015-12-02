@@ -1,5 +1,3 @@
-from flask import Flask, jsonify
-
-from friends_api import datastore
+from flask import Flask
 
 app = Flask(__name__)
