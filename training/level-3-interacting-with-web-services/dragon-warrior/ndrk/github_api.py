@@ -69,6 +69,23 @@ class Github:
         response = requests.get(url)
         return response
 
+    def create_repo(
+            self,
+            username: str,
+            repo_name: str,
+            **kwargs) -> requests.Response:
+        headers = {'Authorization': 'token {}'.format(self.oauth_token)}
+
+        url = self.urls['user_repositories_url'].replace("{user}", username).rsplit('{')[0]
+
+        return requests.post(url, headers=headers, json=kwargs)
+
+    def update_repo(self, repo_name: str) -> requests.Response:
+        pass
+
+    def delete_repo(self, repo_name: str) -> requests.Response:
+        pass
+
     def create_issue(
             self,
             username: str,
@@ -163,18 +180,18 @@ class Github:
 
 if __name__ == "__main__":
     github = Github(credentials.tokens['github'])
-    new_issue = github.create_issue(
-        username='ndrk',
-        repo_name='pandas-practical-python-primer',
-        title='Example Issue'
-    )
+    # new_issue = github.create_issue(
+    #     username='ndrk',
+    #     repo_name='pandas-practical-python-primer',
+    #     title='Example Issue'
+    # )
 
-    updated_issue = github.update_issue(
-        username='ndrk',
-        repo_name='pandas-practical-python-primer',
-        title='Updated Example Issue',
-        issue_number=new_issue.json()['number']
-    )
+    # updated_issue = github.update_issue(
+    #     username='ndrk',
+    #     repo_name='pandas-practical-python-primer',
+    #     title='Updated Example Issue',
+    #     issue_number=new_issue.json()['number']
+    # )
     # import pprint
     # github_info = github_entry_point()
     # github_info = github_user_info('ndrk')
