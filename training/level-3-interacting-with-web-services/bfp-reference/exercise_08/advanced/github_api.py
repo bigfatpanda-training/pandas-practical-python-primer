@@ -112,8 +112,6 @@ class Github:
         headers = {'Authorization': 'token {}'.format(self.oauth_token)}
         url = (self.urls['repository_url'].format(
             owner=username, repo=repo_name) + "/issues")
-        payload = dict(title=title, body=body, assignee=assignee,
-                       milestone=milestone, labels=labels)
 
         return requests.post(url, headers=headers, json=arguments)
 
