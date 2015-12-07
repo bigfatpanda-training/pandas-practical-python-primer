@@ -48,30 +48,8 @@ def create_friend():
     Returns:
         A flask.Response object.
     """
-    import sys
     try:
         request_payload = request.get_json()
-
-        if request_payload is None:
-            response = make_response(
-                jsonify(
-                    {"error": "No JSON payload present.  Make sure that "
-                     "appropriate `content-type` header is "
-                     "included in your request."}),
-                    400)
-        else:
-            datastore.friends.append(
-                {"id": request_payload['id'],
-                 "first_name": request_payload['firstName'],
-                 "last_name": request_payload['lastName'],
-                 "telephone": request_payload['telephone'],
-                 "email": request_payload['email'],
-                 "notes": request_payload['notes']
-                 })
-
-            response = make_response(
-                jsonify({"message": "Friend resource created."}), 201)
-
     except BadRequest as error:
         response = make_response(
             jsonify(
@@ -80,12 +58,37 @@ def create_friend():
                 400)
         return response
 
-    except Exception as error:
+    if not request_payload:
         response = make_response(
             jsonify(
-                {"errorType": str(sys.exc_info()[0]),
-                 "errorMessage": str(sys.exc_info()[1]),
-                 "errorLocation": sys.exc_info()[2].tb_lineno}),
+                {"error": "No JSON payload present.  Make sure that "
+                 "appropriate `content-type` header is "
+                 "included in your request."}),
                 400)
+        return response
 
+    missing_json_elements = set(datastore.friends[0].keys()).difference(
+        request_payload.keys())
+
+    if missing_json_elements:
+        response = make_response(
+            jsonify(
+                {"error": "Missing required payload elements. "
+                          "The following elements are "
+                          "required: {}".format(
+                    missing_json_elements.difference(request_payload.keys()))}),
+            404)
+        return response
+
+    for potential_duplicate in datastore.friends:
+        if request_payload['id'].lower() == potential_duplicate['id'].lower():
+            response = make_response(
+                jsonify(
+                    {"error": "An friend resource already exists with the "
+                              "given id: {}".format(request_payload['id'])}),
+                400)
+            return response
+
+    response = make_response(
+        jsonify({"message": "Friend resource created."}), 201)
     return response
