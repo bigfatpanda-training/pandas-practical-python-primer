@@ -35,4 +35,5 @@ def specific_friend(id: str):
         jsonify(
             {"error": "No friend found with the specified identifier. "
                       "BFP is a Big Fat Panda Loser!"}), 404)
+
     return error_response

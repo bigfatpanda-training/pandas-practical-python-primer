@@ -1,6 +1,8 @@
 GET /api/v1/friends
     curl http://127.0.0.1:5000/api/v1/friends
 
+GET /api/v1/friends/<id>
+
 POST /api/v1/friends
     Valid
         curl 127.0.0.1:5000/api/v1/friends -X POST -H "content-type:application/json" -d '{"id":"dDuck", "firstName": "Donald", "lastName": "Duck", "telephone": "i-love-ducks", "email": "donald@disney.com", "notes": "A grumpy, easily agitated duck."}'
@@ -13,8 +15,6 @@ POST /api/v1/friends
 
     Missing JSON Element
         curl 127.0.0.1:5000/api/v1/friends -X POST -H "content-type:application/json" -d '{"firstName": "Donald", "lastName": "Duck", "telephone": "i-love-ducks", "email": "donald@disney.com", "notes": "A grumpy, easily agitated duck."}'
-
-GET /api/v1/friends/<id>
 
 PUT /api/v1/friends/<id>
     Valid

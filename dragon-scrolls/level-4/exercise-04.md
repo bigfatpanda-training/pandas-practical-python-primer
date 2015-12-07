@@ -86,6 +86,14 @@ various methods of your API.  Test your first method with the following command:
     ```bash
     curl 127.0.0.1:5000/api/v1/friends
     ```
+    
+    > ![Check It Out](../images/information.png) There will be a lot of `curl`
+    > commands that you'll be using in this training level.  Some of them
+    > can get quite long. Save yourself some frustration and just copy/paste
+    > them from the `curl_tests` file which you can find by going to
+    > `level-4` on your Vagrant machine (inside the `dragon-warrior` folder
+    > for this training level).
+    
   
 - You should get the following response:
     
