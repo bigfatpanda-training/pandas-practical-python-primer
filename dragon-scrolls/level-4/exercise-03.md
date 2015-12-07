@@ -22,22 +22,27 @@ set of friends.  Congratulations:
     friends = [
         {
             "id": "BFP",
-            "first_name": "Big Fat",
-            "last_name": "Panda",
+            "firstName": "Big Fat",
+            "lastName": "Panda",
             "telephone": "574-213-0726",
             "email": "mike@eikonomega.com",
             "notes": "My bestest friend in all the world."
         },
         {
             "id": "VinDi",
-            "first_name": "Vin",
-            "last_name": "Diesel",
+            "firstName": "Vin",
+            "lastName": "Diesel",
             "telephone": "I-HIT-PEOPLE",
             "email": "vdiesel4@supercool.edu",
             "notes": "Really annoying guy.  Will never amount to anything."
         }
     ]
     ```
+    
+    - ![Dictionary Key Names](../images/information.png) Notice that 
+    dictionary key names do **not** have to conform to PEP8 syntax rules
+    for variable names. Here we are using JSON naming convention syntax, since 
+    that is what we'll be interacting with in the API.
     
 - Update `friends.py` to import the `datastore` module:
     

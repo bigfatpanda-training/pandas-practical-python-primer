@@ -48,13 +48,7 @@ friend resource and return a success message to the client:
     ```python
     request_payload = request.get_json()
     
-    datastore.friends.append(
-        {"id": request_payload['id'],
-         "first_name": request_payload['firstName'],
-         "last_name": request_payload['lastName'],
-         "telephone": request_payload['telephone'],
-         "email": request_payload['email'],
-         "notes": request_payload['notes']})
+    datastore.friends.append(request_payload)
 
     response = make_response(jsonify({"message": "Friend resource created."}),
                              201)
@@ -63,8 +57,6 @@ friend resource and return a success message to the client:
     
     - In this code were are using the `append` method on the `datastore.friends`
     list object to create a new friend record, which is itself a dictionary.
-    - You can see how we access different parts of the `request_payload` 
-    object as values in the new dictionary.
     - Finally, you can see how we use the `make_response` function to override
     the standard `200` response code with `201` which means a new resource
     was successfully created.

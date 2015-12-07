@@ -102,17 +102,17 @@ various methods of your API.  Test your first method with the following command:
       "friends": [
         {
           "email": "mike@eikonomega.com",
-          "first_name": "Big Fat",
+          "firstName": "Big Fat",
           "id": "BFP",
-          "last_name": "Panda",
+          "lastName": "Panda",
           "notes": "My bestest friend in all the world.",
           "telephone": "574-213-0726"
         },
         {
           "email": "vdiesel4@supercool.edu",
-          "first_name": "Vin",
+          "firstName": "Vin",
           "id": "VinDi",
-          "last_name": "Diesel",
+          "lastName": "Diesel",
           "notes": "Really annoying guy.  Will never amount to anything.",
           "telephone": "I-HIT-PEOPLE"
         }

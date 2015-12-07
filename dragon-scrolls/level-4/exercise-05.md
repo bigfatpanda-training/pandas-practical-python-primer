@@ -72,9 +72,9 @@ output:
     ```JSON
     {
       "email": "vdiesel4@supercool.edu",
-      "first_name": "Vin",
+      "firstName": "Vin",
       "id": "VinDi",
-      "last_name": "Diesel",
+      "lastName": "Diesel",
       "notes": "Really annoying guy.  Will never amount to anything.",
       "telephone": "I-HIT-PEOPLE"
     }

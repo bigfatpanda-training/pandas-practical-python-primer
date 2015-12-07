@@ -370,49 +370,49 @@ the JSON payload result in a `KeyError` exception.
             }
             ```
 
-#### Step 5: Fix the Bug that Allows You To Create Friends with Identical IDs
-    - As we've seen, the way that the API is currently constructed allows us
-    to create multiple friend resources that are identical.  That isn't right.
-    Each of our friends should only be in our list once.
-        - We might have friends that share certain data points, like first/last
-        name, or even telephone numbers, but they should still have a unique id
-        value.
-    
-    - You can see this bug in action to executing the following curl commands:
-        - Do this one 2x or more times: `curl 127.0.0.1:5000/api/v1/friends -X POST -H "content-type:application/json" -d '{"id":"dDuck", "firstName": "Donald", "lastName": "Duck", "telephone": "i-love-ducks", "email": "donald@disney.com", "notes": "A grumpy, easily agitated duck."}'`
-        - Do this to see all your friends: `curl 127.0.0.1:5000/api/v1/friends`
-        
-    - Let's add a check into our function that will prevent attempts to 
-    add a friend resource with an `id` value that already exists:
-     
-        ```python
-        ...     
-        for friend in datastore.friends:
-            if request_payload['id'].lower() == friend['id'].lower():
-                error_response = make_response(
-                    jsonify(
-                        {"error": "An friend resource already exists with the "
-                                  "given id: {}".format(request_payload['id'])}),
-                    400)
-                return error_response
+### Fix the Bug that Allows You To Create Friends with Identical IDs
+- As we've seen, the way that the API is currently constructed allows us
+to create multiple friend resources that are identical.  That isn't right.
+Each of our friends should only be in our list once.
+    - We might have friends that share certain data points, like first/last
+    name, or even telephone numbers, but they should still have a unique id
+    value.
 
-        datastore.friends.append(
-            {"id": request_payload['id'],
-             "first_name": request_payload['firstName'],
-             "last_name": request_payload['lastName'],
-        ...
-        ```
-        
-    - Now verify that you get the correct response when trying to create a 
-    duplicate friend using the `curl` commands above.  You should get this:
+- You can see this bug in action to executing the following curl commands:
+    - Do this one 2x or more times: `curl 127.0.0.1:5000/api/v1/friends -X POST -H "content-type:application/json" -d '{"id":"dDuck", "firstName": "Donald", "lastName": "Duck", "telephone": "i-love-ducks", "email": "donald@disney.com", "notes": "A grumpy, easily agitated duck."}'`
+    - Do this to see all your friends: `curl 127.0.0.1:5000/api/v1/friends`
     
-        ```
-        {
-          "error": "An friend resource already exists with the given id: dDuck1"
-        }
-        ```
+- Let's add a check into our function that will prevent attempts to 
+add a friend resource with an `id` value that already exists:
+ 
+    ```python
+    ...     
+    for friend in datastore.friends:
+        if request_payload['id'].lower() == friend['id'].lower():
+            error_response = make_response(
+                jsonify(
+                    {"error": "An friend resource already exists with the "
+                              "given id: {}".format(request_payload['id'])}),
+                400)
+            return error_response
+
+    datastore.friends.append(
+        {"id": request_payload['id'],
+         "first_name": request_payload['firstName'],
+         "last_name": request_payload['lastName'],
+    ...
+    ```
+    
+- Now verify that you get the correct response when trying to create a 
+duplicate friend using the `curl` commands above.  You should get this:
+
+    ```
+    {
+      "error": "An friend resource already exists with the given id: dDuck1"
+    }
+    ```
         
-#### Step 6: Take a Depth Breath and Congratulate Yourself!
+### Take a Depth Breath and Congratulate Yourself!
 You've successfully squished alot of bugs in this section.  Depending on your
 personality, this could have been really fun or really, really, awful.
 
