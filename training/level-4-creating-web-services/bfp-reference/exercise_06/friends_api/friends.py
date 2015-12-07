@@ -15,6 +15,7 @@ def friends():
     """
     return jsonify({"friends": datastore.friends})
 
+
 @app.route('/api/v1/friends/<id>', methods=['GET'])
 def specific_friend(id: str):
     """
@@ -33,6 +34,7 @@ def specific_friend(id: str):
     error_response = make_response(
         jsonify({"error": "You have no friends.  LOSER."}), 404)
     return error_response
+
 
 @app.route('/api/v1/friends', methods=['POST'])
 def create_friend():

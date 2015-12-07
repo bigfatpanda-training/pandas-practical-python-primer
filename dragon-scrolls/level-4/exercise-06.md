@@ -1,6 +1,6 @@
 [Previous](exercise-05.md) |  [Next](exercise-07.md)
 ## Add HTTP POST Support to our Web Service API
-[Code Files](../../training/level-4-creating-web-services/bfp-reference/exercise_04)
+[Code Files](../../training/level-4-creating-web-services/bfp-reference/exercise_05)
 
 In a properly designed RESTful web service/api, we create new resources using
 the POST HTTP method.  It's time for us to do that for our API so that we can 
