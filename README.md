@@ -2,6 +2,7 @@
 # Welcome Dragon Warrior!
 
 [![Join the chat at https://gitter.im/bigfatpanda-training/pandas-practical-python-primer](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bigfatpanda-training/pandas-practical-python-primer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Welcome to your beginning Python training course.  Soon you'll be making
 your enemies go blind through the pure awesomeness of your code!
 
