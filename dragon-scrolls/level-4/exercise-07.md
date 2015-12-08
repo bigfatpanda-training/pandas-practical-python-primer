@@ -37,15 +37,7 @@ for debugging purposes.
         import sys
         try:    
             request_payload = request.get_json()
-        
-            datastore.friends.append(
-                {"id": request_payload['id'],
-                 "first_name": request_payload['firstName'],
-                 "last_name": request_payload['lastName'],
-                 "telephone": request_payload['telephone'],
-                 "email": request_payload['email'],
-                 "notes": request_payload['notes']
-                 })
+            datastore.friends.append(request_payload)
         except Exception as error:
             response = make_response(
                 jsonify(
@@ -53,11 +45,11 @@ for debugging purposes.
                      "errorMessage": str(sys.exc_info()[1]),
                      "errorLocation": sys.exc_info()[2].tb_lineno}),
                     400)
+            return response
         else:
             response = make_response(
                 jsonify({"message": "Friend resource created."}), 201)
-            
-        return response
+            return response
     ```
     
     - In the exception handler, we are catching all children of the Exception
@@ -79,9 +71,9 @@ for debugging purposes.
         [documentation]((https://docs.python.org/3/library/sys.html#sys.exc_info) 
         for more info.
     
-    > ![info](../images/information.png) You've seen the `try/except` syntax before,
-    > but if you need a refresher on how it works, consult the 
-    [Python Documentation](https://docs.python.org/3/tutorial/errors.html#handling-exceptions) 
+    > ![info](../images/information.png) You've seen the `try/except` syntax 
+    > before, but if you need a refresher on how it works, consult the 
+    > [Python Documentation](https://docs.python.org/3/tutorial/errors.html#handling-exceptions) 
     
 #### Smash the No `content-type:application/json` Header Bug
 - Incoming HTTP requests that don't provide a `content-type` header specifying 
