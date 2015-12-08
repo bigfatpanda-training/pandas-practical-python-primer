@@ -478,3 +478,5 @@ your `create_friend` function looks like this:
         return response
     ```
     
+| [Next Exercise](exercise-08.md)
+    

@@ -52,42 +52,18 @@ def create_friend():
         request_payload = request.get_json()
     except BadRequest as error:
         response = make_response(
-            jsonify(
-                {"error": "JSON payload contains syntax errors. "
-                          "Please fix and try again."}),
-                400)
+            jsonify({"error": "JSON payload contains syntax errors. "
+                              "Please fix and try again."}),
+            400)
         return response
 
-    if not request_payload:
+    try:
+        datastore.create_friend(request_payload)
+    except ValueError as error:
         response = make_response(
-            jsonify(
-                {"error": "No JSON payload present.  Make sure that "
-                 "appropriate `content-type` header is "
-                 "included in your request."}),
-                400)
+            jsonify({"error": str(error)}),
+            400)
         return response
-
-    missing_json_elements = set(datastore.friends[0].keys()).difference(
-        request_payload.keys())
-
-    if missing_json_elements:
-        response = make_response(
-            jsonify(
-                {"error": "Missing required payload elements. "
-                          "The following elements are "
-                          "required: {}".format(
-                    missing_json_elements.difference(request_payload.keys()))}),
-            404)
-        return response
-
-    for potential_duplicate in datastore.friends:
-        if request_payload['id'].lower() == potential_duplicate['id'].lower():
-            response = make_response(
-                jsonify(
-                    {"error": "An friend resource already exists with the "
-                              "given id: {}".format(request_payload['id'])}),
-                400)
-            return response
 
     response = make_response(
         jsonify({"message": "Friend resource created."}), 201)

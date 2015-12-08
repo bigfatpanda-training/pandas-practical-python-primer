@@ -31,11 +31,23 @@ def create_friend(data: dict):
         ValueError: If data is None or doesn't contain all required
             elements.
     """
-    required_elements = friends[0].keys()
-    if data is None:
-        raise ValueError("You cannot create a friend without data.")
-    elif not set(data).issuperset(required_elements):
-        raise ValueError("Some of the data required to create a friend "
-                         "was not present.  The following elements "
-                         "must be present to create a friend: {}".format(
-            required_elements))
+    required_elements = set(friends[0].keys())
+    try:
+        if not required_elements.issubset(data):
+            raise ValueError("Some of the data required to create a friend "
+                             "was not present.  The following elements "
+                             "must be present to create a friend: {}".format(
+                required_elements))
+    except TypeError:
+        raise ValueError("No data was received.") from TypeError
+
+    for element in data:
+        if element not in required_elements:
+            data.pop(element)
+
+    for friend in friends:
+        if data['id'].lower() == friend['id'].lower():
+            raise ValueError("A friend already exists with the "
+                             "`id` specified: {}".format(data['id']))
+
+    friends.append(data)

@@ -222,4 +222,6 @@ with our datastore - SQLite.
         * This will occur in this function when the value of the `id` parameter
         is set to something that has no match in the datastore, and therefore
         can not be deleted.
+        
+| [Next Exercise](exercise-12.md)
     

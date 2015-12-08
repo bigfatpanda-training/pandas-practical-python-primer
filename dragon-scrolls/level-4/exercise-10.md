@@ -66,6 +66,7 @@ Let's make sure that the API is operating as expected.
   "error": "No such friend exists."
 }
 
+| [Next Exercise](exercise-11.md)
     
        
         

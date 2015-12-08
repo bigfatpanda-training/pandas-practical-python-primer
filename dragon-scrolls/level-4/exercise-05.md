@@ -84,3 +84,5 @@ output:
 > be immediately obvious.  What happens when we query for `BFP`?  What about
 > `bfp`?  How might we account for this?
 
+| [Next Exercise](exercise-06.md)
+

@@ -23,19 +23,6 @@ def create_friend(data: dict):
     Create a new friend entry is our datastore of friends.
 
     Args:
-        data: A dictionary of data for our new friend.  Must have
-            the following elements: ['id', 'firstName', 'lastName',
-            'telephone', 'email', 'notes']
-
-    Raises:
-        ValueError: If data is None or doesn't contain all required
-            elements.
+        data: A dictionary of data for our new friend.
     """
-    required_elements = friends[0].keys()
-    if data is None:
-        raise ValueError("You cannot create a friend without data.")
-    elif not set(data).issuperset(required_elements):
-        raise ValueError("Some of the data required to create a friend "
-                         "was not present. The following elements "
-                         "must be present to create a friend: {}".format(
-            list(required_elements)))
+    friends.append(data)

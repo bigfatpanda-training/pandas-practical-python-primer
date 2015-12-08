@@ -123,3 +123,5 @@ various methods of your API.  Test your first method with the following command:
     > ![Problem Alert](../images/alert.png) Remember that both terminal 
     > sessions need to have active SSH connections to the Vagrant VM 
     > (`vagrant ssh`) for this to work correctly.
+    
+| [Next Exercise](exercise-05.md)

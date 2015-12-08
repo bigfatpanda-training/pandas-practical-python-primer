@@ -345,3 +345,5 @@ as a constant?_
     used even when the `verify_required_data_present`.
     * This is just something that comes from experience.  You'll get there
     someday too!
+    
+| [Next Exercise](exercise-10.md)

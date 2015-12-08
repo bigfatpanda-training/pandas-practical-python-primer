@@ -61,6 +61,8 @@ see if you can access `datastore.friends`.
     > to use it when executing a package module as a script (like we are doing
     > here).  Otherwise, the `import` statements that refer to other package 
     > modules will break.  
+    
+| [Next Exercise](exercise-04.md)
 
     
 

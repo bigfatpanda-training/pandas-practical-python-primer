@@ -35,3 +35,5 @@ API and see what happens: `curl http://127.0.0.1:5000`.  You should
 get a response back.
 
 > ![Reminder](../images/reminder.png) Don't forget to add the module docstring.
+
+| [Next Exercise](exercise-03.md)
