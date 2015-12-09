@@ -1,5 +1,5 @@
 [Previous](exercise-09.md) |  [Next](exercise-11.md)
-## Moving to a Persistent Datastore: Part 1
+## Exercise 10: Moving to a Persistent Datastore: Part 1
 Now that we've created a fully functional Web API, it's time to move it towards
 a production ready state.  One of the pieces needed for that is to have a 
 persistent datastore that doesn't get wiped out each time we restart out 
