@@ -1,5 +1,5 @@
 [Previous](exercise-07.md) |  [Next](exercise-09.md)
-## Adding HTTP PATCH Support in our Web Service API
+## Exercise 8: Adding HTTP PATCH Support in our Web Service API
 I hope that you are starting to get the hang of adding functionality to your
 API by now.  In this exercise, we'll be adding the ability to update
 existing friend resources.

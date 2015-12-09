@@ -1,5 +1,5 @@
 [Previous](exercise-08.md) |  [Next](exercise-10.md)
-## Adding HTTP DELETE Support in our Web Service API
+## Exercise 9: Adding HTTP DELETE Support in our Web Service API
 OK. This one is going to be easy!  Let's add the ability to delete our friends!
 
 ### There Is No Secret Ingredient: Create `destroy_friend` Functions

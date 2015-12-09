@@ -1,5 +1,5 @@
 [Previous](exercise-04.md) |  [Next](exercise-06.md)
-## Exercise 4: Additional HTTP GET Support to your API
+## Exercise 5: Additional HTTP GET Support to your API
 [Code Files](../../training/level-4-creating-web-services/bfp-reference/exercise_04)
 
 In this exercise you will add support for retrieving a specific friend 

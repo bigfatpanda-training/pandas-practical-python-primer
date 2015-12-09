@@ -1,5 +1,5 @@
 [Previous](exercise-10.md)
-## Moving to a Persistent Datastore: Part 2
+## Exercise 11: Moving to a Persistent Datastore: Part 2
 Now that we've created our database and a series of functions to interact with 
 it, we need to incorporate that in the various functions of `api.py`. 
 

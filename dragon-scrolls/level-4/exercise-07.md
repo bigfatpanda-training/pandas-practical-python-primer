@@ -1,5 +1,5 @@
 [Previous](exercise-06.md) |  [Next](exercise-08.md)
-## Debugging HTTP POST Support
+## Exercise 7: Debugging HTTP POST Support
 [Code Files](../../training/level-4-creating-web-services/bfp-reference/exercise_06)
 
 Let's improve your POST support by killing the bugs that we discovered at the
