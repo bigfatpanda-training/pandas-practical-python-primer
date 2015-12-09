@@ -49,40 +49,23 @@ def create_friend() -> Response:
         A flask.Response object.
     """
     try:
-        request_payload = api_helpers.json_payload(request)
+        request_payload = request.get_json()
+        datastore.create_friend(request_payload)
+    except BadRequest as error:
+        response = make_response(
+            jsonify(
+                {"error": "JSON payload contains syntax errors. "
+                          "Please fix and try again."}),
+                400)
+        return response
     except ValueError as error:
         response = make_response(
             jsonify({"error": str(error)}), 400)
         return response
-
-    required_elements = {"id", "firstName", "lastName", "telephone",
-                         "email", "notes"}
-    if not required_elements.issubset(request_payload.keys()):
-        response = make_response(
-            jsonify(
-                {"error": "Missing required payload elements. The "
-                 "following are required: {}".format(
-                    required_elements.difference(request_payload.keys()))}),
-            400)
-    elif datastore.existing_friend(request_payload['id']):
-        response = make_response(
-            jsonify(
-                {"error": "The specified friend resource already exists."}),
-            400)
     else:
-        datastore.friends.append(
-            {"id": request_payload['id'],
-             "first_name": request_payload['firstName'],
-             "last_name": request_payload['lastName'],
-             "telephone": request_payload['telephone'],
-             "email": request_payload['email'],
-             "notes": request_payload['notes']
-             })
-
         response = make_response(
             jsonify({"message": "Friend resource created."}), 201)
-
-    return response
+        return response
 
 
 @app.route('/api/v1/friends/<id>', methods=['PUT'])
