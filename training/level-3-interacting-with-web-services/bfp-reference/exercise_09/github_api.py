@@ -164,11 +164,7 @@ class Github:
 
         return requests.patch(url, headers=self.headers, json=payload)
 
-    def create_repo(self, name: str, description: str, homepage: str=None,
-                    private: bool=False, has_issues: bool=True,
-                    has_wiki: bool=True, has_downloads: bool=True,
-                    auto_init: bool=False, gitignore_template: str=None,
-                    license_template: str=None):
+    def create_repo(self, name: str, description: str, **kwargs):
         """
         Create a new repository for a given user.  You must be able
         to authenticate as the user for this to work.
