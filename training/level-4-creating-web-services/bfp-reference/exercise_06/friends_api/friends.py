@@ -48,15 +48,7 @@ def create_friend():
         A flask.Response object.
     """
     request_payload = request.get_json()
-
-    datastore.friends.append(
-        {"id": request_payload['id'],
-         "first_name": request_payload['firstName'],
-         "last_name": request_payload['lastName'],
-         "telephone": request_payload['telephone'],
-         "email": request_payload['email'],
-         "notes": request_payload['notes']
-         })
+    datastore.create_friend(request_payload)
 
     response = make_response(
         jsonify({"message": "Friend resource created."}), 201)

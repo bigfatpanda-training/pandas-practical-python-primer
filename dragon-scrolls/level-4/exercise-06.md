@@ -10,8 +10,9 @@ create new friend records in our datastore.
 methods (GET, PUT, PATCH, DELETE) used for in RESTful web services/apis?
 
 ### There Is No Secret Ingredient: [POST] A New Friend Today!
-* Add the following function stub to `api.py` below your other functions:
+- Add the following function stubs to `friends.py` and `datastore.py`:
     ```python
+    # friends.py
     @app.route('/api/v1/friends', methods=['POST'])
     def create_friend():
         """
@@ -21,12 +22,33 @@ methods (GET, PUT, PATCH, DELETE) used for in RESTful web services/apis?
         a new friend resource.
         """
         pass
+        
+    # datastore.py
+    def create_friend(data: dict):
+        """
+        Create a new friend entry is our datastore of friends.
+    
+        Args:
+            data: A dictionary of data for our new friend.
+        """
+        friends.append(data)
     ```
+    
+    - Notice that both of our functions have the same name.  If this 
+    is confusing to you, remember the different contexts - one belongs
+    to the `friends` module and the other to the `datastore` module.
+      
+    - So,in reality, we are defining `friends.create_friend` and 
+    `datastore.create_friend`.  You'll see how they related to each other
+    shortly.
+    
+    > ![Alternatively](../images/reminder.png) If having the same 
+    name bugs you, go ahead and pick a different name for one of the functions.
+    There is no magic to having matching names between them.
 
-* The first thing our function needs to do is get access to the 
-"JSON representation in the request object" that is referenced in the 
-docstring in order to construct a new friend resource.  You can do so by 
-replace `pass` with the following code:
+- The first thing our `friends.create_friend` function needs to do is get access 
+to the JSON in the HTTP request in order to construct a new friend resource.  
+You can do so by replacing `pass` with the following code:
 
     ```python
     request_payload = request.get_json()
@@ -42,36 +64,29 @@ replace `pass` with the following code:
         > ![reminder](../images/reminder.png) Remember to import the `request`
         > object from the flask library.
          
-* Now that you have the JSON payload, you can use it to create a new
-friend resource and return a success message to the client:
+- Now that you have the JSON payload, you pass that along to the  
+`datastore.create_friend` function to create the new resource. Then wrap up
+the function by returning a success message to the client:
 
     ```python
     request_payload = request.get_json()
     
-    datastore.friends.append(
-        {"id": request_payload['id'],
-         "first_name": request_payload['firstName'],
-         "last_name": request_payload['lastName'],
-         "telephone": request_payload['telephone'],
-         "email": request_payload['email'],
-         "notes": request_payload['notes']})
+    datastore.friends.append(request_payload)
 
     response = make_response(jsonify({"message": "Friend resource created."}),
                              201)
     return response
     ```
     
-    - In this code were are using the `append` method on the `datastore.friends`
-    list object to create a new friend record, which is itself a dictionary.
-    - You can see how we access different parts of the `request_payload` 
-    object as values in the new dictionary.
-    - Finally, you can see how we use the `make_response` function to override
+    - Notice here how we delegate from `friends.create_friend` to 
+    `datastore.create_friend` to actually add the friend to our list.
+    - Also, note how we also use `make_response` here to override
     the standard `200` response code with `201` which means a new resource
     was successfully created.
     
 ### There Is No Secret Ingredient: Testing
 Let's take our new functionality for a test.
-* From your secondary terminal window issue the following command: 
+- From your secondary terminal window issue the following command: 
 
     ```bash
     curl 127.0.0.1:5000/api/v1/friends -X POST -H "content-type:application/json" -d '{"id":"dDuck", "firstName": "Donald", "lastName": "Duck", "telephone": "i-love-ducks", "email": "donald@disney.com", "notes": "A grumpy, easily agitated duck."}'
@@ -83,7 +98,7 @@ Let's take our new functionality for a test.
     
     > ![info](../images/information.png) `-d` allows you to specify the data to pass in the payload.
 
-* This is the response that you should get back:
+- This is the response that you should get back:
     
     ```
     {
@@ -94,11 +109,18 @@ Let's take our new functionality for a test.
 ### Oh Crapola! You've Got Major Bugs
 If you've been following along very precisely, everything should have worked
 up to this point.  However, we actually been introducing bugs into our program
-along the way.  Try the following `curl` operations to see them crawl out of 
-their holes:
+along the way.  Here are some of them:
     
-- Leave out the header that sets `content-type` to `application/json` -> `TypeError: 'NoneType' object is not subscriptable` 
-- Have a syntax error in the JSON payload. -> Stange HTML error message with a 400 status code.
-- Leave out the `firstName` element from the JSON payload. -> `KeyError`
-- POST the same JSON representation twice. -> 
-Two resources are created with the same info.  This is probably not what we want.
+- If you leave out the request header that sets `content-type` to `application/json` 
+your API will create a `null` friend in `datastore.friends`.
+ 
+- Have a syntax error in the JSON payload?  You'll get a strange HTML error 
+message with a 400 status code from your API.
+
+- You can create friends with missing data elements.
+
+- You can create multiple friends with the same ID.
+
+It's time to **squash some bugs!**
+
+| [Next Exercise](exercise-07.md)

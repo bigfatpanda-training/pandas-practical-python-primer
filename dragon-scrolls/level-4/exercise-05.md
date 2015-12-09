@@ -72,9 +72,9 @@ output:
     ```JSON
     {
       "email": "vdiesel4@supercool.edu",
-      "first_name": "Vin",
+      "firstName": "Vin",
       "id": "VinDi",
-      "last_name": "Diesel",
+      "lastName": "Diesel",
       "notes": "Really annoying guy.  Will never amount to anything.",
       "telephone": "I-HIT-PEOPLE"
     }
@@ -83,4 +83,6 @@ output:
 > ![Alert](../images/alert.png) We've introduced a bug here that might not be
 > be immediately obvious.  What happens when we query for `BFP`?  What about
 > `bfp`?  How might we account for this?
+
+| [Next Exercise](exercise-06.md)
 

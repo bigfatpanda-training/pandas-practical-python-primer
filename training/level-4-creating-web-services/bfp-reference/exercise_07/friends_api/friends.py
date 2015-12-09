@@ -48,44 +48,23 @@ def create_friend():
     Returns:
         A flask.Response object.
     """
-    import sys
     try:
         request_payload = request.get_json()
-
-        if request_payload is None:
-            response = make_response(
-                jsonify(
-                    {"error": "No JSON payload present.  Make sure that "
-                     "appropriate `content-type` header is "
-                     "included in your request."}),
-                    400)
-        else:
-            datastore.friends.append(
-                {"id": request_payload['id'],
-                 "first_name": request_payload['firstName'],
-                 "last_name": request_payload['lastName'],
-                 "telephone": request_payload['telephone'],
-                 "email": request_payload['email'],
-                 "notes": request_payload['notes']
-                 })
-
-            response = make_response(
-                jsonify({"message": "Friend resource created."}), 201)
-
     except BadRequest as error:
         response = make_response(
-            jsonify(
-                {"error": "JSON payload contains syntax errors. "
-                          "Please fix and try again."}),
-                400)
+            jsonify({"error": "JSON payload contains syntax errors. "
+                              "Please fix and try again."}),
+            400)
         return response
 
-    except Exception as error:
+    try:
+        datastore.create_friend(request_payload)
+    except ValueError as error:
         response = make_response(
-            jsonify(
-                {"errorType": str(sys.exc_info()[0]),
-                 "errorMessage": str(sys.exc_info()[1]),
-                 "errorLocation": sys.exc_info()[2].tb_lineno}),
-                400)
+            jsonify({"error": str(error)}),
+            400)
+        return response
 
+    response = make_response(
+        jsonify({"message": "Friend resource created."}), 201)
     return response
