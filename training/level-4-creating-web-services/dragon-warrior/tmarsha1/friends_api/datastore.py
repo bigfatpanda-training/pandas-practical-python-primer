@@ -16,3 +16,17 @@ friends = [
         "notes": "Zzzzzzzzzz."
     }
 ]
+
+def existing_friend(id: str) -> dict:
+    """
+    Return a representation of friend resource that matches a given
+    Args:
+        id:
+
+    Returns:
+
+    """
+
+    for friend in friends:
+        if id.lower() == friend['id'].lower():
+            return friend
