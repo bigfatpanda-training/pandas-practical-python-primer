@@ -489,5 +489,9 @@ your function looks like this:
             return response
     ```
     
+> ![Extra Credit](../images/reminder.png) Want another bug to squish? The API
+currently allows you to specify additional non-standard data points.  How
+might you modify `datastore.create_friend` to prevent this?
+    
 | [Next Exercise](exercise-08.md)
     
