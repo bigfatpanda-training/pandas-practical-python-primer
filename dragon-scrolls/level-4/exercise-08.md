@@ -1,43 +1,86 @@
-[Previous](exercise-5.md) |  [Next](exercise-7.md)
-## Adding HTTP PUT Support in our Web Service API
+[Previous](exercise-07.md) |  [Next](exercise-09.md)
+## Adding HTTP PATCH Support in our Web Service API
 I hope that you are starting to get the hang of adding functionality to your
-API by now.  We're going to finish off this session's training by adding
-the ability to replace and delete our friends (after all, haven't we all wanted
-to change or delete or friends from time to time?).
+API by now.  In this exercise, we'll be adding the ability to update
+existing friend resources.
 
-We will not be implementing the `PATCH` method due to a lack of time, but doing
-so would be an excellent way to solidify your knowledge and gain some more
-experience.
+### There Is No Secret Ingredient: Creating a `update_friend` function in 
+`friends` and `datastore` modules.
 
-#### Step 1: Create a `fully_update_friend` Function with the Appropriate URL Route
+Here's what the functions should look like:
+
 ```python
-@app.route('/api/v1/friends/<id>', methods=['PUT'])
-def fully_update_friend(id: str):
+# friends.py
+@app.route('/api/v1/friends/<id>', methods=['PATCH'])
+def update_friend(id: str) -> Response:
     """
-    Update all aspects of a specific friend or return an error.
+    Update an existing friend resource.
 
-    Use a JSON representation to fully update an existing friend
-    resource.
+    Utilize a JSON representation/payload in the request object to
+    updated an existing friend resource.
 
-    Returns
-        HTTP Response (200): If an existing resource is successfully updated.
-        HTTP Response (400): No JSON payload, bad syntax, or missing data.
-        HTTP Response (404): No matching existing resource to update.
+    Args:
+        id: The unique ID value of a given friend.
+
+    Returns:
+        A flask.Response object.
     """
-    pass
+    try:
+        request_payload = request.get_json()
+    except BadRequest as error:
+        response = make_response(
+            jsonify({"error": "JSON payload contains syntax errors. "
+                              "Please fix and try again."}),
+            400)
+        return response
+
+    try:
+        datastore.update_friend(id, request_payload)
+    except ValueError as error:
+        response = make_response(
+            jsonify({"error": str(error)}),
+            400)
+        return response
+
+    response = make_response(
+        jsonify({"message": "Friend resource updated."}), 201)
+    return response
+    
+# datastore.py
+def update_friend(id: str, data: dict):
+    """
+    Update an existing friend entry is our datastore of friends.
+
+    Args:
+        data: A dictionary of data to update an existing friend entry with.
+
+    Raises:
+        ValueError: If data is None or if no matching friend entry is found.
+    """
+    if data is None:
+        raise ValueError(
+            "`None` was received when a dict was expected during "
+            "the attempt to update an existing friend resource.")
+
+    for friend in friends:
+        if id.lower() == friend['id'].lower():
+            friend.update(data)
+            return
+
+    raise ValueError("No existing friend was found matching id: {}".format(id))
 ```
 
-Here's the stub for our new function.  Notice that we are using the same
-URL template as we did for `get_friend`.  We've only modified the method
-on the `app.route` decorator.  `PUT` requests will route to this new method, 
-while `GET` requests to the same url will route to `get_friend`.  Pretty cool!
+- Notice that we are using the same URL template as we did for 
+`specific_friend`.  We've only modified the method on the `app.route` decorator.  
+`PATCH` requests will route to this new method, while `GET` requests to the 
+same url will route to `specific_friend`.  Pretty cool!
 
-#### Step 2: Add the Functionality Borrowed from `create_friend`
-Much of the logic that we'll need for this function is the same as we used
-in our `create_friend` method that handled `POST` requests.  So let's start
-by copying that code over into our new function.
+- Much of the logic that we'll need for these functions is the same as we used
+in the corresponding `create_friend` functions that handled `POST` requests. 
+Here's what they should look like:
 
 ```python
+# friends.py
 @app.route('/api/v1/friends/<id>', methods=['PUT'])
 def fully_update_friend(id: str):
     """

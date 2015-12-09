@@ -16,18 +16,15 @@ POST /api/v1/friends
     Missing JSON Element
         curl 127.0.0.1:5000/api/v1/friends -X POST -H "content-type:application/json" -d '{"firstName": "Donald", "lastName": "Duck", "telephone": "i-love-ducks", "email": "donald@disney.com", "notes": "A grumpy, easily agitated duck."}'
 
-PUT /api/v1/friends/<id>
+PATCH /api/v1/friends/<id>
     Valid
-        curl 127.0.0.1:5000/api/v1/friends/bfp -X PUT -H "content-type:application/json" -d '{"id":"bfp", "firstName": "Really Really Fat", "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
+        curl 127.0.0.1:5000/api/v1/friends/bfp -X PATCH -H "content-type:application/json" -d '{"id":"bfp", "firstName": "Really Really Fat", "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
 
     No Content Type
-        curl 127.0.0.1:5000/api/v1/friends/bfp -X PUT -d '{"id":"bfp", "firstName": "Really Really Fat", "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
+        curl 127.0.0.1:5000/api/v1/friends/bfp -X PATCH -d '{"id":"bfp", "firstName": "Really Really Fat", "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
 
     Syntax Error in JSON
-        curl 127.0.0.1:5000/api/v1/friends/bfp -X PUT -H "content-type:application/json" -d '{"id":"bfp", "firstName": "Really Really Fat" "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
-
-    Missing JSON Element
-        curl 127.0.0.1:5000/api/v1/friends/bfp -X PUT -H "content-type:application/json" -d '{"id":"bfp", "firstName": "Really Really Fat", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
+        curl 127.0.0.1:5000/api/v1/friends/bfp -X PATCH -H "content-type:application/json" -d '{"id":"bfp", "firstName": "Really Really Fat" "lastName": "Panda", "telephone": "i-love-tacos", "email": "mike@eikonomega.com", "notes": "A Panda.  Getting fatter pound at a time."}'
 
 DELETE /api/v1/friends/<id>
     Valid
