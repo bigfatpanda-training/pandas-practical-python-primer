@@ -16,7 +16,6 @@ training levels.  Each level will correspond with one practical use of Python.
 * Level-2: [Creating Command Line Interfaces (CLIs)](dragon-scrolls/level-2/readme.md)
 * Level-3: [Interacting with Web Services](dragon-scrolls/level-3/readme.md)
 * Level-4: [Creating Web Services](dragon-scrolls/level-4/readme.md)
-* Level-5: [Creating Websites](dragon-scrolls/level-5/readme.md)
 
 ## Where Stuff Is
 * Instructional materials are in the `dragon-scrolls` folder, with subfolders 
